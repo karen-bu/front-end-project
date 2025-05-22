@@ -1,22 +1,6 @@
-interface Exoplanet {
-  name?: string;
-  min_mass?: number;
-  max_mass?: number;
-  min_radius?: number;
-  max_radius?: number;
-  min_period?: number;
-  max_period?: number;
-  min_temperature?: number;
-  max_temperature?: number;
-  min_distance_light_year?: number;
-  max_distance_light_year?: number;
-  min_semi_major_axis?: number;
-  max_semi_major_axis?: number;
-  offset?: number;
-}
-
+'use strict';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function fetchExoplanetData(): Promise<void> {
+async function fetchExoplanetData() {
   try {
     const apiData = await fetch(
       'https://api.api-ninjas.com/v1/planets?min_mass=0&min_radius=0&min_period=0&min_temperature=0&min_distance_light_year=0',
@@ -25,7 +9,7 @@ async function fetchExoplanetData(): Promise<void> {
       },
     );
     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
-    const exoplanetData = (await apiData.json()) as Exoplanet;
+    const exoplanetData = await apiData.json();
     console.log(exoplanetData);
   } catch (error) {
     console.error('Error:', error);
