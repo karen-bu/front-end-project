@@ -15,8 +15,9 @@ body {
 }
 
 .page {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  max-height: auto;
+  max-width: auto;
 }
 
 .row {
@@ -30,26 +31,56 @@ body {
   }
 }
 
-.row.center {
-  width: 100%;
-  justify-content: center;
-}
-
-.row.left {
-  justify-content: left;
-}
-
-.column-content {
+.column-100 {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: 100%;
+}
+
+.column-75 {
+  display: flex;
+  justify-content: center;
+  width: 75%;
 
   @media screen and (width < 1024px) {
     width: 100%;
   }
 }
 
-.column-content.header {
+.column-50 {
+  width: 50%;
+}
+
+.column-25 {
+  width: 25%;
+
+  @media screen and (width < 1024px) {
+    width: 50%;
+  }
+}
+
+.entry {
+  @media screen and (width <= 1024px) {
+    width: 100%;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  display: flex;
+  justify-content: left;
+}
+
+.right {
+  display: flex;
+  justify-content: right;
+}
+
+.header {
   margin-top: 200px;
 
   @media screen and (width < 1024px) {
@@ -57,11 +88,19 @@ body {
   }
 }
 
-.column-content.header-narrow {
+.header-narrow {
   margin-top: 125px;
 
   @media screen and (width < 1024px) {
-    margin-top: 70px;
+    margin-top: 50px;
+  }
+}
+
+.header-ultranarrow {
+  margin-top: 60px;
+
+  @media screen and (width < 1024px) {
+    margin-top: 30px;
   }
 }
 
@@ -83,6 +122,22 @@ h1 {
   }
 }
 
+h2 {
+  font-size: 25pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+h3 {
+  font-size: 16pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
 p {
   color: white;
   font-family: 'Work Sans', sans-serif;
@@ -91,6 +146,14 @@ p {
 
   @media screen and (width < 1024px) {
     font-size: 14pt;
+  }
+}
+
+p.icon-label {
+  font-size: 10pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 8pt;
   }
 }
 
@@ -106,11 +169,12 @@ button {
   background-color: transparent;
   color: #fff;
   font-family: 'Work Sans', sans-serif;
-  transition: 0.325s ease-in-out;
   font-size: 12pt;
+  transition: 0.325s ease-in-out;
 
   @media screen and (width < 1024px) {
     width: 300px;
+    height: 60px;
     border-radius: 50px;
     margin-top: 30px;
     font-size: 10pt;
@@ -142,7 +206,7 @@ input {
 }
 
 ::placeholder {
-  color: #6d809f;
+  color: #9ca0b9;
   font-size: 16pt;
 
   @media screen and (width < 1024px) {
@@ -160,16 +224,22 @@ input {
   }
 }
 
-.page.quiz {
+.page.quiz,
+.page.recommendations {
   padding: 100px;
 
   @media screen and (width < 1024px) {
-    padding: 50px;
+    padding: 30px;
   }
 }
 
 .bg0 {
   background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 
 .bg1 {
@@ -208,10 +278,71 @@ input {
   );
 }
 
+.logo {
+  width: 80px;
+  height: 80px;
+
+  @media screen and (width < 1024px) {
+    width: 65px;
+    height: 65px;
+  }
+}
+
 .logo.intro {
   width: 150px;
 }
 
-.logo.quiz {
+.icon-circle {
   width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background: transparent;
+  border: solid white 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+
+  @media screen and (width < 1024px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+i {
+  color: white;
+  font-size: 30px;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    font-size: 20px;
+  }
+}
+
+.icon-circle i:hover {
+  font-size: 35px;
+}
+
+.planet-entry {
+  width: 600px;
+  height: 125px;
+  border-radius: 80px;
+  margin: 10px 5px;
+  padding: 0 40px;
+  background: transparent;
+  border: solid white 3px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    width: 400px;
+    height: 80px;
+  }
+}
+
+.planet-entry:hover {
+  border-color: #9ca0b9;
+  background-color: #9ca0b9;
 }
