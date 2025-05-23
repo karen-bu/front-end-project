@@ -16,8 +16,9 @@ body {
 
 .page {
   min-height: 100vh;
-  max-height: auto;
-  max-width: auto;
+
+  /* max-height: auto;
+  max-width: auto; */
 }
 
 .row {
@@ -140,7 +141,7 @@ h3 {
 }
 
 h4 {
-  font-size: 16pt;
+  font-size: 20pt;
 
   @media screen and (width < 1024px) {
     font-size: 12pt;
@@ -192,11 +193,6 @@ button {
     margin-top: 30px;
     font-size: 10pt;
   }
-}
-
-button:hover {
-  border-color: #9ca0b9;
-  background-color: #9ca0b9;
 }
 
 input {
@@ -300,7 +296,7 @@ h4.dialog > i:hover {
 /* PAGE SPECIFIC */
 
 .page.landing {
-  padding: 250px;
+  padding: 100px 200px 200px;
 
   @media screen and (width < 1024px) {
     padding: 80px;
@@ -309,7 +305,7 @@ h4.dialog > i:hover {
 
 .page.quiz,
 .page.recommendations {
-  padding: 100px;
+  padding: 80px;
 
   @media screen and (width < 1024px) {
     padding: 30px;
@@ -371,6 +367,11 @@ h4.dialog > i:hover {
   }
 }
 
+.logo:hover {
+  transform: rotate(360deg);
+  transition: 1.5s ease-in-out;
+}
+
 .logo.intro {
   width: 250px;
   height: 250px;
@@ -415,9 +416,21 @@ h4.dialog > i:hover {
   }
 }
 
+button:hover,
 .icon-circle:hover,
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
+}
+
+.icon-circle:hover {
   font-size: 28pt;
+}
+
+button:active,
+.icon-circle:active,
+.planet-entry:active {
+  border-color: #fff;
+  box-shadow: 0 0 30px #fff inset;
+  transition: 0.125s ease-in-out;
 }
