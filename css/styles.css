@@ -218,6 +218,10 @@ input {
   }
 }
 
+.column-75.input {
+  position: relative;
+}
+
 ::placeholder {
   color: #9ca0b9;
   font-size: 16pt;
@@ -225,6 +229,15 @@ input {
   @media screen and (width < 1024px) {
     font-size: 14pt;
   }
+}
+
+input:focus {
+  outline: none;
+}
+
+input:focus::placeholder {
+  color: transparent;
+  transition: 0.325s ease-in-out;
 }
 
 hr {
@@ -359,7 +372,8 @@ h4.dialog > i:hover {
 }
 
 .logo.intro {
-  width: 150px;
+  width: 250px;
+  height: 250px;
 }
 
 .icon-circle {
@@ -405,5 +419,5 @@ h4.dialog > i:hover {
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
-  font-size: 35pt;
+  font-size: 28pt;
 }
