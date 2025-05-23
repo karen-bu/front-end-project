@@ -108,7 +108,8 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   color: white;
   font-family: 'Lexend Giga', monospace;
   text-align: center;
@@ -131,6 +132,14 @@ h2 {
 }
 
 h3 {
+  font-size: 20pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 14pt;
+  }
+}
+
+h4 {
   font-size: 16pt;
 
   @media screen and (width < 1024px) {
@@ -205,12 +214,30 @@ input {
   }
 }
 
+.planet-entry > i {
+  font-size: 30px;
+
+  @media screen and (width < 1024px) {
+    font-size: 20px;
+  }
+}
+
 ::placeholder {
   color: #9ca0b9;
   font-size: 16pt;
 
   @media screen and (width < 1024px) {
     font-size: 14pt;
+  }
+}
+
+hr {
+  border: solid white 1px;
+  width: 70%;
+  margin-top: 50px;
+
+  @media screen and (width < 1024px) {
+    margin-top: 25px;
   }
 }
 
@@ -302,25 +329,14 @@ input {
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  color: white;
+  transition: 0.325s ease-in-out;
 
   @media screen and (width < 1024px) {
     width: 60px;
     height: 60px;
-  }
-}
-
-i {
-  color: white;
-  font-size: 30px;
-  transition: 0.325s ease-in-out;
-
-  @media screen and (width < 1024px) {
     font-size: 20px;
   }
-}
-
-.icon-circle i:hover {
-  font-size: 35px;
 }
 
 .planet-entry {
@@ -342,7 +358,9 @@ i {
   }
 }
 
+.icon-circle:hover,
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
+  font-size: 35px;
 }
