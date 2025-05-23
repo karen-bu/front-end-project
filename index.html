@@ -620,6 +620,115 @@
     </div>
     <!-- end information page -->
 
+    <!-- start favorites page -->
+    <div class="page recommendations bg3" data-view="10">
+      <div class="row">
+        <div class="column-50 left">
+          <img
+            src="/images/logo/exodus-logo-white.svg"
+            alt="exod.us logo"
+            class="logo" />
+        </div>
+        <div class="column-50 right">
+          <div class="column-25 center">
+            <div class="icon-circle" title="retake quiz">
+              <i class="fa-solid fa-question"></i>
+            </div>
+          </div>
+          <div class="column-25 center">
+            <div class="icon-circle" title="suggestions list">
+              <i class="fa-solid fa-list"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-50 left"></div>
+        <div class="column-50 right">
+          <div class="column-25 center">
+            <p class="icon-label">retake quiz</p>
+          </div>
+          <div class="column-25 center">
+            <p class="icon-label">recommendations list</p>
+          </div>
+        </div>
+      </div>
+      <div class="row center">
+        <p>here are your favorite planets!</p>
+      </div>
+      <div class="row">
+        <div class="column-50 center entry">
+          <div class="column-50 planet-entry" data-planet-favorite="1">
+            <div class="column-50 left">
+              <h4>16 Cygni Bb</h4>
+            </div>
+            <div class="column-50 right">
+              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
+              <h4><i class="fa-regular fa-heart"></i></h4>
+            </div>
+          </div>
+        </div>
+        <div class="column-50 center entry" data-planet-favorite="2">
+          <div class="planet-entry">
+            <div class="column-50 left">
+              <h4>2MASS J21402931+1625183 b</h4>
+            </div>
+            <div class="column-50 right">
+              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
+              <h4><i class="fa-regular fa-heart"></i></h4>
+            </div>
+          </div>
+        </div>
+        <div class="column-50 center entry" data-planet-favorite="3">
+          <div class="planet-entry">
+            <div class="column-50 left">
+              <h4>23 Librae b</h4>
+            </div>
+            <div class="column-50 right">
+              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
+              <h4><i class="fa-regular fa-heart"></i></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <dialog id="delete-favorite">
+        <div class="row center">
+          <h3 class="dialog">warning!</h3>
+        </div>
+        <div class="row center">
+          <p class="dialog">
+            are you sure you want to delete 16 Cygni Bb from your favorites? you
+            cannot undo this action.
+          </p>
+        </div>
+        <div class="row center">
+          <div class="column-50">
+            <h4 class="dialog">
+              <i class="fa-regular fa-circle-check"></i>
+            </h4>
+          </div>
+          <div class="column-50">
+            <h4 class="dialog"><i class="fa-regular fa-circle-xmark"></i></h4>
+          </div>
+        </div>
+      </dialog>
+      <div class="row header-ultranarrow">
+        <div class="row center">
+          <div class="column-75 center">
+            <p class="icon-label header-ultranarrow">
+              disclaimer: exod.us is not responsible or legally liable for these
+              recommendations. not all planets contain liquid water, habitable
+              environments, friendly residents, or sentient life. exod.us is
+              regretfully unable to provide transportation to those wishing to
+              move. move to a new planet at your own risk.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end favorites page -->
+
     <!-- start scripts -->
     <script src="./js/data.js"></script>
     <script src="./js/main.js"></script>
