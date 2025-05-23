@@ -147,6 +147,10 @@ h4 {
   }
 }
 
+h4 > i {
+  margin-left: 30px;
+}
+
 p {
   color: white;
   font-family: 'Work Sans', sans-serif;
@@ -214,14 +218,6 @@ input {
   }
 }
 
-.planet-entry > i {
-  font-size: 30px;
-
-  @media screen and (width < 1024px) {
-    font-size: 20px;
-  }
-}
-
 ::placeholder {
   color: #9ca0b9;
   font-size: 16pt;
@@ -239,6 +235,53 @@ hr {
   @media screen and (width < 1024px) {
     margin-top: 25px;
   }
+}
+
+dialog {
+  width: 750px;
+  height: 450px;
+  padding: 30px;
+  background: white;
+  opacity: 0.95;
+  border-radius: 30px;
+  border: white;
+
+  @media screen and (width < 1024px) {
+    height: 325px;
+  }
+}
+
+p.dialog,
+h3.dialog,
+h4.dialog {
+  font-size: 16pt;
+  color: #000;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+h3.dialog {
+  font-size: 22pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 20pt;
+  }
+}
+
+h4.dialog > i {
+  font-size: 40pt;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    font-size: 30pt;
+  }
+}
+
+h4.dialog > i:hover {
+  font-size: 45pt;
+  color: #9ca0b9;
 }
 
 /* PAGE SPECIFIC */
@@ -328,14 +371,14 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 25pt;
   color: white;
   transition: 0.325s ease-in-out;
 
   @media screen and (width < 1024px) {
     width: 60px;
     height: 60px;
-    font-size: 20px;
+    font-size: 18pt;
   }
 }
 
@@ -362,5 +405,5 @@ hr {
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
-  font-size: 35px;
+  font-size: 35pt;
 }
