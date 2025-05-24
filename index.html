@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <!-- start page intro -->
+    <!-- start intro page -->
     <div class="page landing bg0" data-view="0">
       <div class="row center header">
         <div class="column-100">
@@ -62,13 +62,14 @@
     <!-- end page intro -->
 
     <!-- start quiz 1 -->
-    <div class="page quiz bg1" data-view="1">
+    <div class="page quiz bg1 hidden" data-view="1">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -91,13 +92,14 @@
     <!-- end quiz 1 -->
 
     <!-- start quiz 2 -->
-    <div class="page quiz bg2" data-view="2">
+    <div class="page quiz bg2 hidden" data-view="2">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -115,13 +117,14 @@
     <!-- end quiz 2 -->
 
     <!-- start quiz 3 -->
-    <div class="page quiz bg3" data-view="3">
+    <div class="page quiz bg3 hidden" data-view="3">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -139,13 +142,14 @@
     <!-- end quiz 3 -->
 
     <!-- start quiz 4 -->
-    <div class="page quiz bg4" data-view="4">
+    <div class="page quiz bg4 hidden" data-view="4">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -167,13 +171,14 @@
     <!-- end quiz 4 -->
 
     <!-- start quiz 5 -->
-    <div class="page quiz bg3" data-view="5">
+    <div class="page quiz bg3 hidden" data-view="5">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -191,13 +196,14 @@
     <!-- end quiz 5 -->
 
     <!-- start quiz 6 -->
-    <div class="page quiz bg2" data-view="6">
+    <div class="page quiz bg2 hidden" data-view="6">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
@@ -208,20 +214,20 @@
           <form id="distance">
             <input
               type="text"
-              placeholder="enter a number between 0 and 30000 + press enter"
+              placeholder="enter a number under 30000 + press enter"
               id="distance-input"
               required />
           </form>
         </div>
         <div class="column-75">
           <p class="label-text hidden" id="distance-input-error-string">
-            please enter a number.
+            please enter a number - no commas, letters, or special characters.
           </p>
           <p class="label-text hidden" id="distance-input-error-integer">
             please enter a whole number.
           </p>
           <p class="label-text hidden" id="distance-input-error-value">
-            please enter a smaller number.
+            please enter a number under 30,000.
           </p>
         </div>
       </div>
@@ -229,18 +235,19 @@
     <!-- end quiz 6 -->
 
     <!-- start quiz results -->
-    <div class="page quiz bg3" data-view="7">
+    <div class="page quiz bg1 hidden" data-view="7">
       <div class="row left">
-        <div class="column-50">
+        <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
         </div>
       </div>
       <div class="row center">
         <div class="column-75">
-          <p>so, you are looking for a place that ...</p>
+          <p id="summary-heading">so, you are looking for a place that ...</p>
         </div>
         <div class="column-75">
           <h2>is cold</h2>
@@ -268,13 +275,14 @@
     <!-- end quiz results -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations bg1" data-view="8">
+    <div class="page recommendations bg1 hidden" data-view="8">
       <div class="row">
         <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 wordmark"><h5>exod.us</h5></div>
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
@@ -329,7 +337,7 @@
         <div class="column-50 center entry" data-planet-recommendation="1">
           <div class="planet-entry">
             <div class="column-50 left">
-              <h4>2MASS J21431+1683 b</h4>
+              <h4>2MASS J21431 b</h4>
             </div>
             <div class="column-50 right">
               <h4><i class="fa-regular fa-heart"></i></h4>
@@ -511,13 +519,14 @@
     <!-- end recommendations page -->
 
     <!-- start information page -->
-    <div class="page recommendations bg2" data-view="9">
+    <div class="page recommendations bg2 hidden" data-view="9">
       <div class="row">
         <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 wordmark"><h5>exod.us</h5></div>
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
@@ -643,13 +652,14 @@
     <!-- end information page -->
 
     <!-- start favorites page -->
-    <div class="page recommendations bg3" data-view="10">
+    <div class="page recommendations bg3 hidden" data-view="10">
       <div class="row">
         <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
+          <div class="column-25 wordmark"><h5>exod.us</h5></div>
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
@@ -693,7 +703,7 @@
         <div class="column-50 center entry" data-planet-favorite="2">
           <div class="planet-entry">
             <div class="column-50 left">
-              <h4>2MASS J21402931+1625183 b</h4>
+              <h4>2MASS J21402931 b</h4>
             </div>
             <div class="column-50 right">
               <h4><i class="fa-regular fa-circle-xmark"></i></h4>

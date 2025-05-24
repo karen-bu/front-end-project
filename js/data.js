@@ -16,3 +16,38 @@ async function fetchExoplanetData() {
   }
 }
 // fetchExoplanetData();
+// REMOVING ERRORS FROM DISTANCE INPUT QUIZ PAGE
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function distanceInputRemoveErrors() {
+  $distanceInputErrorString.classList.add('hidden');
+  $distanceInputErrorInteger.classList.add('hidden');
+  $distanceInputErrorValue.classList.add('hidden');
+}
+// SCROLL FUNCTIONS
+const quizPages = document.querySelectorAll('[data-view]');
+let dataView = 0;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealNext() {
+  quizPages[dataView + 1].classList.remove('hidden');
+  dataView += 1;
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function stopScroll() {
+  document.body.classList.add('stop-scroll');
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollDown() {
+  window.scrollBy({
+    top: window.innerHeight,
+    left: 0,
+    behavior: 'smooth',
+  });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+}

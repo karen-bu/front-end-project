@@ -4,21 +4,24 @@
   box-sizing: border-box;
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* GLOBAL FORMATTING */
-
 body {
   margin: 0;
 }
 
+/* GLOBAL FORMATTING */
+
+.hidden {
+  display: none !important;
+}
+
+.stop-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
 .page {
   min-height: 100vh;
-
-  /* max-height: auto;
-  max-width: auto; */
+  height: auto;
 }
 
 .row {
@@ -97,12 +100,17 @@ body {
   }
 }
 
+.wordmark {
+  margin-left: 20px;
+}
+
 /* GLOBAL TEXT AND IMAGE */
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
   color: white;
   font-family: 'Lexend Giga', monospace;
 }
@@ -143,6 +151,15 @@ h4 {
   }
 }
 
+h5 {
+  font-size: 12pt;
+  text-align: left;
+
+  @media screen and (width < 1024px) {
+    font-size: 8pt;
+  }
+}
+
 h4 > i {
   margin-left: 30px;
 }
@@ -151,10 +168,10 @@ p {
   color: white;
   font-family: 'Work Sans', sans-serif;
   text-align: center;
-  font-size: 16pt;
+  font-size: 14pt;
 
   @media screen and (width < 1024px) {
-    font-size: 14pt;
+    font-size: 12pt;
   }
 }
 
@@ -206,6 +223,7 @@ input {
 
   @media screen and (width < 1024px) {
     font-size: 14pt;
+    width: 300px;
   }
 }
 
@@ -215,10 +233,10 @@ input {
 
 ::placeholder {
   color: #9ca0b9;
-  font-size: 16pt;
+  font-size: 14pt;
 
   @media screen and (width < 1024px) {
-    font-size: 14pt;
+    font-size: 10pt;
   }
 }
 
@@ -368,8 +386,8 @@ h4.dialog > i:hover {
 }
 
 .logo.intro {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
 
   @media screen and (width < 1024px) {
     width: 150px;
@@ -416,7 +434,7 @@ h4.dialog > i:hover {
   transition: 0.325s ease-in-out;
 
   @media screen and (width < 1024px) {
-    width: 400px;
+    max-width: 300px;
     height: 80px;
   }
 }

@@ -14,13 +14,15 @@ const quizResponses: QuizResponses = {};
 
 // landing page (data-view="0")
 const $getStartedButton = document.getElementById('get-started');
+
 $getStartedButton?.addEventListener('click', () => {
   quizResponses.startQuiz = true;
-  // console.log('start quiz', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 1 - planet search (data-view="1")
-
 const $planetSearch = document.querySelector(
   '#planet-search-input',
 ) as HTMLFormElement;
@@ -31,13 +33,14 @@ $planetSearch?.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.code === 'Enter') {
     event.preventDefault();
     quizResponses.planetSearch = $planetSearch.value;
-    // console.log('planet search:', quizResponses);
   }
 });
 
 $noPlanetSearchButton?.addEventListener('click', () => {
   quizResponses.planetSearch = false;
-  // console.log('planet search:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 2 - planet temperature (data-view="2")
@@ -51,12 +54,16 @@ const $temperatureHot = document.querySelector(
 
 $temperatureCold?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'cold';
-  // console.log('planet temperature:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 $temperatureHot?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'hot';
-  // console.log('planet temperature:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 3 - planet mass (data-view="3")
@@ -65,12 +72,16 @@ const $largeMass = document.querySelector('#large-mass') as HTMLButtonElement;
 
 $smallMass?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
-  // console.log('planet mass:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 $largeMass?.addEventListener('click', () => {
   quizResponses.planetMass = 'large';
-  // console.log('planet mass:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 4 - planet period (data-view="4")
@@ -81,12 +92,16 @@ const $shortPeriod = document.querySelector(
 
 $longPeriod?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'long';
-  // console.log('planet period:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 $shortPeriod?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'short';
-  // console.log('planet period:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 5 - planet radius (data-view="5")
@@ -99,12 +114,16 @@ const $smallRadius = document.querySelector(
 
 $largeRadius?.addEventListener('click', () => {
   quizResponses.planetRadius = 'large';
-  // console.log('planet radius:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 $smallRadius?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
-  // console.log('planet radius:', quizResponses);
+  revealNext();
+  scrollDown();
+  stopScroll();
 });
 
 // quiz 6 - planet distance (data-view="6")
@@ -124,12 +143,6 @@ const $distanceInputErrorValue = document.querySelector(
   '#distance-input-error-value',
 ) as HTMLElement;
 
-function distanceInputRemoveErrors(): void {
-  $distanceInputErrorString.classList.add('hidden');
-  $distanceInputErrorInteger.classList.add('hidden');
-  $distanceInputErrorValue.classList.add('hidden');
-}
-
 $distanceInput.addEventListener('input', (event: Event) => {
   const distanceTarget = event.target as HTMLInputElement;
   const distanceTerm = distanceTarget?.value;
@@ -148,12 +161,19 @@ $distanceInput.addEventListener('input', (event: Event) => {
     distanceInputRemoveErrors();
     $distanceInputErrorValue.classList.remove('hidden');
   }
+  if (distanceTerm === '') {
+    distanceInputRemoveErrors();
+  }
 });
 
 $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
     event.preventDefault();
     quizResponses.planetDistance = $distanceInput.value;
-    // console.log(quizResponses);
+    revealNext();
+    scrollDown();
+    stopScroll();
   }
 });
+
+// GENERATING QUIZ SUMMARY PAGE
