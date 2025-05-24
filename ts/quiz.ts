@@ -150,18 +150,15 @@ $distanceInput.addEventListener('input', (event: Event) => {
   if (isNaN(Number(distanceTerm))) {
     distanceInputRemoveErrors();
     $distanceInputErrorString.classList.remove('hidden');
-  }
-
-  if (!isNaN(Number(distanceTerm)) && distanceTerm.includes('.')) {
+  } else if (!isNaN(Number(distanceTerm)) && distanceTerm.includes('.')) {
     distanceInputRemoveErrors();
     $distanceInputErrorInteger.classList.remove('hidden');
-  }
-
-  if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 30000) {
+  } else if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 30000) {
     distanceInputRemoveErrors();
     $distanceInputErrorValue.classList.remove('hidden');
-  }
-  if (distanceTerm === '') {
+  } else if (distanceTerm === '') {
+    distanceInputRemoveErrors();
+  } else {
     distanceInputRemoveErrors();
   }
 });
@@ -175,5 +172,3 @@ $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
     stopScroll();
   }
 });
-
-// GENERATING QUIZ SUMMARY PAGE
