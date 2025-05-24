@@ -26,8 +26,8 @@
   <body>
     <!-- start page intro -->
     <div class="page landing bg0" data-view="0">
-      <div class="column-100">
-        <div class="row center">
+      <div class="row center header">
+        <div class="column-100">
           <img
             src="/images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
@@ -52,10 +52,10 @@
           </p>
         </div>
         <div class="column-75">
-          <p>take our quiz now to start your exod.us!</p>
+          <p>take our quiz now to start your journey!</p>
         </div>
         <div class="column-75">
-          <button>GET STARTED</button>
+          <button id="get-started">GET STARTED</button>
         </div>
       </div>
     </div>
@@ -72,17 +72,20 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>do you already have a planet in mind?</h1>
         </div>
         <div class="column-75 input">
-          <input
-            type="text"
-            placeholder="search by name + press enter"
-            id="planet-name" />
+          <form id="planet-search">
+            <input
+              type="text"
+              placeholder="search by name + press enter"
+              id="planet-search-input"
+              name="planetSearch" />
+          </form>
         </div>
         <div class="column-75">
-          <button>NO</button>
+          <button id="no-planet-search">NO - HELP ME FIND ONE!</button>
         </div>
       </div>
     </div>
@@ -99,14 +102,14 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>how do you like to set the thermostat?</h1>
         </div>
         <div class="column-75">
-          <button>COLDER THAN MY HEART.</button>
+          <button id="temp-cold">COLDER THAN MY HEART.</button>
         </div>
         <div class="column-75">
-          <button>HOTTER THAN THE FIRES OF HECK.</button>
+          <button id="temp-hot">HOTTER THAN THE FIRES OF HECK.</button>
         </div>
       </div>
     </div>
@@ -123,7 +126,7 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>how do you feel, like, in your soul?</h1>
         </div>
         <div class="column-75">
@@ -147,7 +150,7 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>do you want more time in a year?</h1>
         </div>
         <div class="column-75">
@@ -173,7 +176,7 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>how much room are you looking for?</h1>
         </div>
         <div class="column-75">
@@ -197,7 +200,7 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75 header">
           <h1>how far away do you want to go?</h1>
         </div>
         <div class="column-75">
@@ -213,7 +216,7 @@
     <!-- end quiz 6 -->
 
     <!-- start quiz results -->
-    <div class="page quiz bg2" data-view="7">
+    <div class="page quiz bg3" data-view="7">
       <div class="row left">
         <div class="column-50">
           <img
@@ -223,7 +226,7 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75 header-ultranarrow">
+        <div class="column-75">
           <p>so, you are looking for a place that ...</p>
         </div>
         <div class="column-75">
@@ -285,13 +288,19 @@
         </div>
       </div>
       <div class="row center">
-        <h3>based on your answers, here are some suggested planets for you!</h3>
+        <div class="column-75">
+          <h3>
+            based on your answers, here are some recommended planets for you!
+          </h3>
+        </div>
       </div>
       <div class="row center">
-        <p>
-          click on each planet to get more information, or click on the heart to
-          add to your favorites list.
-        </p>
+        <div class="column-75">
+          <p>
+            click on each planet to get more information, or click on the heart
+            to add to your favorites list.
+          </p>
+        </div>
       </div>
       <div class="row">
         <div class="column-50 center entry">
@@ -307,7 +316,7 @@
         <div class="column-50 center entry" data-planet-recommendation="1">
           <div class="planet-entry">
             <div class="column-50 left">
-              <h4>2MASS J21402931+1625183 b</h4>
+              <h4>2MASS J21431+1683 b</h4>
             </div>
             <div class="column-50 right">
               <h4><i class="fa-regular fa-heart"></i></h4>
@@ -455,7 +464,7 @@
           </div>
         </div>
       </div>
-      <div class="row header-ultranarrow">
+      <div class="row header">
         <div class="column-50 center">
           <div class="icon-circle">
             <i class="fa-solid fa-arrow-left" title="previous"></i>
@@ -476,12 +485,11 @@
         </div>
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header-ultranarrow">
-              disclaimer: exod.us is not responsible or legally liable for these
-              recommendations. not all planets contain liquid water, habitable
-              environments, friendly residents, or sentient life. exod.us is
-              regretfully unable to provide transportation to those wishing to
-              move. move to a new planet at your own risk.
+            <p class="icon-label header">
+              disclaimer: exod.us is not morally responsible or legally liable
+              for these recommendations. not all planets contain liquid water,
+              habitable environments, friendly residents, or sentient life. move
+              to a new planet at your own risk.
             </p>
           </div>
         </div>
@@ -524,7 +532,7 @@
       </div>
 
       <div class="row center">
-        <div class="column-75 center header-ultranarrow">
+        <div class="column-75 center header">
           <h1 class="">Beta Pictoris b</h1>
         </div>
         <div class="row center">
@@ -586,7 +594,7 @@
         </div>
       </div>
 
-      <div class="row header-ultranarrow">
+      <div class="row header">
         <div class="column-50 center">
           <div class="icon-circle">
             <i
@@ -609,12 +617,11 @@
         </div>
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header-ultranarrow">
-              disclaimer: exod.us is not responsible or legally liable for these
-              recommendations. not all planets contain liquid water, habitable
-              environments, friendly residents, or sentient life. exod.us is
-              regretfully unable to provide transportation to those wishing to
-              move. move to a new planet at your own risk.
+            <p class="icon-label header">
+              disclaimer: exod.us is not morally responsible or legally liable
+              for these recommendations. not all planets contain liquid water,
+              habitable environments, friendly residents, or sentient life. move
+              to a new planet at your own risk.
             </p>
           </div>
         </div>
@@ -715,15 +722,14 @@
           </div>
         </div>
       </dialog>
-      <div class="row header-ultranarrow">
+      <div class="row header">
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header-ultranarrow">
-              disclaimer: exod.us is not responsible or legally liable for these
-              recommendations. not all planets contain liquid water, habitable
-              environments, friendly residents, or sentient life. exod.us is
-              regretfully unable to provide transportation to those wishing to
-              move. move to a new planet at your own risk.
+            <p class="icon-label header">
+              disclaimer: exod.us is not morally responsible or legally liable
+              for these recommendations. not all planets contain liquid water,
+              habitable environments, friendly residents, or sentient life. move
+              to a new planet at your own risk.
             </p>
           </div>
         </div>
@@ -733,7 +739,7 @@
 
     <!-- start scripts -->
     <script src="./js/data.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/quiz.js"></script>
     <!-- end scripts -->
   </body>
 </html>
