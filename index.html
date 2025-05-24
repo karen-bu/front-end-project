@@ -75,13 +75,12 @@
         <div class="column-75 header">
           <h1>do you already have a planet in mind?</h1>
         </div>
-        <div class="column-75 input">
+        <div class="column-75">
           <form id="planet-search">
             <input
               type="text"
               placeholder="search by name + press enter"
-              id="planet-search-input"
-              name="planetSearch" />
+              id="planet-search-input" />
           </form>
         </div>
         <div class="column-75">
@@ -130,10 +129,10 @@
           <h1>how do you feel, like, in your soul?</h1>
         </div>
         <div class="column-75">
-          <button>TOO WEIGHED DOWN.</button>
+          <button id="small-mass">TOO WEIGHED DOWN.</button>
         </div>
         <div class="column-75">
-          <button>NOT GROUNDED ENOUGH.</button>
+          <button id="large-mass">NOT GROUNDED ENOUGH.</button>
         </div>
       </div>
     </div>
@@ -154,10 +153,12 @@
           <h1>do you want more time in a year?</h1>
         </div>
         <div class="column-75">
-          <button>YES - I HAVE TOO MUCH TO GET DONE. AHH!!!</button>
+          <button id="long-period">
+            YES - I HAVE TOO MUCH TO GET DONE. AHH!!!
+          </button>
         </div>
         <div class="column-75">
-          <button>
+          <button id="short-period">
             NO - I ALREADY HAVE TOO MUCH TIME ALONE WITH MY THOUGHTS.
           </button>
         </div>
@@ -180,10 +181,10 @@
           <h1>how much room are you looking for?</h1>
         </div>
         <div class="column-75">
-          <button>A LOT - I HAVE TOO MUCH STUFF.</button>
+          <button id="small-radius">A LOT - I HAVE TOO MUCH STUFF.</button>
         </div>
         <div class="column-75">
-          <button>NOT MUCH - I'M A MINIMALIST.</button>
+          <button id="large-radius">NOT MUCH - I'M A MINIMALIST.</button>
         </div>
       </div>
     </div>
@@ -204,13 +205,25 @@
           <h1>how far away do you want to go?</h1>
         </div>
         <div class="column-75">
-          <input
-            type="text"
-            placeholder="enter a number between 0 and 10,000 + press enter"
-            id="distance"
-            required />
+          <form id="distance">
+            <input
+              type="text"
+              placeholder="enter a number between 0 and 30000 + press enter"
+              id="distance-input"
+              required />
+          </form>
         </div>
-        <div class="column-75"></div>
+        <div class="column-75">
+          <p class="label-text hidden" id="distance-input-error-string">
+            please enter a number.
+          </p>
+          <p class="label-text hidden" id="distance-input-error-integer">
+            please enter a whole number.
+          </p>
+          <p class="label-text hidden" id="distance-input-error-value">
+            please enter a smaller number.
+          </p>
+        </div>
       </div>
     </div>
     <!-- end quiz 6 -->
@@ -280,10 +293,10 @@
         <div class="column-50 left"></div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <p class="icon-label">retake quiz</p>
+            <p class="label-text">retake quiz</p>
           </div>
           <div class="column-25 center">
-            <p class="icon-label">favorites list</p>
+            <p class="label-text">favorites list</p>
           </div>
         </div>
       </div>
@@ -477,15 +490,15 @@
         </div>
         <div class="row">
           <div class="column-50 center">
-            <p class="icon-label">previous</p>
+            <p class="label-text">previous</p>
           </div>
           <div class="column-50 center">
-            <p class="icon-label">next</p>
+            <p class="label-text">next</p>
           </div>
         </div>
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header">
+            <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
               habitable environments, friendly residents, or sentient life. move
@@ -523,10 +536,10 @@
         <div class="column-50 left"></div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <p class="icon-label">retake quiz</p>
+            <p class="label-text">retake quiz</p>
           </div>
           <div class="column-25 center">
-            <p class="icon-label">favorites list</p>
+            <p class="label-text">favorites list</p>
           </div>
         </div>
       </div>
@@ -609,15 +622,15 @@
         </div>
         <div class="row">
           <div class="column-50 center">
-            <p class="icon-label">back to recommendations</p>
+            <p class="label-text">back to recommendations</p>
           </div>
           <div class="column-50 center">
-            <p class="icon-label">favorite this planet</p>
+            <p class="label-text">favorite this planet</p>
           </div>
         </div>
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header">
+            <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
               habitable environments, friendly residents, or sentient life. move
@@ -655,10 +668,10 @@
         <div class="column-50 left"></div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <p class="icon-label">retake quiz</p>
+            <p class="label-text">retake quiz</p>
           </div>
           <div class="column-25 center">
-            <p class="icon-label">recommendations list</p>
+            <p class="label-text">recommendations list</p>
           </div>
         </div>
       </div>
@@ -725,7 +738,7 @@
       <div class="row header">
         <div class="row center">
           <div class="column-75 center">
-            <p class="icon-label header">
+            <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
               habitable environments, friendly residents, or sentient life. move

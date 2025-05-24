@@ -52,6 +52,10 @@ body {
   width: 50%;
 }
 
+.column-33 {
+  width: 33%;
+}
+
 .column-25 {
   width: 25%;
 
@@ -154,7 +158,7 @@ p {
   }
 }
 
-p.icon-label {
+.label-text {
   font-size: 10pt;
 
   @media screen and (width < 1024px) {
@@ -224,6 +228,11 @@ input:focus {
 
 input:focus::placeholder {
   color: transparent;
+  transition: 0.325s ease-in-out;
+}
+
+input:not(:focus)::placeholder {
+  color: #9ca0b9;
   transition: 0.325s ease-in-out;
 }
 
