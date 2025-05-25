@@ -1,16 +1,16 @@
-// COLLECTING QUIZ ANSWERS
+const $devLazy = document.querySelector('#dev-lazy');
+$devLazy?.addEventListener('click', () => {
+  quizResponses.startQuiz = true;
+  quizResponses.planetSearch = false;
+  quizResponses.planetTemperature = 'hot';
+  quizResponses.planetMass = 'small';
+  quizResponses.planetPeriod = 'long';
+  quizResponses.planetRadius = 'small';
+  quizResponses.planetDistance = '1994';
+  console.log('quizResponses:', quizResponses);
+});
 
-interface QuizResponses {
-  startQuiz?: boolean;
-  planetSearch?: string | boolean;
-  planetTemperature?: string;
-  planetMass?: string;
-  planetPeriod?: string;
-  planetRadius?: string;
-  planetDistance?: number;
-}
-
-const quizResponses: QuizResponses = {};
+// COLLECTING QUIZ RESPONSES
 
 // landing page (data-view="0")
 const $getStartedButton = document.getElementById('get-started');
@@ -165,10 +165,17 @@ $distanceInput.addEventListener('input', (event: Event) => {
 
 $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
-    event.preventDefault();
     quizResponses.planetDistance = $distanceInput.value;
+    console.log(quizResponses.planetDistance);
+    console.log(typeof quizResponses.planetDistance);
+    event.preventDefault();
     revealNext();
     scrollDown();
     stopScroll();
+    generateSummary();
   }
 });
+
+// BUILDING SUGGESTIONS PAGE
+
+// quiz response messages
