@@ -1,22 +1,6 @@
-interface Exoplanet {
-  name?: string;
-  min_mass?: number;
-  max_mass?: number;
-  min_radius?: number;
-  max_radius?: number;
-  min_period?: number;
-  max_period?: number;
-  min_temperature?: number;
-  max_temperature?: number;
-  min_distance_light_year?: number;
-  max_distance_light_year?: number;
-  min_semi_major_axis?: number;
-  max_semi_major_axis?: number;
-  offset?: number;
-}
-
+'use strict';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function fetchExoplanetData(): Promise<void> {
+async function fetchExoplanetData() {
   try {
     const apiData = await fetch(
       'https://api.api-ninjas.com/v1/planets?min_distance_light_year=30000',
@@ -25,50 +9,42 @@ async function fetchExoplanetData(): Promise<void> {
       },
     );
     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
-    const exoplanetData = (await apiData.json()) as Exoplanet;
+    const exoplanetData = await apiData.json();
     console.log(exoplanetData);
   } catch (error) {
     console.error('Error:', error);
   }
 }
-
 // fetchExoplanetData();
-
 // REMOVING ERRORS FROM DISTANCE INPUT QUIZ PAGE
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function distanceInputRemoveErrors(): void {
+function distanceInputRemoveErrors() {
   $distanceInputErrorString.classList.add('hidden');
   $distanceInputErrorInteger.classList.add('hidden');
   $distanceInputErrorValue.classList.add('hidden');
 }
-
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
-
 let dataView = 0;
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function revealNext(): void {
+function revealNext() {
   quizPages[dataView + 1].classList.remove('hidden');
   dataView += 1;
 }
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function stopScroll(): void {
+function stopScroll() {
   document.body.classList.add('stop-scroll');
 }
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function scrollDown(): void {
+function scrollDown() {
   window.scrollBy({
     top: window.innerHeight,
     left: 0,
     behavior: 'smooth',
   });
 }
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function scrollToTop(): void {
+function scrollToTop() {
   window.scrollTo({
     top: 0,
     left: 0,

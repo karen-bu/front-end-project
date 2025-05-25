@@ -1,0 +1,459 @@
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* GLOBAL FORMATTING */
+
+.hidden {
+  display: none !important;
+}
+
+.stop-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+.page {
+  min-height: 100vh;
+  height: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  width: 100%;
+
+  @media screen and (width < 1024px) {
+    margin: 5px 0;
+  }
+}
+
+.column-100 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.column-75 {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+
+  @media screen and (width < 1024px) {
+    width: 100%;
+  }
+}
+
+.column-50 {
+  width: 50%;
+}
+
+.column-33 {
+  width: 33%;
+}
+
+.column-25 {
+  width: 25%;
+
+  @media screen and (width < 1024px) {
+    width: 50%;
+  }
+}
+
+.entry {
+  @media screen and (width <= 1024px) {
+    width: 100%;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  display: flex;
+  justify-content: left;
+}
+
+.right {
+  display: flex;
+  justify-content: right;
+}
+
+.header {
+  margin-top: 30px;
+
+  @media screen and (width < 1024px) {
+    margin-top: 50px;
+  }
+
+  @media screen and (height > 920px) {
+    margin-top: 200px;
+  }
+}
+
+.wordmark {
+  margin-left: 20px;
+}
+
+/* GLOBAL TEXT AND IMAGE */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: white;
+  font-family: 'Lexend Giga', monospace;
+}
+
+h1 {
+  font-size: 40pt;
+  text-align: center;
+
+  @media screen and (width < 1024px) {
+    font-size: 25pt;
+  }
+}
+
+h2 {
+  font-size: 25pt;
+  text-align: center;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+h3 {
+  font-size: 20pt;
+  text-align: center;
+
+  @media screen and (width < 1024px) {
+    font-size: 14pt;
+  }
+}
+
+h4 {
+  font-size: 20pt;
+  text-align: left;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+h5 {
+  font-size: 12pt;
+  text-align: left;
+
+  @media screen and (width < 1024px) {
+    font-size: 8pt;
+  }
+}
+
+h4 > i {
+  margin-left: 30px;
+}
+
+p {
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+  font-size: 14pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+.label-text {
+  font-size: 10pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 8pt;
+  }
+}
+
+button {
+  width: 600px;
+  height: 85px;
+  padding: 0 50px;
+  margin-top: 50px;
+  border-radius: 50px;
+  border-width: 3px;
+  border-color: #fff;
+  border-style: solid;
+  background-color: transparent;
+  color: #fff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12pt;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    width: 300px;
+    height: 60px;
+    border-radius: 50px;
+    margin-top: 30px;
+    font-size: 10pt;
+  }
+}
+
+input {
+  width: 600px;
+  height: 80px;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: solid 3px #fff;
+  background: transparent;
+  margin: 20px 0 40px;
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+  color: #fff;
+  font-size: 16pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 14pt;
+    width: 300px;
+  }
+}
+
+.column-75.input {
+  position: relative;
+}
+
+::placeholder {
+  color: #9ca0b9;
+  font-size: 14pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 10pt;
+  }
+}
+
+input:focus {
+  outline: none;
+}
+
+input:focus::placeholder {
+  color: transparent;
+  transition: 0.325s ease-in-out;
+}
+
+input:not(:focus)::placeholder {
+  color: #9ca0b9;
+  transition: 0.325s ease-in-out;
+}
+
+hr {
+  border: solid white 1px;
+  width: 70%;
+  margin-top: 50px;
+
+  @media screen and (width < 1024px) {
+    margin-top: 25px;
+  }
+}
+
+dialog {
+  width: 750px;
+  height: 450px;
+  padding: 30px;
+  background: white;
+  opacity: 0.95;
+  border-radius: 30px;
+  border: white;
+
+  @media screen and (width < 1024px) {
+    height: 325px;
+  }
+}
+
+p.dialog,
+h3.dialog,
+h4.dialog {
+  font-size: 16pt;
+  color: #000;
+
+  @media screen and (width < 1024px) {
+    font-size: 12pt;
+  }
+}
+
+h3.dialog {
+  font-size: 22pt;
+
+  @media screen and (width < 1024px) {
+    font-size: 20pt;
+  }
+}
+
+h4.dialog > i {
+  font-size: 40pt;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    font-size: 30pt;
+  }
+}
+
+h4.dialog > i:hover {
+  font-size: 45pt;
+  color: #9ca0b9;
+}
+
+/* PAGE SPECIFIC */
+
+.page.landing {
+  padding: 100px 200px 200px;
+
+  @media screen and (width < 1024px) {
+    padding: 80px;
+  }
+}
+
+.page.quiz,
+.page.recommendations {
+  padding: 80px;
+
+  @media screen and (width < 1024px) {
+    padding: 30px;
+  }
+}
+
+.bg0 {
+  background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.bg1 {
+  background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(73, 108, 153, 1) 100%
+  );
+}
+
+.bg2 {
+  background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(144, 131, 144, 1) 100%
+  );
+}
+
+.bg3 {
+  background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(109, 128, 159, 1) 100%
+  );
+}
+
+.bg4 {
+  background: #04040c;
+  background: linear-gradient(
+    0deg,
+    rgba(4, 4, 12, 1) 0%,
+    rgba(156, 160, 185, 1) 100%
+  );
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+
+  @media screen and (width < 1024px) {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+.logo.intro {
+  width: 200px;
+  height: 200px;
+
+  @media screen and (width < 1024px) {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.logo:hover {
+  transform: rotate(360deg);
+  transition: 1.5s ease-in-out;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background: transparent;
+  border: solid white 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25pt;
+  color: white;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    width: 60px;
+    height: 60px;
+    font-size: 18pt;
+  }
+}
+
+.planet-entry {
+  width: 600px;
+  height: 125px;
+  border-radius: 80px;
+  margin: 10px 5px;
+  padding: 0 40px;
+  background: transparent;
+  border: solid white 3px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  transition: 0.325s ease-in-out;
+
+  @media screen and (width < 1024px) {
+    max-width: 300px;
+    height: 80px;
+  }
+}
+
+button:hover,
+.icon-circle:hover,
+.planet-entry:hover {
+  border-color: #9ca0b9;
+  background-color: #9ca0b9;
+}
+
+.icon-circle:hover {
+  font-size: 28pt;
+}
+
+button:active,
+.icon-circle:active,
+.planet-entry:active {
+  border-color: #fff;
+  box-shadow: 0 0 30px #fff inset;
+  transition: 0.05s ease-in-out;
+}
