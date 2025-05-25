@@ -15,18 +15,6 @@ interface Exoplanet {
   offset?: number;
 }
 
-interface QuizResponses {
-  startQuiz?: boolean;
-  planetSearch?: string | boolean;
-  planetTemperature?: string;
-  planetMass?: string;
-  planetPeriod?: string;
-  planetRadius?: string;
-  planetDistance?: string | undefined;
-}
-
-let quizResponses: QuizResponses = {};
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function fetchExoplanetData(): Promise<void> {
   try {
@@ -67,17 +55,46 @@ function revealNext(): void {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function stopScroll(): void {
-  document.body.classList.add('stop-scroll');
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown(): void {
   window.scrollBy({
     top: window.innerHeight,
     left: 0,
     behavior: 'smooth',
   });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hidePrev(): void {
+  quizPages[dataView - 1].classList.add('hidden');
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealAll(): void {
+  for (let i = 0; i < quizPages.length; i++) {
+    quizPages[i].classList.remove('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideQuiz(): void {
+  dataView = 0;
+  for (let i = 1; i < 9; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideAll(): void {
+  dataView = 0;
+  for (let i = 1; i < quizPages.length; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function showLoad(): void {
+  hideAll();
+  quizPages[8].classList.remove('hidden');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -161,25 +178,6 @@ function generateSummary(): void {
 }
 
 // SUMMARY PAGE BUTTONS
-const $summaryPageGetSuggestionsButton = document.querySelector(
-  '#get-suggestions',
-) as HTMLButtonElement;
-
-const $summaryPageRetakeQuizButton = document.querySelector(
-  '#summary-retake-quiz',
-) as HTMLButtonElement;
-
-$summaryPageGetSuggestionsButton?.addEventListener('click', () => {
-  dataView = 7;
-  revealNext();
-  scrollDown();
-  stopScroll();
-});
-
-$summaryPageRetakeQuizButton?.addEventListener('click', () => {
-  quizResponses = {};
-  scrollToTop();
-});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function revealText(element: HTMLElement): void {

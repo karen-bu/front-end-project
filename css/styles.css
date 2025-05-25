@@ -14,11 +14,6 @@ body {
   display: none !important;
 }
 
-.stop-scroll {
-  height: 100%;
-  overflow: hidden;
-}
-
 .invisible {
   opacity: 0;
 }
@@ -31,6 +26,10 @@ body {
 button.visible {
   opacity: 1;
   transition: 0.325s ease-in-out;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* FORMATTING */

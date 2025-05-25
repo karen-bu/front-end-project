@@ -1,5 +1,4 @@
 'use strict';
-let quizResponses = {};
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function fetchExoplanetData() {
   try {
@@ -34,16 +33,40 @@ function revealNext() {
   dataView += 1;
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function stopScroll() {
-  document.body.classList.add('stop-scroll');
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown() {
   window.scrollBy({
     top: window.innerHeight,
     left: 0,
     behavior: 'smooth',
   });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hidePrev() {
+  quizPages[dataView - 1].classList.add('hidden');
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealAll() {
+  for (let i = 0; i < quizPages.length; i++) {
+    quizPages[i].classList.remove('hidden');
+  }
+}
+function hideQuiz() {
+  dataView = 0;
+  for (let i = 1; i < 9; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideAll() {
+  dataView = 0;
+  for (let i = 1; i < quizPages.length; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function showLoad() {
+  hideAll();
+  quizPages[8].classList.remove('hidden');
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToTop() {
@@ -106,27 +129,8 @@ function generateSummary() {
   setTimeout(() => revealText($summaryPageRetakeQuizButton), 4500);
 }
 // SUMMARY PAGE BUTTONS
-const $summaryPageGetSuggestionsButton =
-  document.querySelector('#get-suggestions');
-const $summaryPageRetakeQuizButton = document.querySelector(
-  '#summary-retake-quiz',
-);
-$summaryPageGetSuggestionsButton?.addEventListener('click', () => {
-  dataView = 7;
-  revealNext();
-  scrollDown();
-  stopScroll();
-});
-$summaryPageRetakeQuizButton?.addEventListener('click', () => {
-  quizResponses = {};
-  scrollToTop();
-});
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function revealText(element) {
   element.classList.remove('invisible');
   element.classList.add('visible');
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function viewSwap() {
-  dataView;
 }
