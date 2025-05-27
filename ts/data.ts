@@ -44,6 +44,7 @@ function distanceInputRemoveErrors(): void {
 
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
+console.log(quizPages);
 
 let dataView = 0;
 
@@ -51,11 +52,6 @@ let dataView = 0;
 function revealNext(): void {
   quizPages[dataView + 1].classList.remove('hidden');
   dataView += 1;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function stopScroll(): void {
-  document.body.classList.add('stop-scroll');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -68,10 +64,123 @@ function scrollDown(): void {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hidePrev(): void {
+  quizPages[dataView - 1].classList.add('hidden');
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealAll(): void {
+  for (let i = 0; i < quizPages.length; i++) {
+    quizPages[i].classList.remove('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideQuiz(): void {
+  dataView = 0;
+  for (let i = 1; i < 9; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideAll(): void {
+  dataView = 0;
+  for (let i = 1; i < quizPages.length; i++) {
+    quizPages[i].classList.add('hidden');
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function showLoad(): void {
+  hideAll();
+  quizPages[8].classList.remove('hidden');
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToTop(): void {
   window.scrollTo({
     top: 0,
     left: 0,
     behavior: 'smooth',
   });
+  dataView = 0;
+}
+
+// GENERATING SUMMARY PAGE
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function generateSummary(): void {
+  const $summaryHeading = document.querySelector(
+    '#summary-heading',
+  ) as HTMLElement;
+
+  const $summaryTemperature = document.querySelector(
+    '#summary-temperature',
+  ) as HTMLElement;
+  if (!$summaryTemperature)
+    throw new Error('$summaryTemperature does not exist!');
+  if (quizResponses.planetTemperature === 'cold') {
+    const planetTempMsg = 'is cool and refreshing';
+    $summaryTemperature.textContent = planetTempMsg;
+  } else {
+    const planetTempMsg = 'is warm and cozy';
+    $summaryTemperature.textContent = planetTempMsg;
+  }
+
+  const $summaryMass = document.querySelector('#summary-mass') as HTMLElement;
+  if (quizResponses.planetMass === 'small') {
+    const planetMassMsg = 'makes you feel lighter';
+    $summaryMass.textContent = planetMassMsg;
+  } else {
+    const planetMassMsg = 'makes you feel grounded';
+    $summaryMass.textContent = planetMassMsg;
+  }
+
+  const $summaryPeriod = document.querySelector(
+    '#summary-period',
+  ) as HTMLElement;
+  if (quizResponses.planetPeriod === 'long') {
+    const planetPeriodMsg = 'gives you more time';
+    $summaryPeriod.textContent = planetPeriodMsg;
+  } else {
+    const planetPeriodMsg = 'helps the time fly by';
+    $summaryPeriod.textContent = planetPeriodMsg;
+  }
+
+  const $summaryRadius = document.querySelector(
+    '#summary-radius',
+  ) as HTMLElement;
+  if (quizResponses.planetRadius === 'large') {
+    const planetRadiusMsg = 'gives you plenty of room';
+    $summaryRadius.textContent = planetRadiusMsg;
+  } else {
+    const planetRadiusMsg = 'is cozy and small';
+    $summaryRadius.textContent = planetRadiusMsg;
+  }
+
+  const $summaryDistance = document.querySelector(
+    '#summary-distance',
+  ) as HTMLElement;
+
+  const planetDistance = quizResponses.planetDistance;
+  const planetDistanceMsg = `is at least ${planetDistance} light-years away`;
+  $summaryDistance.textContent = planetDistanceMsg;
+
+  setTimeout(() => revealText($summaryHeading), 250);
+  setTimeout(() => revealText($summaryTemperature), 1000);
+  setTimeout(() => revealText($summaryMass), 1500);
+  setTimeout(() => revealText($summaryPeriod), 2000);
+  setTimeout(() => revealText($summaryRadius), 2500);
+  setTimeout(() => revealText($summaryDistance), 3000);
+  setTimeout(() => revealText($summaryPageGetSuggestionsButton), 4000);
+  setTimeout(() => revealText($summaryPageRetakeQuizButton), 4500);
+}
+
+// SUMMARY PAGE BUTTONS
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealText(element: HTMLElement): void {
+  element.classList.remove('invisible');
+  element.classList.add('visible');
 }

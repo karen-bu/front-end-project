@@ -1,13 +1,25 @@
 'use strict';
-// COLLECTING QUIZ ANSWERS
-const quizResponses = {};
+const $devLazy = document.querySelector('#dev-lazy');
+$devLazy?.addEventListener('click', () => {
+  revealAll();
+  quizResponses.startQuiz = true;
+  quizResponses.planetSearch = false;
+  quizResponses.planetTemperature = 'hot';
+  quizResponses.planetMass = 'small';
+  quizResponses.planetPeriod = 'long';
+  quizResponses.planetRadius = 'small';
+  quizResponses.planetDistance = '1994';
+  generateSummary();
+  console.log('quizResponses:', quizResponses);
+});
+let quizResponses = {};
 // landing page (data-view="0")
 const $getStartedButton = document.getElementById('get-started');
 $getStartedButton?.addEventListener('click', () => {
   quizResponses.startQuiz = true;
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 1 - planet search (data-view="1")
 const $planetSearch = document.querySelector('#planet-search-input');
@@ -22,7 +34,7 @@ $noPlanetSearchButton?.addEventListener('click', () => {
   quizResponses.planetSearch = false;
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 2 - planet temperature (data-view="2")
 const $temperatureCold = document.querySelector('#temp-cold');
@@ -31,13 +43,13 @@ $temperatureCold?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'cold';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 $temperatureHot?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'hot';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 3 - planet mass (data-view="3")
 const $smallMass = document.querySelector('#small-mass');
@@ -46,13 +58,13 @@ $smallMass?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 $largeMass?.addEventListener('click', () => {
   quizResponses.planetMass = 'large';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 4 - planet period (data-view="4")
 const $longPeriod = document.querySelector('#long-period');
@@ -61,13 +73,13 @@ $longPeriod?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'long';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 $shortPeriod?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'short';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 5 - planet radius (data-view="5")
 const $largeRadius = document.querySelector('#large-radius');
@@ -76,13 +88,13 @@ $largeRadius?.addEventListener('click', () => {
   quizResponses.planetRadius = 'large';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 $smallRadius?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
   revealNext();
   scrollDown();
-  stopScroll();
+  setTimeout(() => hidePrev(), 750);
 });
 // quiz 6 - planet distance (data-view="6")
 const $distanceInput = document.querySelector('#distance-input');
@@ -115,10 +127,34 @@ $distanceInput.addEventListener('input', (event) => {
 });
 $distanceInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    event.preventDefault();
     quizResponses.planetDistance = $distanceInput.value;
+    event.preventDefault();
     revealNext();
     scrollDown();
-    stopScroll();
+    generateSummary();
+    setTimeout(() => hidePrev(), 750);
   }
+});
+// BUILDING SUGGESTIONS PAGE
+// quiz response messages
+const $summaryPageGetSuggestionsButton =
+  document.querySelector('#get-suggestions');
+const $summaryPageRetakeQuizButton = document.querySelector(
+  '#summary-retake-quiz',
+);
+$summaryPageGetSuggestionsButton?.addEventListener('click', () => {
+  dataView = 7;
+  // reveal/scroll to load page, hide summary
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+  // reveal/scroll to suggestions, hide quiz
+  setTimeout(() => revealNext(), 3000);
+  setTimeout(() => scrollDown(), 3500);
+  setTimeout(() => hideQuiz(), 4250);
+});
+$summaryPageRetakeQuizButton?.addEventListener('click', () => {
+  quizResponses = {};
+  scrollToTop();
+  setTimeout(() => hideAll(), 1000);
 });
