@@ -1,3 +1,5 @@
+// DEV IS LAZY BUTTON
+
 const $devLazy = document.querySelector('#dev-lazy');
 $devLazy?.addEventListener('click', () => {
   revealAll();
@@ -12,7 +14,7 @@ $devLazy?.addEventListener('click', () => {
   console.log('quizResponses:', quizResponses);
 });
 
-// COLLECTING QUIZ RESPONSES
+// QUIZ PAGES
 
 interface QuizResponses {
   startQuiz?: boolean;
@@ -66,6 +68,10 @@ const $temperatureHot = document.querySelector(
   '#temp-hot',
 ) as HTMLButtonElement;
 
+const $temperatureMedium = document.querySelector(
+  '#temp-medium',
+) as HTMLButtonElement;
+
 $temperatureCold?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'cold';
   revealNext();
@@ -80,9 +86,17 @@ $temperatureHot?.addEventListener('click', () => {
   setTimeout(() => hidePrev(), 750);
 });
 
+$temperatureMedium?.addEventListener('click', () => {
+  quizResponses.planetTemperature = 'medium';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
+
 // quiz 3 - planet mass (data-view="3")
-const $smallMass = document.querySelector('#small-mass') as HTMLButtonElement;
-const $largeMass = document.querySelector('#large-mass') as HTMLButtonElement;
+const $smallMass = document.querySelector('#mass-small') as HTMLButtonElement;
+const $largeMass = document.querySelector('#mass-large') as HTMLButtonElement;
+const $mediumMass = document.querySelector('#mass-medium') as HTMLButtonElement;
 
 $smallMass?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
@@ -98,10 +112,20 @@ $largeMass?.addEventListener('click', () => {
   setTimeout(() => hidePrev(), 750);
 });
 
+$mediumMass?.addEventListener('click', () => {
+  quizResponses.planetMass = 'medium';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
+
 // quiz 4 - planet period (data-view="4")
-const $longPeriod = document.querySelector('#long-period') as HTMLButtonElement;
+const $longPeriod = document.querySelector('#period-long') as HTMLButtonElement;
 const $shortPeriod = document.querySelector(
-  '#short-period',
+  '#period-short',
+) as HTMLButtonElement;
+const $mediumPeriod = document.querySelector(
+  '#period-medium',
 ) as HTMLButtonElement;
 
 $longPeriod?.addEventListener('click', () => {
@@ -118,12 +142,22 @@ $shortPeriod?.addEventListener('click', () => {
   setTimeout(() => hidePrev(), 750);
 });
 
+$mediumPeriod?.addEventListener('click', () => {
+  quizResponses.planetPeriod = 'medium';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
+
 // quiz 5 - planet radius (data-view="5")
 const $largeRadius = document.querySelector(
-  '#large-radius',
+  '#radius-large',
 ) as HTMLButtonElement;
 const $smallRadius = document.querySelector(
-  '#small-radius',
+  '#radius-small',
+) as HTMLButtonElement;
+const $mediumRadius = document.querySelector(
+  '#radius-medium',
 ) as HTMLButtonElement;
 
 $largeRadius?.addEventListener('click', () => {
@@ -135,6 +169,13 @@ $largeRadius?.addEventListener('click', () => {
 
 $smallRadius?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
+
+$mediumRadius?.addEventListener('click', () => {
+  quizResponses.planetRadius = 'medium';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
@@ -181,6 +222,8 @@ $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
     quizResponses.planetDistance = $distanceInput.value;
     event.preventDefault();
+    generateApiCall();
+    fetchExoplanetData(apiURL);
     revealNext();
     scrollDown();
     generateSummary();
@@ -188,7 +231,7 @@ $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
   }
 });
 
-// BUILDING SUGGESTIONS PAGE
+// SUMMARY PAGE
 
 // quiz response messages
 
@@ -219,3 +262,69 @@ $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   scrollToTop();
   setTimeout(() => hideAll(), 1000);
 });
+
+// SUGGESTIONS PAGE
+const $suggestionsPageRetakeQuizButton = document.querySelector(
+  '#suggestions-retake-quiz',
+);
+
+$suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
+  scrollToTop();
+  setTimeout(() => hideAll(), 750);
+});
+
+// GENERATE API URL
+
+let apiTemp = '';
+let apiMass = '';
+let apiPeriod = '';
+let apiRadius = '';
+const apiURL = '';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function generateApiCall(): void {
+  if (quizResponses.planetTemperature === 'hot') {
+    apiTemp = '&min_temperature=186';
+  } else if (quizResponses.planetTemperature === 'cold') {
+    apiTemp = '&max_temperature=185';
+  } else if (quizResponses.planetTemperature === 'medium') {
+    apiTemp = '&min_temperature=185&max_temperature=325';
+  }
+
+  if (quizResponses.planetMass === 'large') {
+    apiMass = '&min_mass=2';
+  } else if (quizResponses.planetMass === 'small') {
+    apiMass = '&max_mass=0.003';
+  } else if (quizResponses.planetMass === 'medium') {
+    apiMass = '&min_mass=0.003&max_mass=2';
+  }
+
+  if (quizResponses.planetPeriod === 'large') {
+    apiPeriod = '&min_period=730';
+  } else if (quizResponses.planetPeriod === 'small') {
+    apiPeriod = '&max_period=100';
+  } else if (quizResponses.planetPeriod === 'medium') {
+    apiPeriod = '&min_period=100&max_period=730';
+  }
+
+  if (quizResponses.planetRadius === 'large') {
+    apiRadius = '&max_radius=3';
+  } else if (quizResponses.planetRadius === 'small') {
+    apiRadius = '&max_radius=1';
+  } else if (quizResponses.planetRadius === 'medium') {
+    apiRadius = '&min_radius=1&max_radius=3';
+  }
+
+  const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
+
+  const api1 = 'https://api.api-ninjas.com/v1/planets?';
+  const apiURL = api1
+    .concat(apiTemp)
+    .concat(apiMass)
+    .concat(apiPeriod)
+    .concat(apiRadius)
+    .concat(apiDistance);
+
+  console.log(quizResponses);
+  console.log(apiURL);
+}

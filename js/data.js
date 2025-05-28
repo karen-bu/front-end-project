@@ -1,13 +1,13 @@
 'use strict';
+const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';
+const apiKey2 = '=HWWTaldjD4VJd3pb';
+const apiKey = apiKey1.concat(apiKey2);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function fetchExoplanetData() {
+async function fetchExoplanetData(url) {
   try {
-    const apiData = await fetch(
-      'https://api.api-ninjas.com/v1/planets?min_distance_light_year=30000',
-      {
-        headers: { 'X-Api-Key': 'zt9vRW46vl4e8li5HhlgnA==HWWTaldjD4VJd3pb' },
-      },
-    );
+    const apiData = await fetch(url, {
+      headers: { 'X-Api-Key': apiKey },
+    });
     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
     const exoplanetData = await apiData.json();
     console.log(exoplanetData);
@@ -15,7 +15,6 @@ async function fetchExoplanetData() {
     console.error('Error:', error);
   }
 }
-// fetchExoplanetData();
 // REMOVING ERRORS FROM DISTANCE INPUT QUIZ PAGE
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function distanceInputRemoveErrors() {
@@ -50,6 +49,7 @@ function revealAll() {
     quizPages[i].classList.remove('hidden');
   }
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hideQuiz() {
   dataView = 0;
   for (let i = 1; i < 9; i++) {
@@ -87,32 +87,45 @@ function generateSummary() {
   if (quizResponses.planetTemperature === 'cold') {
     const planetTempMsg = 'is cool and refreshing';
     $summaryTemperature.textContent = planetTempMsg;
-  } else {
+  } else if (quizResponses.planetTemperature === 'hot') {
     const planetTempMsg = 'is warm and cozy';
+    $summaryTemperature.textContent = planetTempMsg;
+  } else if (quizResponses.planetTemperature === 'medium') {
+    const planetTempMsg = 'like april 25th - not too hot, not too cold';
     $summaryTemperature.textContent = planetTempMsg;
   }
   const $summaryMass = document.querySelector('#summary-mass');
   if (quizResponses.planetMass === 'small') {
     const planetMassMsg = 'makes you feel lighter';
     $summaryMass.textContent = planetMassMsg;
-  } else {
+  } else if (quizResponses.planetMass === 'large') {
     const planetMassMsg = 'makes you feel grounded';
+    $summaryMass.textContent = planetMassMsg;
+  } else if (quizResponses.planetMass === 'medium') {
+    const planetMassMsg = 'makes you stay in perfect balance';
     $summaryMass.textContent = planetMassMsg;
   }
   const $summaryPeriod = document.querySelector('#summary-period');
   if (quizResponses.planetPeriod === 'long') {
     const planetPeriodMsg = 'gives you more time';
     $summaryPeriod.textContent = planetPeriodMsg;
-  } else {
+  } else if (quizResponses.planetPeriod === 'short') {
     const planetPeriodMsg = 'helps the time fly by';
+    $summaryPeriod.textContent = planetPeriodMsg;
+  } else if (quizResponses.planetPeriod === 'medium') {
+    const planetPeriodMsg = 'gives you just enough time';
     $summaryPeriod.textContent = planetPeriodMsg;
   }
   const $summaryRadius = document.querySelector('#summary-radius');
   if (quizResponses.planetRadius === 'large') {
-    const planetRadiusMsg = 'gives you plenty of room';
+    const planetRadiusMsg = 'has plenty of room';
     $summaryRadius.textContent = planetRadiusMsg;
-  } else {
-    const planetRadiusMsg = 'is cozy and small';
+  } else if (quizResponses.planetRadius === 'small') {
+    const planetRadiusMsg = 'is compact and small';
+    $summaryRadius.textContent = planetRadiusMsg;
+  } else if (quizResponses.planetRadius === 'medium') {
+    const planetRadiusMsg =
+      'is just the right size, like a magical pair of jeans';
     $summaryRadius.textContent = planetRadiusMsg;
   }
   const $summaryDistance = document.querySelector('#summary-distance');

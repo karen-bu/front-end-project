@@ -113,6 +113,11 @@
         <div class="column-75">
           <button id="temp-hot">HOTTER THAN THE FIRES OF HECK.</button>
         </div>
+        <div class="column-75">
+          <button id="temp-medium">
+            A REGULAR TEMPERATURE? LIKE A NORMAL PERSON?
+          </button>
+        </div>
       </div>
     </div>
     <!-- end quiz 2 -->
@@ -133,10 +138,13 @@
           <h1>how do you feel, like, in your soul?</h1>
         </div>
         <div class="column-75">
-          <button id="small-mass">TOO WEIGHED DOWN.</button>
+          <button id="mass-small">TOO WEIGHED DOWN.</button>
         </div>
         <div class="column-75">
-          <button id="large-mass">NOT GROUNDED ENOUGH.</button>
+          <button id="mass-large">NOT GROUNDED ENOUGH.</button>
+        </div>
+        <div class="column-75">
+          <button id="mass-medium">WELL-BALANCED, THANK YOU VERY MUCH.</button>
         </div>
       </div>
     </div>
@@ -158,13 +166,18 @@
           <h1>do you want more time in a year?</h1>
         </div>
         <div class="column-75">
-          <button id="long-period">
+          <button id="period-long">
             YES - I HAVE TOO MUCH TO GET DONE. AHH!!!
           </button>
         </div>
         <div class="column-75">
-          <button id="short-period">
+          <button id="period-short">
             NO - I ALREADY HAVE TOO MUCH TIME ALONE WITH MY THOUGHTS.
+          </button>
+        </div>
+        <div class="column-75">
+          <button id="period-medium">
+            I'M GOOD WITH WHAT I HAVE NOW, ACTUALLY.
           </button>
         </div>
       </div>
@@ -187,10 +200,13 @@
           <h1>how much room are you looking for?</h1>
         </div>
         <div class="column-75">
-          <button id="small-radius">A LOT - I HAVE TOO MUCH STUFF.</button>
+          <button id="radius-small">A LOT - I HAVE TOO MUCH STUFF.</button>
         </div>
         <div class="column-75">
-          <button id="large-radius">NOT MUCH - I'M A MINIMALIST.</button>
+          <button id="radius-large">NOT MUCH - I'M A MINIMALIST.</button>
+        </div>
+        <div class="column-75">
+          <button id="radius-medium">SOMEWHERE IN BETWEEN.</button>
         </div>
       </div>
     </div>
@@ -296,7 +312,7 @@
     <!-- end loading page -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations hidden bg1" data-view="9">
+    <div class="page recommendations bg1" data-view="9">
       <div class="row">
         <div class="column-50 left">
           <img
@@ -307,7 +323,10 @@
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <div class="icon-circle" title="retake quiz">
+            <div
+              class="icon-circle"
+              title="retake quiz"
+              id="suggestions-retake-quiz">
               <i class="fa-solid fa-question"></i>
             </div>
           </div>
@@ -344,7 +363,7 @@
           </p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="planet-suggestions">
         <div class="column-50 center entry">
           <div class="column-50 planet-entry" data-planet-recommendation="0">
             <div class="column-50 left">
@@ -365,174 +384,35 @@
             </div>
           </div>
         </div>
-        <div class="column-50 center entry" data-planet-recommendation="2">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>23 Librae b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="3">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>CoRoT-7b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="4">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>51 Pegasi b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="5">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>HAT-P-2b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="6">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>55 Cancri b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="7">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>HAT-P-3b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="8">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>70 Virginis b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="9">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>Kepler-10b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="10">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>109 Piscium b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="11">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>Gliese 1214b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="12">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>Beta Pictoris b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="13">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>HD 17156 b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="14">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>HD 80606b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="15">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>HD 149026 b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row header">
-        <div class="column-50 center">
-          <div class="icon-circle">
-            <i class="fa-solid fa-arrow-left" title="previous"></i>
-          </div>
-        </div>
-        <div class="column-50 center">
-          <div class="icon-circle">
-            <i class="fa-solid fa-arrow-right" title="next"></i>
-          </div>
-        </div>
-        <div class="row">
+
+        <div class="row header">
           <div class="column-50 center">
-            <p class="label-text">previous</p>
+            <div class="icon-circle">
+              <i class="fa-solid fa-arrow-left" title="previous"></i>
+            </div>
           </div>
           <div class="column-50 center">
-            <p class="label-text">next</p>
+            <div class="icon-circle">
+              <i class="fa-solid fa-arrow-right" title="next"></i>
+            </div>
           </div>
-        </div>
-        <div class="row center">
-          <div class="column-75 center">
-            <p class="label-text header">
-              disclaimer: exod.us is not morally responsible or legally liable
-              for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
-            </p>
+          <div class="row">
+            <div class="column-50 center">
+              <p class="label-text">previous</p>
+            </div>
+            <div class="column-50 center">
+              <p class="label-text">next</p>
+            </div>
+          </div>
+          <div class="row center">
+            <div class="column-75 center">
+              <p class="label-text header">
+                disclaimer: exod.us is not morally responsible or legally liable
+                for these recommendations. not all planets contain liquid water,
+                habitable environments, friendly residents, or sentient life.
+                move to a new planet at your own risk.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -783,7 +663,7 @@
 
     <!-- start scripts -->
     <script src="./js/data.js"></script>
-    <script src="./js/quiz.js"></script>
+    <script src="./js/main.js"></script>
     <!-- end scripts -->
   </body>
 </html>
