@@ -9,7 +9,7 @@ $devLazy?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
   quizResponses.planetPeriod = 'long';
   quizResponses.planetRadius = 'small';
-  quizResponses.planetDistance = '1994';
+  quizResponses.planetDistance = '0';
   generateSummary();
   console.log('quizResponses:', quizResponses);
 });
@@ -68,8 +68,8 @@ const $temperatureHot = document.querySelector(
   '#temp-hot',
 ) as HTMLButtonElement;
 
-const $temperatureMedium = document.querySelector(
-  '#temp-medium',
+const $temperatureNull = document.querySelector(
+  '#temp-null',
 ) as HTMLButtonElement;
 
 $temperatureCold?.addEventListener('click', () => {
@@ -86,96 +86,92 @@ $temperatureHot?.addEventListener('click', () => {
   setTimeout(() => hidePrev(), 750);
 });
 
-$temperatureMedium?.addEventListener('click', () => {
-  quizResponses.planetTemperature = 'medium';
+$temperatureNull?.addEventListener('click', () => {
+  quizResponses.planetTemperature = 'null';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
 // quiz 3 - planet mass (data-view="3")
-const $smallMass = document.querySelector('#mass-small') as HTMLButtonElement;
-const $largeMass = document.querySelector('#mass-large') as HTMLButtonElement;
-const $mediumMass = document.querySelector('#mass-medium') as HTMLButtonElement;
+const $massSmall = document.querySelector('#mass-small') as HTMLButtonElement;
+const $massLarge = document.querySelector('#mass-large') as HTMLButtonElement;
+const $massNull = document.querySelector('#mass-null') as HTMLButtonElement;
 
-$smallMass?.addEventListener('click', () => {
+$massSmall?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$largeMass?.addEventListener('click', () => {
+$massLarge?.addEventListener('click', () => {
   quizResponses.planetMass = 'large';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$mediumMass?.addEventListener('click', () => {
-  quizResponses.planetMass = 'medium';
+$massNull?.addEventListener('click', () => {
+  quizResponses.planetMass = 'null';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
 // quiz 4 - planet period (data-view="4")
-const $longPeriod = document.querySelector('#period-long') as HTMLButtonElement;
-const $shortPeriod = document.querySelector(
+const $periodLong = document.querySelector('#period-long') as HTMLButtonElement;
+const $periodShort = document.querySelector(
   '#period-short',
 ) as HTMLButtonElement;
-const $mediumPeriod = document.querySelector(
-  '#period-medium',
-) as HTMLButtonElement;
+const $periodNull = document.querySelector('#period-null') as HTMLButtonElement;
 
-$longPeriod?.addEventListener('click', () => {
+$periodLong?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'long';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$shortPeriod?.addEventListener('click', () => {
+$periodShort?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'short';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$mediumPeriod?.addEventListener('click', () => {
-  quizResponses.planetPeriod = 'medium';
+$periodNull?.addEventListener('click', () => {
+  quizResponses.planetPeriod = 'null';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
 // quiz 5 - planet radius (data-view="5")
-const $largeRadius = document.querySelector(
+const $radiusLarge = document.querySelector(
   '#radius-large',
 ) as HTMLButtonElement;
-const $smallRadius = document.querySelector(
+const $radiusSmall = document.querySelector(
   '#radius-small',
 ) as HTMLButtonElement;
-const $mediumRadius = document.querySelector(
-  '#radius-medium',
-) as HTMLButtonElement;
+const $radiusNull = document.querySelector('#radius-null') as HTMLButtonElement;
 
-$largeRadius?.addEventListener('click', () => {
+$radiusLarge?.addEventListener('click', () => {
   quizResponses.planetRadius = 'large';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$smallRadius?.addEventListener('click', () => {
+$radiusSmall?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
 
-$mediumRadius?.addEventListener('click', () => {
-  quizResponses.planetRadius = 'medium';
+$radiusNull?.addEventListener('click', () => {
+  quizResponses.planetRadius = 'null';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
@@ -263,6 +259,7 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', () => {
 
 $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
+  setTimeout(() => revealAll(), 750);
   scrollToTop();
   setTimeout(() => hideAll(), 1000);
 });
@@ -290,32 +287,32 @@ function generateApiCall(): void {
     apiTemp = '&max_temperature=185';
   } else if (quizResponses.planetTemperature === 'hot') {
     apiTemp = '&min_temperature=186';
-  } else if (quizResponses.planetTemperature === 'medium') {
-    apiTemp = '&min_temperature=185&max_temperature=325';
+  } else if (quizResponses.planetTemperature === 'null') {
+    apiTemp = '&min_temperature=0';
   }
 
   if (quizResponses.planetMass === 'large') {
     apiMass = '&min_mass=2';
   } else if (quizResponses.planetMass === 'small') {
     apiMass = '&max_mass=0.003';
-  } else if (quizResponses.planetMass === 'medium') {
-    apiMass = '&min_mass=0.003&max_mass=2';
+  } else if (quizResponses.planetMass === 'null') {
+    apiMass = '&min_mass=0';
   }
 
   if (quizResponses.planetPeriod === 'large') {
     apiPeriod = '&min_period=730';
   } else if (quizResponses.planetPeriod === 'small') {
     apiPeriod = '&max_period=100';
-  } else if (quizResponses.planetPeriod === 'medium') {
-    apiPeriod = '&min_period=100&max_period=730';
+  } else if (quizResponses.planetPeriod === 'null') {
+    apiPeriod = '&min_period=0';
   }
 
   if (quizResponses.planetRadius === 'large') {
     apiRadius = '&max_radius=3';
   } else if (quizResponses.planetRadius === 'small') {
     apiRadius = '&max_radius=1';
-  } else if (quizResponses.planetRadius === 'medium') {
-    apiRadius = '&min_radius=1&max_radius=3';
+  } else if (quizResponses.planetRadius === 'null') {
+    apiRadius = '&min_radius=0';
   }
 
   const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;

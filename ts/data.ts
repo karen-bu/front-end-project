@@ -20,6 +20,25 @@ const apiKey2 = '=HWWTaldjD4VJd3pb';
 const apiKey = apiKey1.concat(apiKey2);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// async function fetchExoplanetData(): Promise<void> {
+//   try {
+//     const apiData = await fetch(
+//       'https://api.api-ninjas.com/v1/planets?min_radius=0',
+//       {
+//         headers: { 'X-Api-Key': apiKey },
+//       },
+//     );
+//     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
+//     const exoplanetData = (await apiData.json()) as Exoplanet;
+//     console.log(exoplanetData);
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// fetchExoplanetData();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function fetchExoplanetData(url: string): Promise<void> {
   try {
     const apiData = await fetch(url, {
@@ -88,6 +107,7 @@ function hideAll(): void {
   for (let i = 1; i < quizPages.length; i++) {
     quizPages[i].classList.add('hidden');
   }
+  quizPages[0].classList.remove('hidden');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -125,8 +145,9 @@ function generateSummary(): void {
   } else if (quizResponses.planetTemperature === 'hot') {
     const planetTempMsg = 'is warm and cozy';
     $summaryTemperature.textContent = planetTempMsg;
-  } else if (quizResponses.planetTemperature === 'medium') {
-    const planetTempMsg = 'like april 25th - not too hot, not too cold';
+  } else if (quizResponses.planetTemperature === 'null') {
+    const planetTempMsg =
+      'is of any temperature - you can adjust, you always do';
     $summaryTemperature.textContent = planetTempMsg;
   }
 
@@ -137,8 +158,9 @@ function generateSummary(): void {
   } else if (quizResponses.planetMass === 'large') {
     const planetMassMsg = 'makes you feel grounded';
     $summaryMass.textContent = planetMassMsg;
-  } else if (quizResponses.planetMass === 'medium') {
-    const planetMassMsg = 'makes you stay in perfect balance';
+  } else if (quizResponses.planetMass === 'null') {
+    const planetMassMsg =
+      "makes you feel different somehow - it doesn't matter how";
     $summaryMass.textContent = planetMassMsg;
   }
 
@@ -151,8 +173,9 @@ function generateSummary(): void {
   } else if (quizResponses.planetPeriod === 'short') {
     const planetPeriodMsg = 'helps the time fly by';
     $summaryPeriod.textContent = planetPeriodMsg;
-  } else if (quizResponses.planetPeriod === 'medium') {
-    const planetPeriodMsg = 'gives you just enough time';
+  } else if (quizResponses.planetPeriod === 'null') {
+    const planetPeriodMsg =
+      "gives you either more or less time - it's a construct, anyway";
     $summaryPeriod.textContent = planetPeriodMsg;
   }
 
@@ -165,9 +188,8 @@ function generateSummary(): void {
   } else if (quizResponses.planetRadius === 'small') {
     const planetRadiusMsg = 'is compact and small';
     $summaryRadius.textContent = planetRadiusMsg;
-  } else if (quizResponses.planetRadius === 'medium') {
-    const planetRadiusMsg =
-      'is just the right size, like a magical pair of jeans';
+  } else if (quizResponses.planetRadius === 'null') {
+    const planetRadiusMsg = "is any size, as long as it's elsewhere";
     $summaryRadius.textContent = planetRadiusMsg;
   }
 
