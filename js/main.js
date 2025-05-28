@@ -158,8 +158,6 @@ $distanceInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     quizResponses.planetDistance = $distanceInput.value;
     event.preventDefault();
-    generateApiCall();
-    fetchExoplanetData(apiURL);
     revealNext();
     scrollDown();
     generateSummary();
@@ -168,6 +166,7 @@ $distanceInput.addEventListener('keydown', (event) => {
 });
 // SUMMARY PAGE
 // quiz response messages
+let apiURL = '';
 const $summaryPageGetSuggestionsButton =
   document.querySelector('#get-suggestions');
 const $summaryPageRetakeQuizButton = document.querySelector(
@@ -175,6 +174,9 @@ const $summaryPageRetakeQuizButton = document.querySelector(
 );
 $summaryPageGetSuggestionsButton?.addEventListener('click', () => {
   dataView = 7;
+  // generate API url and make the calls
+  generateApiCall();
+  fetchExoplanetData(apiURL);
   // reveal/scroll to load page, hide summary
   revealNext();
   scrollDown();
@@ -202,13 +204,12 @@ let apiTemp = '';
 let apiMass = '';
 let apiPeriod = '';
 let apiRadius = '';
-const apiURL = '';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function generateApiCall() {
-  if (quizResponses.planetTemperature === 'hot') {
-    apiTemp = '&min_temperature=186';
-  } else if (quizResponses.planetTemperature === 'cold') {
+  if (quizResponses.planetTemperature === 'cold') {
     apiTemp = '&max_temperature=185';
+  } else if (quizResponses.planetTemperature === 'hot') {
+    apiTemp = '&min_temperature=186';
   } else if (quizResponses.planetTemperature === 'medium') {
     apiTemp = '&min_temperature=185&max_temperature=325';
   }
@@ -235,7 +236,7 @@ function generateApiCall() {
   }
   const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
   const api1 = 'https://api.api-ninjas.com/v1/planets?';
-  const apiURL = api1
+  apiURL = api1
     .concat(apiTemp)
     .concat(apiMass)
     .concat(apiPeriod)
