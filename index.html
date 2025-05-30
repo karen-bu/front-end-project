@@ -364,22 +364,24 @@
       </div>
       <div class="row center invisible" id="planet-recommendations"></div>
       <div class="row header" id="suggestions-footer">
-        <div class="row invisible" id="recommendations-previous-next">
+        <div class="row" id="recommendations-previous-next">
           <div class="column-50 center">
-            <div class="icon-circle">
+            <div class="icon-circle invisible" id="suggestions-previous-icon">
               <i class="fa-solid fa-arrow-left" title="previous"></i>
             </div>
           </div>
           <div class="column-50 center">
-            <div class="icon-circle">
+            <div class="icon-circle invisible" id="suggestions-next-icon">
               <i class="fa-solid fa-arrow-right" title="next"></i>
             </div>
           </div>
           <div class="row">
-            <div class="column-50 center">
+            <div
+              class="column-50 center invisible"
+              id="suggestions-previous-text">
               <p class="label-text">previous</p>
             </div>
-            <div class="column-50 center">
+            <div class="column-50 center invisible" id="suggestions-next-text">
               <p class="label-text">next</p>
             </div>
           </div>

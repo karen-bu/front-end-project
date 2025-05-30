@@ -144,8 +144,14 @@ function generateSummary(): void {
   ) as HTMLElement;
 
   const planetDistance = quizResponses.planetDistance;
-  const planetDistanceMsg = `is at least ${planetDistance} light-years away`;
-  $summaryDistance.textContent = planetDistanceMsg;
+
+  if (quizResponses.planetDistance === '1') {
+    const planetDistanceMsg = `is at least ${planetDistance} light-year away`;
+    $summaryDistance.textContent = planetDistanceMsg;
+  } else {
+    const planetDistanceMsg = `is at least ${planetDistance} light-years away`;
+    $summaryDistance.textContent = planetDistanceMsg;
+  }
 
   setTimeout(() => revealText($summaryHeading), 250);
   setTimeout(() => revealText($summaryTemperature), 1000);
@@ -239,6 +245,24 @@ const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';
 const apiKey2 = '=HWWTaldjD4VJd3pb';
 const apiKey = apiKey1.concat(apiKey2);
 
+// const fetchTest =
+//   'https://api.api-ninjas.com/v1/planets?&min_temperature=0&min_mass=0&min_period=0&min_radius=0&min_distance_light_year=0&offset=30';
+
+// async function fetchExoplanetData(url: string): Promise<void> {
+//   try {
+//     const apiData = await fetch(url, {
+//       headers: { 'X-Api-Key': apiKey },
+//     });
+//     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
+//     const exoplanetData = await apiData.json();
+//     console.log(exoplanetData);
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// console.log(fetchExoplanetData(fetchTest));
+
 async function fetchExoplanetData(
   url: string,
 ): Promise<Exoplanet[] | undefined> {
@@ -255,6 +279,19 @@ async function fetchExoplanetData(
 }
 
 // BUILD SUGGESTIONS PAGE
+
+const $previousIconRecommendations = document.querySelector(
+  '#suggestions-previous-icon',
+) as HTMLElement;
+const $nextIconRecommendations = document.querySelector(
+  '#suggestions-next-icon',
+) as HTMLElement;
+const $previousTextRecommendations = document.querySelector(
+  '#suggestions-previous-text',
+) as HTMLElement;
+const $nextTextRecommendations = document.querySelector(
+  '#suggestions-next-text',
+) as HTMLElement;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function buildSuggestionsPage(): Promise<void> {
@@ -321,6 +358,11 @@ async function buildSuggestionsPage(): Promise<void> {
       $h4RecommendationsHeartIcon.appendChild($recommendationsHeartIcon);
     }
   }
+
+  if (exoplanetData.length === 30) {
+    revealText($nextIconRecommendations);
+    revealText($nextTextRecommendations);
+  }
 }
 
 // GENERATING SUGGESTIONS PAGE
@@ -337,12 +379,14 @@ function generateSuggestionsPage(): void {
     '#planet-recommendations',
   ) as HTMLElement;
 
-  const $previousNextRecommendations = document.querySelector(
-    '#recommendations-previous-next',
-  ) as HTMLElement;
-
   const $disclaimerRecommendations = document.querySelector(
     '#suggestions-disclaimer',
+  ) as HTMLElement;
+
+  // suggestions arrows
+
+  const $previousNextRecommendations = document.querySelector(
+    '#recommendations-previous-next',
   ) as HTMLElement;
 
   setTimeout(() => revealText($suggestionsHeader), 250);
