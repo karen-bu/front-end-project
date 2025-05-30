@@ -262,42 +262,64 @@ async function buildSuggestionsPage(): Promise<void> {
   if (!exoplanetData) throw new Error('exoplanetData does not exist!');
   console.log(exoplanetData);
 
-  const $planetEntryRow = document.querySelector('#planet-recommendations');
-  console.log($planetEntryRow);
+  const $planetEntryRow = document.querySelector(
+    '#planet-recommendations',
+  ) as HTMLElement;
 
-  for (let i = 0; i < exoplanetData.length; i++) {
-    const $column50CenterEntry = document.createElement('div');
-    $column50CenterEntry.setAttribute('class', 'column-50 center entry');
+  if (exoplanetData.length === 0) {
+    const $h4NoPlanets1 = document.createElement('h4');
+    $h4NoPlanets1.setAttribute('class', 'no-planets-text');
+    $h4NoPlanets1.textContent = 'nothing matching your criteria was found :(';
 
-    const $column50PlanetEntry = document.createElement('div');
-    $column50PlanetEntry.setAttribute('class', 'column-50 planet-entry');
-    $column50PlanetEntry.setAttribute(
-      'data-planet-recommendation',
-      String(exoplanetData.indexOf(exoplanetData[i])),
-    );
-    const $column50DivName = document.createElement('div');
-    $column50DivName.setAttribute('class', 'column-50 left');
+    const $h4NoPlanets2 = document.createElement('h4');
+    $h4NoPlanets2.setAttribute('class', 'no-planets-text');
+    $h4NoPlanets2.textContent =
+      "don't worry, there is still a place in the universe meant for you!";
 
-    const $h4PlanetEntry = document.createElement('h4');
-    $h4PlanetEntry.textContent = exoplanetData[i].name;
+    const $h4NoPlanets3 = document.createElement('h4');
+    $h4NoPlanets3.setAttribute('class', 'no-planets-text');
+    $h4NoPlanets3.textContent =
+      'please retake the quiz to adjust your parameters and search again.';
 
-    const $column50DivIcons = document.createElement('div');
-    $column50DivIcons.setAttribute('class', 'column-50 right');
+    $planetEntryRow?.appendChild($h4NoPlanets1);
+    $planetEntryRow?.appendChild($h4NoPlanets2);
+    $planetEntryRow?.appendChild($h4NoPlanets3);
+  } else {
+    for (let i = 0; i < exoplanetData.length; i++) {
+      const $column50CenterEntry = document.createElement('div');
+      $column50CenterEntry.setAttribute('class', 'column-50 center entry');
 
-    const $h4RecommendationsHeartIcon = document.createElement('h4');
+      const $column50PlanetEntry = document.createElement('div');
+      $column50PlanetEntry.setAttribute('class', 'column-50 planet-entry');
+      $column50PlanetEntry.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
+      const $column50DivName = document.createElement('div');
+      $column50DivName.setAttribute('class', 'column-50 left');
 
-    const $recommendationsHeartIcon = document.createElement('i');
-    $recommendationsHeartIcon.setAttribute('class', 'fa-regular fa-heart');
+      const $h4PlanetEntry = document.createElement('h4');
 
-    // appending entry to DOM
+      $h4PlanetEntry.textContent = exoplanetData[i].name;
 
-    $planetEntryRow?.appendChild($column50CenterEntry);
-    $column50CenterEntry.appendChild($column50PlanetEntry);
-    $column50PlanetEntry.appendChild($column50DivName);
-    $column50DivName.appendChild($h4PlanetEntry);
-    $column50PlanetEntry.appendChild($column50DivIcons);
-    $column50DivIcons.appendChild($h4RecommendationsHeartIcon);
-    $h4RecommendationsHeartIcon.appendChild($recommendationsHeartIcon);
+      const $column50DivIcons = document.createElement('div');
+      $column50DivIcons.setAttribute('class', 'column-50 right');
+
+      const $h4RecommendationsHeartIcon = document.createElement('h4');
+
+      const $recommendationsHeartIcon = document.createElement('i');
+      $recommendationsHeartIcon.setAttribute('class', 'fa-regular fa-heart');
+
+      // appending entry to DOM
+
+      $planetEntryRow?.appendChild($column50CenterEntry);
+      $column50CenterEntry.appendChild($column50PlanetEntry);
+      $column50PlanetEntry.appendChild($column50DivName);
+      $column50DivName.appendChild($h4PlanetEntry);
+      $column50PlanetEntry.appendChild($column50DivIcons);
+      $column50DivIcons.appendChild($h4RecommendationsHeartIcon);
+      $h4RecommendationsHeartIcon.appendChild($recommendationsHeartIcon);
+    }
   }
 }
 
@@ -319,8 +341,13 @@ function generateSuggestionsPage(): void {
     '#recommendations-previous-next',
   ) as HTMLElement;
 
+  const $disclaimerRecommendations = document.querySelector(
+    '#suggestions-disclaimer',
+  ) as HTMLElement;
+
   setTimeout(() => revealText($suggestionsHeader), 250);
   setTimeout(() => revealText($suggestionsSubheader), 750);
   setTimeout(() => revealText($planetRecommendations), 1500);
   setTimeout(() => revealText($previousNextRecommendations), 2250);
+  setTimeout(() => revealText($disclaimerRecommendations), 3000);
 }

@@ -206,7 +206,7 @@ $distanceInput.addEventListener('input', (event: Event) => {
   } else if (!isNaN(Number(distanceTerm)) && distanceTerm.includes('.')) {
     distanceInputRemoveErrors();
     $distanceInputErrorInteger.classList.remove('hidden');
-  } else if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 30000) {
+  } else if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 50) {
     distanceInputRemoveErrors();
     $distanceInputErrorValue.classList.remove('hidden');
   } else if (distanceTerm === '') {
@@ -228,6 +228,8 @@ $distanceInput.addEventListener('keydown', (event: KeyboardEvent) => {
 });
 
 // SUMMARY PAGE
+
+const $distanceForm = document.getElementById('distance') as HTMLFormElement;
 
 // quiz response messages
 
@@ -263,6 +265,8 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
 
 $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
+  $distanceForm.reset();
+  distanceInputRemoveErrors();
   setTimeout(() => revealAll(), 750);
   scrollToTop();
   setTimeout(() => hideAll(), 1000);
@@ -274,6 +278,8 @@ const $suggestionsPageRetakeQuizButton = document.querySelector(
 );
 
 $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
+  $distanceForm.reset();
+  distanceInputRemoveErrors();
   scrollToTop();
   setTimeout(() => hideAll(), 750);
 });
