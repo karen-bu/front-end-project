@@ -1,37 +1,4 @@
 'use strict';
-const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';
-const apiKey2 = '=HWWTaldjD4VJd3pb';
-const apiKey = apiKey1.concat(apiKey2);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// async function fetchExoplanetData(): Promise<void> {
-//   try {
-//     const apiData = await fetch(
-//       'https://api.api-ninjas.com/v1/planets?min_radius=0',
-//       {
-//         headers: { 'X-Api-Key': apiKey },
-//       },
-//     );
-//     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
-//     const exoplanetData = (await apiData.json()) as Exoplanet;
-//     console.log(exoplanetData);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// }
-// fetchExoplanetData();
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function fetchExoplanetData(url) {
-  try {
-    const apiData = await fetch(url, {
-      headers: { 'X-Api-Key': apiKey },
-    });
-    if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
-    const exoplanetData = await apiData.json();
-    console.log(exoplanetData);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
 // REMOVING ERRORS FROM DISTANCE INPUT QUIZ PAGE
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function distanceInputRemoveErrors() {
@@ -166,4 +133,116 @@ function generateSummary() {
 function revealText(element) {
   element.classList.remove('invisible');
   element.classList.add('visible');
+}
+// GENERATE API URL
+let apiTemp = '';
+let apiMass = '';
+let apiPeriod = '';
+let apiRadius = '';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function generateApiCall() {
+  if (quizResponses.planetTemperature === 'cold') {
+    apiTemp = '&max_temperature=185';
+  } else if (quizResponses.planetTemperature === 'hot') {
+    apiTemp = '&min_temperature=186';
+  } else if (quizResponses.planetTemperature === 'null') {
+    apiTemp = '&min_temperature=0';
+  }
+  if (quizResponses.planetMass === 'large') {
+    apiMass = '&min_mass=2';
+  } else if (quizResponses.planetMass === 'small') {
+    apiMass = '&max_mass=0.003';
+  } else if (quizResponses.planetMass === 'null') {
+    apiMass = '&min_mass=0';
+  }
+  if (quizResponses.planetPeriod === 'large') {
+    apiPeriod = '&min_period=730';
+  } else if (quizResponses.planetPeriod === 'small') {
+    apiPeriod = '&max_period=100';
+  } else if (quizResponses.planetPeriod === 'null') {
+    apiPeriod = '&min_period=0';
+  }
+  if (quizResponses.planetRadius === 'large') {
+    apiRadius = '&max_radius=3';
+  } else if (quizResponses.planetRadius === 'small') {
+    apiRadius = '&max_radius=1';
+  } else if (quizResponses.planetRadius === 'null') {
+    apiRadius = '&min_radius=0';
+  }
+  const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
+  const api1 = 'https://api.api-ninjas.com/v1/planets?';
+  apiURL = api1
+    .concat(apiTemp)
+    .concat(apiMass)
+    .concat(apiPeriod)
+    .concat(apiRadius)
+    .concat(apiDistance);
+  console.log(quizResponses);
+  console.log(apiURL);
+}
+const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';
+const apiKey2 = '=HWWTaldjD4VJd3pb';
+const apiKey = apiKey1.concat(apiKey2);
+async function fetchExoplanetData(url) {
+  try {
+    const apiData = await fetch(url, {
+      headers: { 'X-Api-Key': apiKey },
+    });
+    if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
+    return await apiData.json();
+  } catch (error) {
+    console.error('Error:', error);
+    return undefined;
+  }
+}
+// BUILD SUGGESTIONS PAGE
+async function buildSuggestionsPage() {
+  const exoplanetData = await fetchExoplanetData(apiURL);
+  if (!exoplanetData) throw new Error('exoplanetData does not exist!');
+  console.log(exoplanetData);
+  const $planetEntryRow = document.querySelector('#planet-recommendations');
+  console.log($planetEntryRow);
+  for (let i = 0; i < exoplanetData.length; i++) {
+    const $column50CenterEntry = document.createElement('div');
+    $column50CenterEntry.setAttribute('class', 'column-50 center entry');
+    const $column50PlanetEntry = document.createElement('div');
+    $column50PlanetEntry.setAttribute('class', 'column-50 planet-entry');
+    $column50PlanetEntry.setAttribute(
+      'data-planet-recommendation',
+      String(exoplanetData.indexOf(exoplanetData[i])),
+    );
+    const $column50DivName = document.createElement('div');
+    $column50DivName.setAttribute('class', 'column-50 left');
+    const $h4PlanetEntry = document.createElement('h4');
+    $h4PlanetEntry.textContent = exoplanetData[i].name;
+    const $column50DivIcons = document.createElement('div');
+    $column50DivIcons.setAttribute('class', 'column-50 right');
+    const $h4RecommendationsHeartIcon = document.createElement('h4');
+    const $recommendationsHeartIcon = document.createElement('i');
+    $recommendationsHeartIcon.setAttribute('class', 'fa-regular fa-heart');
+    // appending entry to DOM
+    $planetEntryRow?.appendChild($column50CenterEntry);
+    $column50CenterEntry.appendChild($column50PlanetEntry);
+    $column50PlanetEntry.appendChild($column50DivName);
+    $column50DivName.appendChild($h4PlanetEntry);
+    $column50PlanetEntry.appendChild($column50DivIcons);
+    $column50DivIcons.appendChild($h4RecommendationsHeartIcon);
+    $h4RecommendationsHeartIcon.appendChild($recommendationsHeartIcon);
+  }
+}
+// GENERATING SUGGESTIONS PAGE
+function generateSuggestionsPage() {
+  const $suggestionsHeader = document.querySelector('#suggestions-header-text');
+  const $suggestionsSubheader = document.querySelector(
+    '#suggestions-subheader-text',
+  );
+  const $planetRecommendations = document.querySelector(
+    '#planet-recommendations',
+  );
+  const $previousNextRecommendations = document.querySelector(
+    '#recommendations-previous-next',
+  );
+  setTimeout(() => revealText($suggestionsHeader), 250);
+  setTimeout(() => revealText($suggestionsSubheader), 1000);
+  setTimeout(() => revealText($planetRecommendations), 1500);
 }

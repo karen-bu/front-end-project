@@ -309,7 +309,7 @@
 
     <!-- start recommendations page -->
     <div class="page recommendations bg1" data-view="9">
-      <div class="row">
+      <div class="row" id="suggestions-header">
         <div class="column-50 left">
           <img
             src="/images/logo/exodus-logo-white.svg"
@@ -327,7 +327,10 @@
             </div>
           </div>
           <div class="column-25 center">
-            <div class="icon-circle" title="favorites">
+            <div
+              class="icon-circle"
+              title="favorites"
+              id="suggestions-favorites">
               <i class="fa-solid fa-heart"></i>
             </div>
           </div>
@@ -345,43 +348,23 @@
         </div>
       </div>
       <div class="row center">
-        <div class="column-75">
+        <div class="column-75 invisible" id="suggestions-header-text">
           <h3>
             based on your answers, here are some recommended planets for you!
           </h3>
         </div>
       </div>
       <div class="row center">
-        <div class="column-75">
+        <div class="column-75 invisible" id="suggestions-subheader-text">
           <p>
             click on each planet to get more information, or click on the heart
             to add to your favorites list.
           </p>
         </div>
       </div>
-      <div class="row" id="planet-suggestions">
-        <div class="column-50 center entry">
-          <div class="column-50 planet-entry" data-planet-recommendation="0">
-            <div class="column-50 left">
-              <h4>16 Cygni Bb</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-recommendation="1">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>2MASS J21431 b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-
-        <div class="row header">
+      <div class="row invisible" id="planet-recommendations"></div>
+      <div class="row header" id="suggestions-footer">
+        <div class="row" id="recommendations-previous-next">
           <div class="column-50 center">
             <div class="icon-circle">
               <i class="fa-solid fa-arrow-left" title="previous"></i>
@@ -400,15 +383,15 @@
               <p class="label-text">next</p>
             </div>
           </div>
-          <div class="row center">
-            <div class="column-75 center">
-              <p class="label-text header">
-                disclaimer: exod.us is not morally responsible or legally liable
-                for these recommendations. not all planets contain liquid water,
-                habitable environments, friendly residents, or sentient life.
-                move to a new planet at your own risk.
-              </p>
-            </div>
+        </div>
+        <div class="row center" id="suggestions-disclaimer">
+          <div class="column-75 center">
+            <p class="label-text header">
+              disclaimer: exod.us is not morally responsible or legally liable
+              for these recommendations. not all planets contain liquid water,
+              habitable environments, friendly residents, or sentient life. move
+              to a new planet at your own risk.
+            </p>
           </div>
         </div>
       </div>

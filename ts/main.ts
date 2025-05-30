@@ -11,6 +11,8 @@ $devLazy?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
   quizResponses.planetDistance = '0';
   generateSummary();
+  generateApiCall();
+  fetchExoplanetData(apiURL);
   console.log('quizResponses:', quizResponses);
 });
 
@@ -239,12 +241,13 @@ const $summaryPageRetakeQuizButton = document.querySelector(
   '#summary-retake-quiz',
 ) as HTMLButtonElement;
 
-$summaryPageGetSuggestionsButton?.addEventListener('click', () => {
+$summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
   dataView = 7;
 
   // generate API url and make the calls
   generateApiCall();
   fetchExoplanetData(apiURL);
+  await buildSuggestionsPage();
 
   // reveal/scroll to load page, hide summary
   revealNext();
@@ -254,6 +257,7 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', () => {
   // reveal/scroll to suggestions, hide quiz
   setTimeout(() => revealNext(), 3000);
   setTimeout(() => scrollDown(), 3500);
+  setTimeout(() => generateSuggestionsPage(), 3750);
   setTimeout(() => hideQuiz(), 4250);
 });
 
@@ -273,58 +277,3 @@ $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
   scrollToTop();
   setTimeout(() => hideAll(), 750);
 });
-
-// GENERATE API URL
-
-let apiTemp = '';
-let apiMass = '';
-let apiPeriod = '';
-let apiRadius = '';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function generateApiCall(): void {
-  if (quizResponses.planetTemperature === 'cold') {
-    apiTemp = '&max_temperature=185';
-  } else if (quizResponses.planetTemperature === 'hot') {
-    apiTemp = '&min_temperature=186';
-  } else if (quizResponses.planetTemperature === 'null') {
-    apiTemp = '&min_temperature=0';
-  }
-
-  if (quizResponses.planetMass === 'large') {
-    apiMass = '&min_mass=2';
-  } else if (quizResponses.planetMass === 'small') {
-    apiMass = '&max_mass=0.003';
-  } else if (quizResponses.planetMass === 'null') {
-    apiMass = '&min_mass=0';
-  }
-
-  if (quizResponses.planetPeriod === 'large') {
-    apiPeriod = '&min_period=730';
-  } else if (quizResponses.planetPeriod === 'small') {
-    apiPeriod = '&max_period=100';
-  } else if (quizResponses.planetPeriod === 'null') {
-    apiPeriod = '&min_period=0';
-  }
-
-  if (quizResponses.planetRadius === 'large') {
-    apiRadius = '&max_radius=3';
-  } else if (quizResponses.planetRadius === 'small') {
-    apiRadius = '&max_radius=1';
-  } else if (quizResponses.planetRadius === 'null') {
-    apiRadius = '&min_radius=0';
-  }
-
-  const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
-
-  const api1 = 'https://api.api-ninjas.com/v1/planets?';
-  apiURL = api1
-    .concat(apiTemp)
-    .concat(apiMass)
-    .concat(apiPeriod)
-    .concat(apiRadius)
-    .concat(apiDistance);
-
-  console.log(quizResponses);
-  console.log(apiURL);
-}
