@@ -1,15 +1,30 @@
 'use strict';
+// DEV IS LAZY BUTTON
 const $devLazy = document.querySelector('#dev-lazy');
 $devLazy?.addEventListener('click', () => {
+  const $suggestionsHeader = document.querySelector('#suggestions-header-text');
+  const $suggestionsSubheader = document.querySelector(
+    '#suggestions-subheader-text',
+  );
+  const $planetRecommendations = document.querySelector(
+    '#planet-recommendations',
+  );
   revealAll();
   quizResponses.startQuiz = true;
   quizResponses.planetSearch = false;
-  quizResponses.planetTemperature = 'hot';
-  quizResponses.planetMass = 'small';
-  quizResponses.planetPeriod = 'long';
-  quizResponses.planetRadius = 'small';
-  quizResponses.planetDistance = '1994';
+  quizResponses.planetTemperature = 'null';
+  quizResponses.planetMass = 'null';
+  quizResponses.planetPeriod = 'null';
+  quizResponses.planetRadius = 'null';
+  quizResponses.planetDistance = '0';
   generateSummary();
+  generateApiCall();
+  console.log(apiURL);
+  fetchExoplanetData(apiURL);
+  buildSuggestionsPage();
+  setTimeout(() => revealText($suggestionsHeader), 250);
+  setTimeout(() => revealText($suggestionsSubheader), 750);
+  setTimeout(() => revealText($planetRecommendations), 1500);
   console.log('quizResponses:', quizResponses);
 });
 let quizResponses = {};
@@ -39,6 +54,7 @@ $noPlanetSearchButton?.addEventListener('click', () => {
 // quiz 2 - planet temperature (data-view="2")
 const $temperatureCold = document.querySelector('#temp-cold');
 const $temperatureHot = document.querySelector('#temp-hot');
+const $temperatureNull = document.querySelector('#temp-null');
 $temperatureCold?.addEventListener('click', () => {
   quizResponses.planetTemperature = 'cold';
   revealNext();
@@ -51,47 +67,74 @@ $temperatureHot?.addEventListener('click', () => {
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
+$temperatureNull?.addEventListener('click', () => {
+  quizResponses.planetTemperature = 'null';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
 // quiz 3 - planet mass (data-view="3")
-const $smallMass = document.querySelector('#small-mass');
-const $largeMass = document.querySelector('#large-mass');
-$smallMass?.addEventListener('click', () => {
+const $massSmall = document.querySelector('#mass-small');
+const $massLarge = document.querySelector('#mass-large');
+const $massNull = document.querySelector('#mass-null');
+$massSmall?.addEventListener('click', () => {
   quizResponses.planetMass = 'small';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
-$largeMass?.addEventListener('click', () => {
+$massLarge?.addEventListener('click', () => {
   quizResponses.planetMass = 'large';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
+$massNull?.addEventListener('click', () => {
+  quizResponses.planetMass = 'null';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
 // quiz 4 - planet period (data-view="4")
-const $longPeriod = document.querySelector('#long-period');
-const $shortPeriod = document.querySelector('#short-period');
-$longPeriod?.addEventListener('click', () => {
+const $periodLong = document.querySelector('#period-long');
+const $periodShort = document.querySelector('#period-short');
+const $periodNull = document.querySelector('#period-null');
+$periodLong?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'long';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
-$shortPeriod?.addEventListener('click', () => {
+$periodShort?.addEventListener('click', () => {
   quizResponses.planetPeriod = 'short';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
+$periodNull?.addEventListener('click', () => {
+  quizResponses.planetPeriod = 'null';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
 // quiz 5 - planet radius (data-view="5")
-const $largeRadius = document.querySelector('#large-radius');
-const $smallRadius = document.querySelector('#small-radius');
-$largeRadius?.addEventListener('click', () => {
+const $radiusLarge = document.querySelector('#radius-large');
+const $radiusSmall = document.querySelector('#radius-small');
+const $radiusNull = document.querySelector('#radius-null');
+$radiusLarge?.addEventListener('click', () => {
   quizResponses.planetRadius = 'large';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
 });
-$smallRadius?.addEventListener('click', () => {
+$radiusSmall?.addEventListener('click', () => {
   quizResponses.planetRadius = 'small';
+  revealNext();
+  scrollDown();
+  setTimeout(() => hidePrev(), 750);
+});
+$radiusNull?.addEventListener('click', () => {
+  quizResponses.planetRadius = 'null';
   revealNext();
   scrollDown();
   setTimeout(() => hidePrev(), 750);
@@ -116,7 +159,7 @@ $distanceInput.addEventListener('input', (event) => {
   } else if (!isNaN(Number(distanceTerm)) && distanceTerm.includes('.')) {
     distanceInputRemoveErrors();
     $distanceInputErrorInteger.classList.remove('hidden');
-  } else if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 30000) {
+  } else if (!isNaN(Number(distanceTerm)) && Number(distanceTerm) > 50) {
     distanceInputRemoveErrors();
     $distanceInputErrorValue.classList.remove('hidden');
   } else if (distanceTerm === '') {
@@ -135,15 +178,20 @@ $distanceInput.addEventListener('keydown', (event) => {
     setTimeout(() => hidePrev(), 750);
   }
 });
-// BUILDING SUGGESTIONS PAGE
+// SUMMARY PAGE
+const $distanceForm = document.getElementById('distance');
 // quiz response messages
 const $summaryPageGetSuggestionsButton =
   document.querySelector('#get-suggestions');
 const $summaryPageRetakeQuizButton = document.querySelector(
   '#summary-retake-quiz',
 );
-$summaryPageGetSuggestionsButton?.addEventListener('click', () => {
+$summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
   dataView = 7;
+  // generate API url and make the calls
+  generateApiCall();
+  fetchExoplanetData(apiURL);
+  await buildSuggestionsPage();
   // reveal/scroll to load page, hide summary
   revealNext();
   scrollDown();
@@ -151,10 +199,44 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', () => {
   // reveal/scroll to suggestions, hide quiz
   setTimeout(() => revealNext(), 3000);
   setTimeout(() => scrollDown(), 3500);
+  setTimeout(() => generateSuggestionsPage(), 3750);
   setTimeout(() => hideQuiz(), 4250);
 });
 $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
+  $distanceForm.reset();
+  distanceInputRemoveErrors();
+  setTimeout(() => revealAll(), 750);
   scrollToTop();
   setTimeout(() => hideAll(), 1000);
+});
+// SUGGESTIONS PAGE
+const $suggestionsPageRetakeQuizButton = document.querySelector(
+  '#suggestions-retake-quiz',
+);
+$suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
+  $distanceForm.reset();
+  distanceInputRemoveErrors();
+  scrollToTop();
+  setTimeout(() => hideAll(), 750);
+});
+const $suggestionsNextButton = document.querySelector('#suggestions-next-icon');
+const $suggestionsPreviousButton = document.querySelector(
+  '#suggestions-previous-icon',
+);
+$suggestionsNextButton?.addEventListener('click', () => {
+  pageChange();
+  increaseAPIOffset();
+  console.log(apiURL);
+  fetchExoplanetData(apiURL);
+  $suggestionsLoading?.classList.remove('hidden');
+  buildSuggestionsPage();
+});
+$suggestionsPreviousButton?.addEventListener('click', () => {
+  pageChange();
+  decreaseAPIOffset();
+  console.log(apiURL);
+  fetchExoplanetData(apiURL);
+  $suggestionsLoading?.classList.remove('hidden');
+  buildSuggestionsPage();
 });
