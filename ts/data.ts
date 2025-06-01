@@ -166,9 +166,15 @@ function generateSummary(): void {
 // SUMMARY PAGE BUTTONS
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function revealText(element: HTMLElement): void {
+function revealText(element: any): void {
   element.classList.remove('invisible');
   element.classList.add('visible');
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hideText(element: any): void {
+  element.classList.remove('visible');
+  element.classList.add('invisible');
 }
 
 // GENERATE API URL
@@ -177,6 +183,11 @@ let apiTemp = '';
 let apiMass = '';
 let apiPeriod = '';
 let apiRadius = '';
+
+let apiURL = '';
+let apiOffsetNumber = 0;
+
+const api1 = 'https://api.api-ninjas.com/v1/planets?';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function generateApiCall(): void {
@@ -213,17 +224,61 @@ function generateApiCall(): void {
   }
 
   const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
+  const apiOffset = '&offset=0';
 
-  const api1 = 'https://api.api-ninjas.com/v1/planets?';
   apiURL = api1
     .concat(apiTemp)
     .concat(apiMass)
     .concat(apiPeriod)
     .concat(apiRadius)
-    .concat(apiDistance);
+    .concat(apiDistance)
+    .concat(apiOffset);
 
   console.log(quizResponses);
   console.log(apiURL);
+}
+
+// GENERATING NEXT PAGE OF API URL
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function increaseAPIOffset(): void {
+  apiOffsetNumber += 30;
+  const apiOffset = `&offset=${apiOffsetNumber}`;
+  const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
+
+  apiURL = api1
+    .concat(apiTemp)
+    .concat(apiMass)
+    .concat(apiPeriod)
+    .concat(apiRadius)
+    .concat(apiDistance)
+    .concat(apiOffset);
+  console.log(apiURL);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function decreaseAPIOffset(): void {
+  const apiDistance = `&min_distance_light_year=${quizResponses.planetDistance}`;
+
+  if (apiOffsetNumber >= 30) {
+    apiOffsetNumber -= 30;
+    const apiOffset = `&offset=${apiOffsetNumber}`;
+
+    apiURL = api1
+      .concat(apiTemp)
+      .concat(apiMass)
+      .concat(apiPeriod)
+      .concat(apiRadius)
+      .concat(apiDistance)
+      .concat(apiOffset);
+    console.log(apiURL);
+  } else
+    apiURL = apiURL = api1
+      .concat(apiTemp)
+      .concat(apiMass)
+      .concat(apiPeriod)
+      .concat(apiRadius)
+      .concat(apiDistance);
 }
 
 // CALLING API
@@ -292,6 +347,13 @@ const $previousTextRecommendations = document.querySelector(
 const $nextTextRecommendations = document.querySelector(
   '#suggestions-next-text',
 ) as HTMLElement;
+const $suggestionsLoading = document.querySelector(
+  '#suggestions-loading',
+) as HTMLElement;
+
+const $disclaimerRecommendations = document.querySelector(
+  '#suggestions-disclaimer',
+) as HTMLElement;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function buildSuggestionsPage(): Promise<void> {
@@ -322,6 +384,11 @@ async function buildSuggestionsPage(): Promise<void> {
     $planetEntryRow?.appendChild($h4NoPlanets2);
     $planetEntryRow?.appendChild($h4NoPlanets3);
   } else {
+    const $rowCenterEntry = document.createElement('div');
+
+    $rowCenterEntry.setAttribute('class', 'row center');
+    $rowCenterEntry.setAttribute('id', 'planet-recommendations-page');
+
     for (let i = 0; i < exoplanetData.length; i++) {
       const $column50CenterEntry = document.createElement('div');
       $column50CenterEntry.setAttribute('class', 'column-50 center entry');
@@ -349,7 +416,8 @@ async function buildSuggestionsPage(): Promise<void> {
 
       // appending entry to DOM
 
-      $planetEntryRow?.appendChild($column50CenterEntry);
+      $planetEntryRow?.appendChild($rowCenterEntry);
+      $rowCenterEntry?.appendChild($column50CenterEntry);
       $column50CenterEntry.appendChild($column50PlanetEntry);
       $column50PlanetEntry.appendChild($column50DivName);
       $column50DivName.appendChild($h4PlanetEntry);
@@ -360,9 +428,26 @@ async function buildSuggestionsPage(): Promise<void> {
   }
 
   if (exoplanetData.length === 30) {
+    setTimeout(() => revealText($nextIconRecommendations), 2250);
+    setTimeout(() => revealText($nextTextRecommendations), 2250);
+    setTimeout(() => revealText($disclaimerRecommendations), 3000);
+  }
+
+  if (apiOffsetNumber > 0) {
+    revealText($previousIconRecommendations);
+    revealText($previousTextRecommendations);
     revealText($nextIconRecommendations);
     revealText($nextTextRecommendations);
+    revealText($disclaimerRecommendations);
   }
+
+  if (apiOffsetNumber === 0) {
+    hideText($previousIconRecommendations);
+    hideText($previousTextRecommendations);
+    revealText($disclaimerRecommendations);
+  }
+
+  $suggestionsLoading?.classList.add('hidden');
 }
 
 // GENERATING SUGGESTIONS PAGE
@@ -379,10 +464,6 @@ function generateSuggestionsPage(): void {
     '#planet-recommendations',
   ) as HTMLElement;
 
-  const $disclaimerRecommendations = document.querySelector(
-    '#suggestions-disclaimer',
-  ) as HTMLElement;
-
   // suggestions arrows
 
   const $previousNextRecommendations = document.querySelector(
@@ -393,5 +474,16 @@ function generateSuggestionsPage(): void {
   setTimeout(() => revealText($suggestionsSubheader), 750);
   setTimeout(() => revealText($planetRecommendations), 1500);
   setTimeout(() => revealText($previousNextRecommendations), 2250);
-  setTimeout(() => revealText($disclaimerRecommendations), 3000);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function pageChange(): void {
+  const $planetRecommendationPage = document.querySelector(
+    '#planet-recommendations-page',
+  );
+  $planetRecommendationPage?.remove();
+
+  if ($planetRecommendationPage === null) {
+    $suggestionsLoading?.classList.remove('hidden');
+  }
 }

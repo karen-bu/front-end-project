@@ -2,17 +2,32 @@
 
 const $devLazy = document.querySelector('#dev-lazy');
 $devLazy?.addEventListener('click', () => {
+  const $suggestionsHeader = document.querySelector(
+    '#suggestions-header-text',
+  ) as HTMLElement;
+  const $suggestionsSubheader = document.querySelector(
+    '#suggestions-subheader-text',
+  ) as HTMLElement;
+  const $planetRecommendations = document.querySelector(
+    '#planet-recommendations',
+  ) as HTMLElement;
+
   revealAll();
   quizResponses.startQuiz = true;
   quizResponses.planetSearch = false;
-  quizResponses.planetTemperature = 'hot';
-  quizResponses.planetMass = 'small';
-  quizResponses.planetPeriod = 'long';
-  quizResponses.planetRadius = 'small';
+  quizResponses.planetTemperature = 'null';
+  quizResponses.planetMass = 'null';
+  quizResponses.planetPeriod = 'null';
+  quizResponses.planetRadius = 'null';
   quizResponses.planetDistance = '0';
   generateSummary();
   generateApiCall();
+  console.log(apiURL);
   fetchExoplanetData(apiURL);
+  buildSuggestionsPage();
+  setTimeout(() => revealText($suggestionsHeader), 250);
+  setTimeout(() => revealText($suggestionsSubheader), 750);
+  setTimeout(() => revealText($planetRecommendations), 1500);
   console.log('quizResponses:', quizResponses);
 });
 
@@ -233,8 +248,6 @@ const $distanceForm = document.getElementById('distance') as HTMLFormElement;
 
 // quiz response messages
 
-let apiURL = '';
-
 const $summaryPageGetSuggestionsButton = document.querySelector(
   '#get-suggestions',
 ) as HTMLButtonElement;
@@ -282,4 +295,27 @@ $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
   distanceInputRemoveErrors();
   scrollToTop();
   setTimeout(() => hideAll(), 750);
+});
+
+const $suggestionsNextButton = document.querySelector('#suggestions-next-icon');
+const $suggestionsPreviousButton = document.querySelector(
+  '#suggestions-previous-icon',
+);
+
+$suggestionsNextButton?.addEventListener('click', () => {
+  pageChange();
+  increaseAPIOffset();
+  console.log(apiURL);
+  fetchExoplanetData(apiURL);
+  $suggestionsLoading?.classList.remove('hidden');
+  buildSuggestionsPage();
+});
+
+$suggestionsPreviousButton?.addEventListener('click', () => {
+  pageChange();
+  decreaseAPIOffset();
+  console.log(apiURL);
+  fetchExoplanetData(apiURL);
+  $suggestionsLoading?.classList.remove('hidden');
+  buildSuggestionsPage();
 });
