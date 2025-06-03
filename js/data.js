@@ -24,6 +24,11 @@ function scrollDown() {
   });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollToInformation() {
+  const $informationPage = document.querySelector("[data-view='10']");
+  $informationPage?.scrollIntoView({ behavior: 'smooth' });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hidePrev() {
   quizPages[dataView - 1].classList.add('hidden');
 }
@@ -176,7 +181,7 @@ function generateApiCall() {
     apiPeriod = '&min_period=0';
   }
   if (quizResponses.planetRadius === 'large') {
-    apiRadius = '&max_radius=3';
+    apiRadius = '&min_radius=3';
   } else if (quizResponses.planetRadius === 'small') {
     apiRadius = '&max_radius=1';
   } else if (quizResponses.planetRadius === 'null') {
@@ -278,9 +283,10 @@ const $suggestionsLoading = document.querySelector('#suggestions-loading');
 const $disclaimerRecommendations = document.querySelector(
   '#suggestions-disclaimer',
 );
+let exoplanetData = [];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function buildSuggestionsPage() {
-  const exoplanetData = await fetchExoplanetData(apiURL);
+  exoplanetData = await fetchExoplanetData(apiURL);
   if (!exoplanetData) throw new Error('exoplanetData does not exist!');
   console.log(exoplanetData);
   const $planetEntryRow = document.querySelector('#planet-recommendations');
@@ -314,10 +320,22 @@ async function buildSuggestionsPage() {
       );
       const $column50DivName = document.createElement('div');
       $column50DivName.setAttribute('class', 'column-50 left');
+      $column50DivName.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
       const $h4PlanetEntry = document.createElement('h4');
+      $h4PlanetEntry.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
       $h4PlanetEntry.textContent = exoplanetData[i].name;
       const $column50DivIcons = document.createElement('div');
       $column50DivIcons.setAttribute('class', 'column-50 right');
+      $column50DivIcons.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
       const $h4RecommendationsHeartIcon = document.createElement('h4');
       const $recommendationsHeartIcon = document.createElement('i');
       $recommendationsHeartIcon.setAttribute('class', 'fa-regular fa-heart');
@@ -379,4 +397,186 @@ function pageChange() {
   if ($planetRecommendationPage === null) {
     $suggestionsLoading?.classList.remove('hidden');
   }
+}
+// BUILDING INFORMATION PAGE
+let planetClickedNumber = 0;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function buildInformationPage() {
+  const $planetInformationPageHolder = document.createElement('div');
+  $planetInformationPageHolder.setAttribute(
+    'id',
+    'planet-information-page-holder',
+  );
+  // name of planet
+  const $columnPlanetInfoName = document.createElement('div');
+  $columnPlanetInfoName.setAttribute('class', 'column--75 center header');
+  const $h1PlanetInfoName = document.createElement('h1');
+  $h1PlanetInfoName.textContent = exoplanetData[planetClickedNumber].name;
+  // temperature
+  const $temperatureInfoRow = document.createElement('div');
+  $temperatureInfoRow.setAttribute('class', 'row center');
+  const $temperatureInfoColumn1 = document.createElement('div');
+  $temperatureInfoColumn1.setAttribute('class', 'column-75');
+  const $temperatureInfoHeader = document.createElement('h3');
+  $temperatureInfoHeader.textContent = 'temperature';
+  const $temperatureInfoColumn2 = document.createElement('div');
+  $temperatureInfoColumn2.setAttribute('class', 'column-75');
+  const $temperatureInfoText = document.createElement('p');
+  $temperatureInfoText.setAttribute('id', 'planet-temperature-info');
+  const temperatureInfoK = exoplanetData[planetClickedNumber].temperature;
+  const temperatureInfoC = temperatureInfoK - 273;
+  const temperatureInfoF = (temperatureInfoK - 273) * 1.8 + 32;
+  let temperatureInfoMessage = '';
+  if (temperatureInfoK < 188) {
+    temperatureInfoMessage = 'Chilly!';
+  } else {
+    temperatureInfoMessage = 'Toasty!';
+  }
+  $temperatureInfoText.textContent = `${temperatureInfoK} K. That's ${temperatureInfoF} Fahrenheit or ${temperatureInfoC}. ${temperatureInfoMessage}`;
+  const $temperatureInfoColumn3 = document.createElement('div');
+  $temperatureInfoColumn3.setAttribute('class', 'column-75');
+  const $temperatureInfoDivider = document.createElement('hr');
+  // star mass
+  const $massInfoRow = document.createElement('div');
+  $massInfoRow.setAttribute('class', 'row center');
+  const $massInfoColumn1 = document.createElement('div');
+  $massInfoColumn1.setAttribute('class', 'column-75');
+  const $massInfoHeader = document.createElement('h3');
+  $massInfoHeader.textContent = 'star mass';
+  const $massInfoColumn2 = document.createElement('div');
+  $massInfoColumn2.setAttribute('class', 'column-75');
+  const $massInfoText = document.createElement('p');
+  const massInfo = exoplanetData[planetClickedNumber].mass;
+  let massInfoMessage = '';
+  if (massInfo >= 2) {
+    massInfoMessage = 'Talk about gains!';
+  } else if (massInfo <= 0.003) {
+    massInfoMessage = 'Lightweight!';
+  } else {
+    massInfoMessage = 'Just like home!';
+  }
+  $massInfoText.textContent = `${massInfo} Jupiters. ${massInfoMessage}`;
+  const $massInfoColumn3 = document.createElement('div');
+  $massInfoColumn3.setAttribute('class', 'column-75');
+  const $massInfoDivider = document.createElement('hr');
+  // length of year
+  const $yearInfoRow = document.createElement('div');
+  $yearInfoRow.setAttribute('class', 'row center');
+  const $yearInfoColumn1 = document.createElement('div');
+  $yearInfoColumn1.setAttribute('class', 'column-75');
+  const $yearInfoHeader = document.createElement('h3');
+  $yearInfoHeader.textContent = 'length of year';
+  const $yearInfoColumn2 = document.createElement('div');
+  $yearInfoColumn2.setAttribute('class', 'column-75');
+  const $yearInfoText = document.createElement('p');
+  const yearInfo = exoplanetData[planetClickedNumber].period;
+  const yearInfoConversion = Math.round(yearInfo / 365);
+  let yearInfoMessage = '';
+  if (yearInfo >= 730) {
+    yearInfoMessage = 'So much time to get so much done!';
+  } else if (yearInfo <= 100) {
+    yearInfoMessage = 'The time will just fly by!';
+  } else {
+    yearInfoMessage = 'Not too long, not too short.';
+  }
+  $yearInfoText.textContent = `${yearInfo} days, or ${yearInfoConversion} years. ${yearInfoMessage}`;
+  const $yearInfoColumn3 = document.createElement('div');
+  $yearInfoColumn3.setAttribute('class', 'column-75');
+  const $yearInfoDivider = document.createElement('hr');
+  // radius
+  const $radiusInfoRow = document.createElement('div');
+  $radiusInfoRow.setAttribute('class', 'row center');
+  const $radiusInfoColumn1 = document.createElement('div');
+  $radiusInfoColumn1.setAttribute('class', 'column-75');
+  const $radiusInfoHeader = document.createElement('h3');
+  $radiusInfoHeader.textContent = 'radius';
+  const $radiusInfoColumn2 = document.createElement('div');
+  $radiusInfoColumn2.setAttribute('class', 'column-75');
+  const $radiusInfoText = document.createElement('p');
+  const radiusInfo = exoplanetData[planetClickedNumber].radius;
+  const radiusInfoKm = radiusInfo * 71492;
+  const radiusInfoMi = radiusInfo * 88900;
+  let radiusInfoMessage = '';
+  if (radiusInfo >= 3) {
+    radiusInfoMessage = 'Finally, that big backyard you wanted!';
+  } else if (radiusInfo <= 1) {
+    radiusInfoMessage =
+      'Pretty small and cozy ... by interplanetary standards.';
+  } else {
+    radiusInfoMessage = 'Just the right size.';
+  }
+  $radiusInfoText.textContent = `${radiusInfo} Jupiters. That's ${radiusInfoKm} kilometers or ${radiusInfoMi} miles. ${radiusInfoMessage}`;
+  const $radiusInfoColumn3 = document.createElement('div');
+  $radiusInfoColumn3.setAttribute('class', 'column-75');
+  const $radiusInfoDivider = document.createElement('hr');
+  // distance from earth
+  const $distanceInfoRow = document.createElement('div');
+  $distanceInfoRow.setAttribute('class', 'row center');
+  const $distanceInfoColumn1 = document.createElement('div');
+  $distanceInfoColumn1.setAttribute('class', 'column-75');
+  const $distanceInfoHeader = document.createElement('h3');
+  $distanceInfoHeader.textContent = 'distance from earth';
+  const $distanceInfoColumn2 = document.createElement('div');
+  $distanceInfoColumn2.setAttribute('class', 'column-75');
+  const $distanceInfoText = document.createElement('p');
+  $distanceInfoText.setAttribute('id', 'planet-distance-info');
+  const distanceInfo = exoplanetData[planetClickedNumber].distance_light_year;
+  let distanceMessage = '';
+  if (distanceInfo < 1) {
+    distanceMessage = 'Still close enough to visit!';
+  } else {
+    distanceMessage = 'Far away from all those annoying neighbors!';
+  }
+  $distanceInfoText.textContent = `${distanceInfo} light-years. ${distanceMessage}`;
+  // building the page
+  const $planetInformationPage = document.querySelector(
+    '#planet-information-page',
+  );
+  $planetInformationPage?.appendChild($planetInformationPageHolder);
+  // appending title row
+  $planetInformationPageHolder?.appendChild($columnPlanetInfoName);
+  $planetInformationPageHolder?.appendChild($h1PlanetInfoName);
+  // appending temperature row
+  $planetInformationPageHolder?.appendChild($temperatureInfoRow);
+  $temperatureInfoRow?.appendChild($temperatureInfoColumn1);
+  $temperatureInfoColumn1?.appendChild($temperatureInfoHeader);
+  $temperatureInfoRow?.appendChild($temperatureInfoColumn2);
+  $temperatureInfoColumn2?.appendChild($temperatureInfoText);
+  $temperatureInfoRow?.appendChild($temperatureInfoColumn3);
+  $temperatureInfoColumn3?.appendChild($temperatureInfoDivider);
+  // appending mass row
+  $planetInformationPageHolder?.appendChild($massInfoRow);
+  $massInfoRow?.appendChild($massInfoColumn1);
+  $massInfoColumn1?.appendChild($massInfoHeader);
+  $massInfoRow?.appendChild($massInfoColumn2);
+  $massInfoColumn2?.appendChild($massInfoText);
+  $massInfoRow?.appendChild($massInfoColumn3);
+  $massInfoColumn3?.appendChild($massInfoDivider);
+  // appending length of year row
+  $planetInformationPageHolder?.appendChild($yearInfoRow);
+  $yearInfoRow?.appendChild($yearInfoColumn1);
+  $yearInfoColumn1?.appendChild($yearInfoHeader);
+  $yearInfoRow?.appendChild($yearInfoColumn2);
+  $yearInfoColumn2?.appendChild($yearInfoText);
+  $yearInfoRow?.appendChild($yearInfoColumn3);
+  $yearInfoColumn3?.appendChild($yearInfoDivider);
+  // appending radius row
+  $planetInformationPageHolder?.appendChild($radiusInfoRow);
+  $radiusInfoRow?.appendChild($radiusInfoColumn1);
+  $radiusInfoColumn1?.appendChild($radiusInfoHeader);
+  $radiusInfoRow?.appendChild($radiusInfoColumn2);
+  $radiusInfoColumn2?.appendChild($radiusInfoText);
+  $radiusInfoRow?.appendChild($radiusInfoColumn3);
+  $radiusInfoColumn3?.appendChild($radiusInfoDivider);
+  // appending distance row
+  $planetInformationPageHolder?.appendChild($distanceInfoRow);
+  $distanceInfoRow?.appendChild($distanceInfoColumn1);
+  $distanceInfoColumn1?.appendChild($distanceInfoHeader);
+  $distanceInfoRow?.appendChild($distanceInfoColumn2);
+  $distanceInfoColumn2?.appendChild($distanceInfoText);
+  // reveal footer
+  const $planetInformationFooter = document.querySelector(
+    '#information-footer',
+  );
+  revealText($planetInformationFooter);
 }

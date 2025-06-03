@@ -211,6 +211,7 @@ $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   setTimeout(() => hideAll(), 1000);
 });
 // SUGGESTIONS PAGE
+// building the suggestions page
 const $suggestionsPageRetakeQuizButton = document.querySelector(
   '#suggestions-retake-quiz',
 );
@@ -239,4 +240,27 @@ $suggestionsPreviousButton?.addEventListener('click', () => {
   fetchExoplanetData(apiURL);
   $suggestionsLoading?.classList.remove('hidden');
   buildSuggestionsPage();
+});
+// adding suggestion to favorites
+// BRING UP PLANET INFORMATION PAGE
+const $planetRecommendations = document.querySelector(
+  '#planet-recommendations',
+);
+$planetRecommendations?.addEventListener('click', (event) => {
+  const planetClicked = event.target;
+  planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
+  if (!planetClickedNumber) {
+    planetClickedNumber = 0;
+  } else {
+    // remove the previous page
+    const $planetInformationPageHolder = document.querySelector(
+      '#planet-information-page-holder',
+    );
+    $planetInformationPageHolder?.remove();
+    // build new page
+    buildInformationPage();
+    revealNext();
+    scrollToInformation();
+    setTimeout(() => hidePrev(), 750);
+  }
 });
