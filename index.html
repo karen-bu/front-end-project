@@ -308,7 +308,7 @@
     <!-- end loading page -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations bg1" data-view="9">
+    <div class="page recommendations bg1 hidden" data-view="9">
       <div class="row" id="suggestions-header">
         <div class="column-50 left">
           <img
@@ -423,7 +423,7 @@
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <div class="icon-circle" title="retake quiz">
+            <div class="icon-circle" title="retake quiz" id="info-retake-quiz">
               <i class="fa-solid fa-question"></i>
             </div>
           </div>
@@ -446,75 +446,12 @@
         </div>
       </div>
 
-      <div class="row center">
-        <div class="column-75 center header">
-          <h1 class="">Beta Pictoris b</h1>
-        </div>
-        <div class="row center">
-          <div class="column-100">
-            <h3>temperature</h3>
-          </div>
-          <div class="column-100">
-            <p>1612 K. That's 2442 Fahrenheit or 1339 Celcius. Toasty!</p>
-          </div>
-          <div class="column-100">
-            <hr />
-          </div>
-        </div>
-        <div class="row center">
-          <div class="column-100">
-            <h3>star mass</h3>
-          </div>
-          <div class="column-100">
-            <p>11 Jupiters. Talk about gains!</p>
-          </div>
-          <div class="column-100">
-            <hr />
-          </div>
-        </div>
-        <div class="row center">
-          <div class="column-100">
-            <h3>length of year</h3>
-          </div>
-          <div class="column-100">
-            <p>7665 days. So much time to get so much done!</p>
-          </div>
-          <div class="column-100">
-            <hr />
-          </div>
-        </div>
-        <div class="row center">
-          <div class="column-100">
-            <h3>radius</h3>
-          </div>
-          <div class="column-100">
-            <p>
-              1.65 Jupiters. That’s 115353 kilometers or 71677 miles. Finally,
-              that big backyard you wanted!
-            </p>
-          </div>
-          <div class="column-100">
-            <hr />
-          </div>
-        </div>
-        <div class="row center">
-          <div class="column-100">
-            <h3>distance from earth</h3>
-          </div>
-          <div class="column-100">
-            <p>
-              64.24 light-years. Far away from all those annoying neighbors!
-            </p>
-          </div>
-        </div>
-      </div>
+      <div class="row center" id="planet-information-page"></div>
 
-      <div class="row header">
+      <div class="row header invisible" id="information-footer">
         <div class="column-50 center">
-          <div class="icon-circle">
-            <i
-              class="fa-solid fa-arrow-left"
-              title="back to recommendations"></i>
+          <div class="icon-circle" id="back-to-recommendations">
+            <i class="fa-solid fa-arrow-up" title="back to recommendations"></i>
           </div>
         </div>
         <div class="column-50 center">
@@ -535,8 +472,9 @@
             <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
+              habitable environments, or sentient life. should sentient life
+              exist, it is not guaranteed to be friendly. move to a new planet
+              at your own risk.
             </p>
           </div>
         </div>
@@ -644,8 +582,9 @@
             <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
+              habitable environments, or sentient life. should sentient life
+              exist, it is not guaranteed to be friendly. move to a new planet
+              at your own risk.
             </p>
           </div>
         </div>
