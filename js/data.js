@@ -9,12 +9,6 @@ function distanceInputRemoveErrors() {
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
 console.log(quizPages);
-let dataView = 0;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function revealNext() {
-  quizPages[dataView + 1].classList.remove('hidden');
-  dataView += 1;
-}
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown() {
   window.scrollBy({
@@ -29,8 +23,13 @@ function scrollToInformation() {
   $informationPage?.scrollIntoView({ behavior: 'smooth' });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function hidePrev() {
-  quizPages[dataView - 1].classList.add('hidden');
+function scrollToRecommendations() {
+  const $recommendationsPage = document.querySelector("[data-view='9']");
+  $recommendationsPage?.scrollIntoView({ behavior: 'smooth' });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function revealPage(dataView) {
+  quizPages[dataView].classList.remove('hidden');
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function revealAll() {
@@ -39,19 +38,21 @@ function revealAll() {
   }
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hidePage(dataView) {
+  quizPages[dataView].classList.add('hidden');
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hideQuiz() {
-  dataView = 0;
   for (let i = 1; i < 9; i++) {
-    quizPages[i].classList.add('hidden');
+    hidePage(i);
   }
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hideAll() {
-  dataView = 0;
   for (let i = 1; i < quizPages.length; i++) {
-    quizPages[i].classList.add('hidden');
+    hidePage(i);
   }
-  quizPages[0].classList.remove('hidden');
+  revealPage(0);
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showLoad() {
@@ -60,12 +61,9 @@ function showLoad() {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
-  dataView = 0;
+  revealAll();
+  const $topOfPage = document.querySelector("[data-view='0']");
+  $topOfPage?.scrollIntoView({ behavior: 'smooth' });
 }
 // GENERATING SUMMARY PAGE
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -424,15 +422,15 @@ function buildInformationPage() {
   const $temperatureInfoText = document.createElement('p');
   $temperatureInfoText.setAttribute('id', 'planet-temperature-info');
   const temperatureInfoK = exoplanetData[planetClickedNumber].temperature;
-  const temperatureInfoC = temperatureInfoK - 273;
-  const temperatureInfoF = (temperatureInfoK - 273) * 1.8 + 32;
+  const temperatureInfoC = Math.round(temperatureInfoK - 273);
+  const temperatureInfoF = Math.round((temperatureInfoK - 273) * 1.8 + 32);
   let temperatureInfoMessage = '';
   if (temperatureInfoK < 188) {
     temperatureInfoMessage = 'Chilly!';
   } else {
     temperatureInfoMessage = 'Toasty!';
   }
-  $temperatureInfoText.textContent = `${temperatureInfoK} K. That's ${temperatureInfoF} Fahrenheit or ${temperatureInfoC}. ${temperatureInfoMessage}`;
+  $temperatureInfoText.textContent = `${temperatureInfoK} Kelvin. That's ${temperatureInfoF} degrees Fahrenheit, or ${temperatureInfoC} degrees Celcius. ${temperatureInfoMessage} For reference, Earth is an average of 288K, 59°F, or 15°C.`;
   const $temperatureInfoColumn3 = document.createElement('div');
   $temperatureInfoColumn3.setAttribute('class', 'column-75');
   const $temperatureInfoDivider = document.createElement('hr');
@@ -453,9 +451,9 @@ function buildInformationPage() {
   } else if (massInfo <= 0.003) {
     massInfoMessage = 'Lightweight!';
   } else {
-    massInfoMessage = 'Just like home!';
+    massInfoMessage = 'Just like home! Sort of.';
   }
-  $massInfoText.textContent = `${massInfo} Jupiters. ${massInfoMessage}`;
+  $massInfoText.textContent = `${massInfo} times the mass of Jupiter. ${massInfoMessage} For reference, Earth is about 0.003 Jupiters.`;
   const $massInfoColumn3 = document.createElement('div');
   $massInfoColumn3.setAttribute('class', 'column-75');
   const $massInfoDivider = document.createElement('hr');
@@ -469,17 +467,26 @@ function buildInformationPage() {
   const $yearInfoColumn2 = document.createElement('div');
   $yearInfoColumn2.setAttribute('class', 'column-75');
   const $yearInfoText = document.createElement('p');
-  const yearInfo = exoplanetData[planetClickedNumber].period;
-  const yearInfoConversion = Math.round(yearInfo / 365);
+  const yearInfo = Number(exoplanetData[planetClickedNumber].period.toFixed(2));
+  let yearInfoConversion = '';
+  let yearPlural = '';
+  if (Math.round(yearInfo / 365) === 0) {
+    yearInfoConversion = 'less than 1 Earth';
+    yearPlural = 'year';
+  } else {
+    yearInfoConversion = Math.round(yearInfo / 365);
+    yearPlural = 'years';
+  }
+  const yearInfoConversionHours = Math.round(yearInfo * 24);
   let yearInfoMessage = '';
   if (yearInfo >= 730) {
     yearInfoMessage = 'So much time to get so much done!';
   } else if (yearInfo <= 100) {
     yearInfoMessage = 'The time will just fly by!';
   } else {
-    yearInfoMessage = 'Not too long, not too short.';
+    yearInfoMessage = 'Not too long, not too short!';
   }
-  $yearInfoText.textContent = `${yearInfo} days, or ${yearInfoConversion} years. ${yearInfoMessage}`;
+  $yearInfoText.textContent = `${yearInfo} days, or ${yearInfoConversionHours} hours, or ${yearInfoConversion} ${yearPlural}. ${yearInfoMessage} For reference, one Earth year is ... well, you already know, or else your kindergarten teacher failed you badly.`;
   const $yearInfoColumn3 = document.createElement('div');
   $yearInfoColumn3.setAttribute('class', 'column-75');
   const $yearInfoDivider = document.createElement('hr');
@@ -494,18 +501,18 @@ function buildInformationPage() {
   $radiusInfoColumn2.setAttribute('class', 'column-75');
   const $radiusInfoText = document.createElement('p');
   const radiusInfo = exoplanetData[planetClickedNumber].radius;
-  const radiusInfoKm = radiusInfo * 71492;
-  const radiusInfoMi = radiusInfo * 88900;
+  const radiusInfoKm = Math.round(radiusInfo * 71492);
+  const radiusInfoMi = Math.round(radiusInfo * 88900);
   let radiusInfoMessage = '';
-  if (radiusInfo >= 3) {
-    radiusInfoMessage = 'Finally, that big backyard you wanted!';
-  } else if (radiusInfo <= 1) {
+  if (radiusInfo >= 2) {
     radiusInfoMessage =
-      'Pretty small and cozy ... by interplanetary standards.';
+      "Because space is like Texas - everything's bigger there.";
+  } else if (radiusInfo <= 1) {
+    radiusInfoMessage = 'Pretty small and cozy ... by planet standards.';
   } else {
-    radiusInfoMessage = 'Just the right size.';
+    radiusInfoMessage = 'A nice, comfortable size!';
   }
-  $radiusInfoText.textContent = `${radiusInfo} Jupiters. That's ${radiusInfoKm} kilometers or ${radiusInfoMi} miles. ${radiusInfoMessage}`;
+  $radiusInfoText.textContent = `${radiusInfo} Jupiters. That's ${radiusInfoKm} kilometers, or ${radiusInfoMi} miles. ${radiusInfoMessage} For reference, Earth is 0.0892 Jupiters, or 6,378 kilometers, or 3,963 miles.`;
   const $radiusInfoColumn3 = document.createElement('div');
   $radiusInfoColumn3.setAttribute('class', 'column-75');
   const $radiusInfoDivider = document.createElement('hr');
@@ -522,12 +529,13 @@ function buildInformationPage() {
   $distanceInfoText.setAttribute('id', 'planet-distance-info');
   const distanceInfo = exoplanetData[planetClickedNumber].distance_light_year;
   let distanceMessage = '';
-  if (distanceInfo < 1) {
-    distanceMessage = 'Still close enough to visit!';
+  if (distanceInfo < 5) {
+    distanceMessage =
+      'Still close enough to visit home on the weekends! Theoretically. Once we invent faster-than-light travel.';
   } else {
-    distanceMessage = 'Far away from all those annoying neighbors!';
+    distanceMessage = 'Far, far, FAR away from all those annoying neighbors!';
   }
-  $distanceInfoText.textContent = `${distanceInfo} light-years. ${distanceMessage}`;
+  $distanceInfoText.textContent = `${distanceInfo} light-years. ${distanceMessage} For reference, the distance from Earth to the Sun is 0.0000158 (about 1/62,500) light-years. Traveling at the speed of light, you would get to the Sun in about 8 and 1/3 minutes.`;
   // building the page
   const $planetInformationPage = document.querySelector(
     '#planet-information-page',

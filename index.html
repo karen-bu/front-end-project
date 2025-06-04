@@ -308,7 +308,7 @@
     <!-- end loading page -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations bg1" data-view="9">
+    <div class="page recommendations bg1 hidden" data-view="9">
       <div class="row" id="suggestions-header">
         <div class="column-50 left">
           <img
@@ -423,7 +423,7 @@
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <div class="icon-circle" title="retake quiz">
+            <div class="icon-circle" title="retake quiz" id="info-retake-quiz">
               <i class="fa-solid fa-question"></i>
             </div>
           </div>
@@ -450,10 +450,8 @@
 
       <div class="row header invisible" id="information-footer">
         <div class="column-50 center">
-          <div class="icon-circle">
-            <i
-              class="fa-solid fa-arrow-left"
-              title="back to recommendations"></i>
+          <div class="icon-circle" id="back-to-recommendations">
+            <i class="fa-solid fa-arrow-up" title="back to recommendations"></i>
           </div>
         </div>
         <div class="column-50 center">
@@ -474,8 +472,9 @@
             <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
+              habitable environments, or sentient life. should sentient life
+              exist, it is not guaranteed to be friendly. move to a new planet
+              at your own risk.
             </p>
           </div>
         </div>
@@ -583,8 +582,9 @@
             <p class="label-text header">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
+              habitable environments, or sentient life. should sentient life
+              exist, it is not guaranteed to be friendly. move to a new planet
+              at your own risk.
             </p>
           </div>
         </div>
