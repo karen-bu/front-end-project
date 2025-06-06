@@ -256,25 +256,38 @@ $infoPageRetakeQuizButton?.addEventListener('click', () => {
   scrollToTop();
   setTimeout(() => hideAll(), 750);
 });
+// clicking on a planet
 const $planetRecommendations = document.querySelector(
   '#planet-recommendations',
 );
 $planetRecommendations?.addEventListener('click', (event) => {
   const planetClicked = event.target;
-  planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
-  if (!planetClickedNumber) {
-    planetClickedNumber = 0;
-  } else {
-    // remove the previous page
-    const $planetInformationPageHolder = document.querySelector(
-      '#planet-information-page-holder',
-    );
-    $planetInformationPageHolder?.remove();
-    // build new page
-    buildInformationPage();
-    revealPage(10);
-    scrollToInformation();
-    setTimeout(() => hidePage(9), 750);
+  console.log(planetClicked);
+  if (planetClicked.classList.contains('entry-click')) {
+    console.log('this is a planet entry');
+    // planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
+    // if (!planetClickedNumber) {
+    //   planetClickedNumber = 0;
+    // } else {
+    //   // remove the previous page
+    //   const $planetInformationPageHolder = document.querySelector(
+    //     '#planet-information-page-holder',
+    //   );
+    //   $planetInformationPageHolder?.remove();
+    // build new page - UNCOMMENT
+    // buildInformationPage();
+    // revealPage(10);
+    // scrollToInformation();
+    // setTimeout(() => hidePage(9), 750);
+  } else if (planetClicked.classList.contains('icon-click')) {
+    console.log('this is an icon');
+    if (planetClicked.classList.contains('fa-regular')) {
+      planetClicked.classList.remove('fa-regular');
+      planetClicked.classList.add('fa-solid');
+    } else {
+      planetClicked.classList.add('fa-regular');
+      planetClicked.classList.remove('fa-solid');
+    }
   }
 });
 // event listener to go back to recommendations
@@ -288,3 +301,17 @@ $recommendationsInfoPage?.addEventListener('click', () => {
   setTimeout(() => hidePage(10), 750);
 });
 // event listener to favorite planet
+const $planetFavoritedHeart = document.querySelector('.planet-favorite');
+$planetFavoritedHeart?.addEventListener('click', (event) => {
+  const favoritedPlanet = event.target;
+  console.log('HEART CLICK');
+  favoritedPlanet.classList.remove('fa-regular');
+  favoritedPlanet.classList.add('fa-solid');
+  // if (favoritedPlanet.classList.contains('fa-regular')) {
+  //   favoritedPlanet.classList.remove('fa-regular');
+  //   favoritedPlanet.classList.add('fa-solid');
+  // } else {
+  //   favoritedPlanet.classList.remove('fa-solid');
+  //   favoritedPlanet.classList.add('fa-regular');
+  // }
+});

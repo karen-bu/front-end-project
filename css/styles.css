@@ -448,7 +448,7 @@ h4.dialog > i:hover {
   width: 600px;
   height: 125px;
   border-radius: 80px;
-  margin: 10px 5px;
+  margin: 10px;
   padding: 0 40px;
   background: transparent;
   border: solid white 3px;
@@ -480,4 +480,15 @@ button:active,
   border-color: #fff;
   box-shadow: 0 0 30px #fff inset;
   transition: 0.05s ease-in-out;
+}
+
+#planet-recommendations {
+  max-height: 55vh;
+  overflow: scroll;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+
+  @media screen and (width < 1024px) {
+    border-radius: 15px;
+  }
 }
