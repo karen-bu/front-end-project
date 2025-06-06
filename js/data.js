@@ -336,7 +336,10 @@ async function buildSuggestionsPage() {
         String(exoplanetData.indexOf(exoplanetData[i])),
       );
       const $h4RecommendationsHeartIcon = document.createElement('h4');
-      $h4RecommendationsHeartIcon.setAttribute('class', 'heart-icon');
+      $h4RecommendationsHeartIcon.setAttribute(
+        'class',
+        'heart-icon entry-click',
+      );
       $h4RecommendationsHeartIcon.setAttribute(
         'data-planet-recommendation',
         String(exoplanetData.indexOf(exoplanetData[i])),
@@ -602,16 +605,3 @@ function buildInformationPage() {
   revealText($planetInformationFooter);
 }
 // FAVORITES LIST
-// let favoritesList: Exoplanet[] = [];
-// const favoritePlanet: Exoplanet = {
-//   distance_light_year: exoplanetData[planetClickedNumber].distance_light_year,
-//   host_star_mass: exoplanetData[planetClickedNumber].host_star_mass,
-//   host_star_temperature:
-//     exoplanetData[planetClickedNumber].host_star_temperature,
-//   mass: exoplanetData[planetClickedNumber].mass,
-//   name: exoplanetData[planetClickedNumber].name,
-//   period: exoplanetData[planetClickedNumber].period,
-//   radius: exoplanetData[planetClickedNumber].radius,
-//   semi_major_axis: exoplanetData[planetClickedNumber].semi_major_axis,
-//   temperature: exoplanetData[planetClickedNumber].temperature,
-// };

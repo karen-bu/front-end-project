@@ -247,6 +247,7 @@ $suggestionsPreviousButton?.addEventListener('click', () => {
 });
 // adding suggestion to favorites
 // PLANET INFORMATION PAGE
+let favoritesList = [];
 // retake quiz button
 const $infoPageRetakeQuizButton = document.querySelector('#info-retake-quiz');
 $infoPageRetakeQuizButton?.addEventListener('click', () => {
@@ -263,32 +264,44 @@ const $planetRecommendations = document.querySelector(
 $planetRecommendations?.addEventListener('click', (event) => {
   const planetClicked = event.target;
   console.log(planetClicked);
+  planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
   if (planetClicked.classList.contains('entry-click')) {
-    console.log('this is a planet entry');
-    // planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
-    // if (!planetClickedNumber) {
-    //   planetClickedNumber = 0;
-    // } else {
-    //   // remove the previous page
-    //   const $planetInformationPageHolder = document.querySelector(
-    //     '#planet-information-page-holder',
-    //   );
-    //   $planetInformationPageHolder?.remove();
+    // remove the previous page
+    const $planetInformationPageHolder = document.querySelector(
+      '#planet-information-page-holder',
+    );
+    $planetInformationPageHolder?.remove();
     // build new page - UNCOMMENT
-    // buildInformationPage();
-    // revealPage(10);
-    // scrollToInformation();
-    // setTimeout(() => hidePage(9), 750);
+    buildInformationPage();
+    revealPage(10);
+    scrollToInformation();
+    setTimeout(() => hidePage(9), 750);
   } else if (planetClicked.classList.contains('icon-click')) {
-    console.log('this is an icon');
+    // change heart icon
     if (planetClicked.classList.contains('fa-regular')) {
       planetClicked.classList.remove('fa-regular');
       planetClicked.classList.add('fa-solid');
+      const favoritePlanet = {
+        distance_light_year:
+          exoplanetData[planetClickedNumber].distance_light_year,
+        host_star_mass: exoplanetData[planetClickedNumber].host_star_mass,
+        host_star_temperature:
+          exoplanetData[planetClickedNumber].host_star_temperature,
+        mass: exoplanetData[planetClickedNumber].mass,
+        name: exoplanetData[planetClickedNumber].name,
+        period: exoplanetData[planetClickedNumber].period,
+        radius: exoplanetData[planetClickedNumber].radius,
+        semi_major_axis: exoplanetData[planetClickedNumber].semi_major_axis,
+        temperature: exoplanetData[planetClickedNumber].temperature,
+      };
+      favoritesList.push(favoritePlanet);
+      console.log('favorites list:', favoritesList);
     } else {
       planetClicked.classList.add('fa-regular');
       planetClicked.classList.remove('fa-solid');
     }
   }
+  // push to favorites array
 });
 // event listener to go back to recommendations
 const $recommendationsInfoPage = document.querySelector(
@@ -299,19 +312,4 @@ $recommendationsInfoPage?.addEventListener('click', () => {
   revealPage(9);
   scrollToRecommendations();
   setTimeout(() => hidePage(10), 750);
-});
-// event listener to favorite planet
-const $planetFavoritedHeart = document.querySelector('.planet-favorite');
-$planetFavoritedHeart?.addEventListener('click', (event) => {
-  const favoritedPlanet = event.target;
-  console.log('HEART CLICK');
-  favoritedPlanet.classList.remove('fa-regular');
-  favoritedPlanet.classList.add('fa-solid');
-  // if (favoritedPlanet.classList.contains('fa-regular')) {
-  //   favoritedPlanet.classList.remove('fa-regular');
-  //   favoritedPlanet.classList.add('fa-solid');
-  // } else {
-  //   favoritedPlanet.classList.remove('fa-solid');
-  //   favoritedPlanet.classList.add('fa-regular');
-  // }
 });
