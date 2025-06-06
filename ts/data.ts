@@ -298,6 +298,7 @@ interface Exoplanet {
   semi_major_axis: number;
   temperature: number;
   offset?: number;
+  planetClickedNumber?: number;
 }
 
 const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';

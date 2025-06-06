@@ -245,7 +245,6 @@ $suggestionsPreviousButton?.addEventListener('click', () => {
   $suggestionsLoading?.classList.remove('hidden');
   buildSuggestionsPage();
 });
-// adding suggestion to favorites
 // PLANET INFORMATION PAGE
 let favoritesList = [];
 // retake quiz button
@@ -263,7 +262,6 @@ const $planetRecommendations = document.querySelector(
 );
 $planetRecommendations?.addEventListener('click', (event) => {
   const planetClicked = event.target;
-  console.log(planetClicked);
   planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
   if (planetClicked.classList.contains('entry-click')) {
     // remove the previous page
@@ -271,12 +269,14 @@ $planetRecommendations?.addEventListener('click', (event) => {
       '#planet-information-page-holder',
     );
     $planetInformationPageHolder?.remove();
-    // build new page - UNCOMMENT
+    // build and show new information page
     buildInformationPage();
     revealPage(10);
-    scrollToInformation();
-    setTimeout(() => hidePage(9), 750);
-  } else if (planetClicked.classList.contains('icon-click')) {
+    // scrollToInformation();
+    // setTimeout(() => hidePage(9), 750);
+  }
+  // add planets to favorites
+  else if (planetClicked.classList.contains('icon-click')) {
     // change heart icon
     if (planetClicked.classList.contains('fa-regular')) {
       planetClicked.classList.remove('fa-regular');
@@ -293,23 +293,71 @@ $planetRecommendations?.addEventListener('click', (event) => {
         radius: exoplanetData[planetClickedNumber].radius,
         semi_major_axis: exoplanetData[planetClickedNumber].semi_major_axis,
         temperature: exoplanetData[planetClickedNumber].temperature,
+        planetClickedNumber,
       };
+      // push to favorites array
       favoritesList.push(favoritePlanet);
       console.log('favorites list:', favoritesList);
-    } else {
+    }
+    // remove from favorites list
+    else {
       planetClicked.classList.add('fa-regular');
       planetClicked.classList.remove('fa-solid');
+      for (let i = 0; i < favoritesList.length; i++) {
+        if (favoritesList[i].planetClickedNumber === planetClickedNumber) {
+          favoritesList.splice(i, 1);
+        }
+      }
+      favoritesList.splice(planetClickedNumber, 1);
+      console.log('favoritesList', favoritesList);
     }
   }
-  // push to favorites array
 });
 // event listener to go back to recommendations
 const $recommendationsInfoPage = document.querySelector(
   '#back-to-recommendations',
 );
+// scroll back to recommendations page
 $recommendationsInfoPage?.addEventListener('click', () => {
-  // scroll back to recommendations page
   revealPage(9);
   scrollToRecommendations();
   setTimeout(() => hidePage(10), 750);
+});
+// add planet to favorites from this page
+const $infoPageFavoriteButton = document.querySelector('#info-page-favorite');
+$infoPageFavoriteButton?.addEventListener('click', (event) => {
+  console.log(planetClickedNumber);
+  const favoriteClicked = event.target;
+  // change appearance of heart
+  if (favoriteClicked.classList.contains('fa-regular')) {
+    favoriteClicked.classList.remove('fa-regular');
+    favoriteClicked.classList.add('fa-solid');
+    // push to favorites array
+    const favoritePlanet = {
+      distance_light_year:
+        exoplanetData[planetClickedNumber].distance_light_year,
+      host_star_mass: exoplanetData[planetClickedNumber].host_star_mass,
+      host_star_temperature:
+        exoplanetData[planetClickedNumber].host_star_temperature,
+      mass: exoplanetData[planetClickedNumber].mass,
+      name: exoplanetData[planetClickedNumber].name,
+      period: exoplanetData[planetClickedNumber].period,
+      radius: exoplanetData[planetClickedNumber].radius,
+      semi_major_axis: exoplanetData[planetClickedNumber].semi_major_axis,
+      temperature: exoplanetData[planetClickedNumber].temperature,
+    };
+    favoritesList.push(favoritePlanet);
+    console.log('favorites list:', favoritesList);
+  }
+  // remove heart and remove from favorites array
+  else if (favoriteClicked.classList.contains('fa-solid')) {
+    favoriteClicked.classList.remove('fa-solid');
+    favoriteClicked.classList.add('fa-regular');
+    for (let i = 0; i < favoritesList.length; i++) {
+      if (favoritesList[i].planetClickedNumber === planetClickedNumber) {
+        favoritesList.splice(i, 1);
+      }
+    }
+    console.log('favorites list:', favoritesList);
+  }
 });
