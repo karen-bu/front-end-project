@@ -444,6 +444,7 @@ h4.dialog > i:hover {
   }
 }
 
+.favorites-entry,
 .planet-entry {
   width: 600px;
   height: 125px;
@@ -482,7 +483,7 @@ button:active,
   transition: 0.05s ease-in-out;
 }
 
-#planet-recommendations {
+.element-scroll {
   max-height: 55vh;
   overflow: scroll;
   border: 2px solid rgba(255, 255, 255, 0.25);

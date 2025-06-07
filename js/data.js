@@ -18,6 +18,14 @@ function scrollDown() {
   });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollUp() {
+  window.scrollBy({
+    top: -window.innerHeight,
+    left: 0,
+    behavior: 'smooth',
+  });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToInformation() {
   const $informationPage = document.querySelector("[data-view='10']");
   $informationPage?.scrollIntoView({ behavior: 'smooth' });
@@ -291,18 +299,9 @@ async function buildSuggestionsPage() {
   if (exoplanetData.length === 0) {
     const $h4NoPlanets1 = document.createElement('h4');
     $h4NoPlanets1.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets1.textContent = 'nothing matching your criteria was found :(';
-    const $h4NoPlanets2 = document.createElement('h4');
-    $h4NoPlanets2.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets2.textContent =
-      "don't worry, there is still a place in the universe meant for you!";
-    const $h4NoPlanets3 = document.createElement('h4');
-    $h4NoPlanets3.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets3.textContent =
-      'please retake the quiz to adjust your parameters and search again.';
+    $h4NoPlanets1.textContent =
+      "nothing matching your criteria was found :( don't worry, there is still a place in the universe meant for you! please retake the quiz to adjust your parameters and search again.";
     $planetEntryRow?.appendChild($h4NoPlanets1);
-    $planetEntryRow?.appendChild($h4NoPlanets2);
-    $planetEntryRow?.appendChild($h4NoPlanets3);
   } else {
     const $rowCenterEntry = document.createElement('div');
     $rowCenterEntry.setAttribute('class', 'row center');
@@ -605,3 +604,55 @@ function buildInformationPage() {
   revealText($planetInformationFooter);
 }
 // FAVORITES LIST
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function buildFavoritesPage() {
+  const $favoritesPageListDelete = document.querySelector(
+    '#favorites-list-holder',
+  );
+  $favoritesPageListDelete?.remove();
+  const $favoritesPageList = document.querySelector('#favorites-list');
+  if (favoritesList.length === 0) {
+    const $noFavoritesRow = document.createElement('div');
+    $noFavoritesRow.setAttribute('class', 'row center');
+    const $noFavoritesText = document.createElement('h4');
+    $noFavoritesText.textContent =
+      "no favorites yet! why don't you add a planet from your recommendations list?";
+    $favoritesPageList?.appendChild($noFavoritesRow);
+    $noFavoritesRow?.appendChild($noFavoritesText);
+  } else {
+    const $favoritesPageListHolder = document.createElement('div');
+    $favoritesPageListHolder.setAttribute('class', 'row');
+    $favoritesPageListHolder.setAttribute('id', 'favorites-list-holder');
+    $favoritesPageList?.appendChild($favoritesPageListHolder);
+    for (let i = 0; i < favoritesList.length; i++) {
+      const $column50CenterEntry = document.createElement('div');
+      $column50CenterEntry.setAttribute('class', 'column-50 center entry');
+      const $column50FavoritesEntry = document.createElement('div');
+      $column50FavoritesEntry.setAttribute(
+        'class',
+        'column-50 favorites-entry',
+      );
+      const $column50FavoritesText = document.createElement('div');
+      $column50FavoritesText.setAttribute('class', 'column-50 left');
+      const $h4FavoritesText = document.createElement('h4');
+      $h4FavoritesText.textContent = favoritesList[i].name;
+      const $column50FavoritesIcons = document.createElement('div');
+      $column50FavoritesIcons.setAttribute('class', 'column-50 right');
+      const $h4FavoritesCancelIcon = document.createElement('h4');
+      const $favoritesCancelIcon = document.createElement('i');
+      $favoritesCancelIcon.setAttribute('class', 'fa-regular fa-circle-xmark');
+      const $h4FavoritesHeartButton = document.createElement('h4');
+      const $favoritesHeartIcon = document.createElement('i');
+      $favoritesHeartIcon.setAttribute('class', 'fa-solid fa-heart');
+      $favoritesPageListHolder?.appendChild($column50CenterEntry);
+      $column50CenterEntry?.appendChild($column50FavoritesEntry);
+      $column50FavoritesEntry?.appendChild($column50FavoritesText);
+      $column50FavoritesText?.appendChild($h4FavoritesText);
+      $column50FavoritesEntry?.appendChild($column50FavoritesIcons);
+      $column50FavoritesIcons?.appendChild($h4FavoritesCancelIcon);
+      $h4FavoritesCancelIcon?.appendChild($favoritesCancelIcon);
+      $column50FavoritesIcons?.appendChild($h4FavoritesHeartButton);
+      $h4FavoritesHeartButton?.appendChild($favoritesHeartIcon);
+    }
+  }
+}

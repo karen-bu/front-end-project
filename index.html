@@ -364,7 +364,9 @@
           </p>
         </div>
       </div>
-      <div class="row center invisible" id="planet-recommendations"></div>
+      <div
+        class="row invisible element-scroll"
+        id="planet-recommendations"></div>
       <div class="row center header hidden" id="suggestions-loading">
         <div class="column-100">
           <img
@@ -431,7 +433,10 @@
             </div>
           </div>
           <div class="column-25 center">
-            <div class="icon-circle" title="favorites">
+            <div
+              class="icon-circle"
+              title="favorites"
+              id="information-favorites">
               <i class="fa-solid fa-heart"></i>
             </div>
           </div>
@@ -500,12 +505,18 @@
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <div class="icon-circle" title="retake quiz">
+            <div
+              class="icon-circle"
+              id="favorite-retake-quiz"
+              title="retake quiz">
               <i class="fa-solid fa-question"></i>
             </div>
           </div>
           <div class="column-25 center">
-            <div class="icon-circle" title="suggestions list">
+            <div
+              class="icon-circle"
+              id="favorite-recommendations-list"
+              title="suggestions list">
               <i class="fa-solid fa-list"></i>
             </div>
           </div>
@@ -525,41 +536,7 @@
       <div class="row center">
         <h2>here are your favorite planets!</h2>
       </div>
-      <div class="row">
-        <div class="column-50 center entry">
-          <div class="column-50 planet-entry" data-planet-favorite="1">
-            <div class="column-50 left">
-              <h4>16 Cygni Bb</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-favorite="2">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>2MASS J21402931 b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-favorite="3">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>23 Librae b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="row" id="favorites-list"></div>
 
       <dialog id="delete-favorite">
         <div class="row center">
@@ -599,8 +576,8 @@
     <!-- end favorites page -->
 
     <!-- start scripts -->
-    <script src="./js/data.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
     <!-- end scripts -->
   </body>
 </html>

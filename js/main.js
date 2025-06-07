@@ -213,7 +213,17 @@ $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   setTimeout(() => hideAll(), 750);
 });
 // SUGGESTIONS PAGE
-// building the suggestions page
+// favorites list button
+const $suggestionsPageFavoritesList = document.querySelector(
+  '#suggestions-favorites',
+);
+$suggestionsPageFavoritesList?.addEventListener('click', () => {
+  buildFavoritesPage();
+  revealPage(11);
+  scrollDown();
+  setTimeout(() => hidePage(9), 750);
+});
+// retake quiz button
 const $suggestionsPageRetakeQuizButton = document.querySelector(
   '#suggestions-retake-quiz',
 );
@@ -224,11 +234,11 @@ $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
   scrollToTop();
   setTimeout(() => hideAll(), 750);
 });
+// previous and next buttons on suggestion page
 const $suggestionsNextButton = document.querySelector('#suggestions-next-icon');
 const $suggestionsPreviousButton = document.querySelector(
   '#suggestions-previous-icon',
 );
-// previous and next buttons on suggestion page
 $suggestionsNextButton?.addEventListener('click', () => {
   pageChange();
   increaseAPIOffset();
@@ -255,6 +265,14 @@ $infoPageRetakeQuizButton?.addEventListener('click', () => {
   distanceInputRemoveErrors();
   scrollToTop();
   setTimeout(() => hideAll(), 750);
+});
+// favorites list button
+const $infoPageFavoritesList = document.querySelector('#information-favorites');
+$infoPageFavoritesList?.addEventListener('click', () => {
+  buildFavoritesPage();
+  revealPage(11);
+  scrollDown();
+  setTimeout(() => hidePage(10), 750);
 });
 // clicking on a planet
 const $planetRecommendations = document.querySelector(
@@ -298,6 +316,8 @@ $planetRecommendations?.addEventListener('click', (event) => {
       // push to favorites array
       favoritesList.push(favoritePlanet);
       console.log('favorites list:', favoritesList);
+      // build favorites page
+      buildFavoritesPage();
     }
     // remove from favorites list
     else {
@@ -311,6 +331,7 @@ $planetRecommendations?.addEventListener('click', (event) => {
       favoritesList.splice(planetClickedNumber, 1);
       console.log('favoritesList', favoritesList);
     }
+    // retain appearance of heart even if page is refreshed - TO WORK ON
   }
 });
 // event listener to go back to recommendations
@@ -348,6 +369,8 @@ $infoPageFavoriteButton?.addEventListener('click', (event) => {
     };
     favoritesList.push(favoritePlanet);
     console.log('favorites list:', favoritesList);
+    // build favorites page
+    buildFavoritesPage();
   }
   // remove heart and remove from favorites array
   else if (favoriteClicked.classList.contains('fa-solid')) {
@@ -360,4 +383,25 @@ $infoPageFavoriteButton?.addEventListener('click', (event) => {
     }
     console.log('favorites list:', favoritesList);
   }
+});
+// FAVORITES LIST
+// retake quiz button
+const $favoritesPageRetakeQuizButton = document.querySelector(
+  '#favorite-retake-quiz',
+);
+$favoritesPageRetakeQuizButton?.addEventListener('click', () => {
+  quizResponses = {};
+  $distanceForm.reset();
+  distanceInputRemoveErrors();
+  scrollToTop();
+  setTimeout(() => hideAll(), 750);
+});
+// recommendations list button
+const $favoritesPageRecommendationsList = document.querySelector(
+  '#favorite-recommendations-list',
+);
+$favoritesPageRecommendationsList?.addEventListener('click', () => {
+  revealPage(9);
+  scrollToRecommendations();
+  setTimeout(() => hidePage(11), 750);
 });
