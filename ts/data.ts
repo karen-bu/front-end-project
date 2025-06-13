@@ -8,6 +8,7 @@ function distanceInputRemoveErrors(): void {
 
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
+console.log(quizPages);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown(): void {
@@ -29,19 +30,19 @@ function scrollUp(): void {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToInformation(): void {
-  const $informationPage = document.querySelector("[data-view='10']");
+  const $informationPage = document.querySelector("[data-view='9']");
   $informationPage?.scrollIntoView({ behavior: 'smooth' });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToRecommendations(): void {
-  const $recommendationsPage = document.querySelector("[data-view='9']");
+  const $recommendationsPage = document.querySelector("[data-view='8']");
   $recommendationsPage?.scrollIntoView({ behavior: 'smooth' });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToFavorites(): void {
-  const $favoritesPage = document.querySelector("[data-view='11']");
+  const $favoritesPage = document.querySelector("[data-view='10']");
   $favoritesPage?.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -64,7 +65,7 @@ function hidePage(dataView: number): void {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hideQuiz(): void {
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i < 8; i++) {
     hidePage(i);
   }
 }
@@ -80,7 +81,7 @@ function hideAll(): void {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showLoad(): void {
   hideAll();
-  quizPages[8].classList.remove('hidden');
+  quizPages[7].classList.remove('hidden');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -446,6 +447,11 @@ async function buildSuggestionsPage(): Promise<void> {
       const $recommendationsHeartIcon = document.createElement('i');
       $recommendationsHeartIcon.setAttribute(
         'class',
+        'fa-solid fa-heart icon-click',
+      );
+
+      $recommendationsHeartIcon.setAttribute(
+        'class',
         'fa-regular fa-heart icon-click',
       );
       $recommendationsHeartIcon.setAttribute(
@@ -798,6 +804,7 @@ function buildFavoritesPage(): void {
     $noFavoritesRow.setAttribute('class', 'row center');
 
     const $noFavoritesText = document.createElement('h4');
+    $noFavoritesText.setAttribute('class', 'no-favorites');
     $noFavoritesText.textContent =
       "no favorites yet! why don't you add a planet from your recommendations list?";
 
@@ -877,10 +884,32 @@ function buildFavoritesPage(): void {
   }
 }
 
-// writing to local storage
+// LOCAL STORAGE FUNCTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function writeFavoritesList(): void {
   const favoritesListJSON = JSON.stringify(favoritesList);
   localStorage.setItem('favoritesList-storage', favoritesListJSON);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function readFavoritesList(): void {
+  const favoritesListStorage = localStorage.getItem('favoritesList-storage');
+  if (favoritesListStorage !== null) {
+    favoritesList = JSON.parse(favoritesListStorage);
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function writeQuizResponses(): void {
+  const quizResponsesJSON = JSON.stringify(quizResponses);
+  localStorage.setItem('quizResponses-storage', quizResponsesJSON);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function readQuizResponses(): void {
+  const quizResponsesStorage = localStorage.getItem('quizResponses-storage');
+  if (quizResponsesStorage !== null) {
+    quizResponses = JSON.parse(quizResponsesStorage);
+  }
 }

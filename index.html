@@ -57,43 +57,20 @@
         <div class="column-75">
           <button id="get-started">GET STARTED</button>
         </div>
-        <button id="dev-lazy">DEV IS LAZY</button>
+        <div class="column-75">
+          <button class="saved-favorites hidden" id="saved-favorites">
+            SAVED FAVORITES
+          </button>
+        </div>
+        <div class="column-75">
+          <button id="dev-lazy">DEV IS LAZY</button>
+        </div>
       </div>
     </div>
     <!-- end page intro -->
 
     <!-- start quiz 1 -->
-    <div class="page quiz bg1 hidden" data-view="1">
-      <div class="row left">
-        <div class="column-50 left">
-          <img
-            src="images/logo/exodus-logo-white.svg"
-            alt="exod.us logo"
-            class="logo" />
-          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
-        </div>
-      </div>
-      <div class="row center">
-        <div class="column-75 header">
-          <h1>do you already have a planet in mind?</h1>
-        </div>
-        <div class="column-75">
-          <form id="planet-search">
-            <input
-              type="text"
-              placeholder="search by name + press enter"
-              id="planet-search-input" />
-          </form>
-        </div>
-        <div class="column-75">
-          <button id="no-planet-search">NO - HELP ME FIND ONE!</button>
-        </div>
-      </div>
-    </div>
-    <!-- end quiz 1 -->
-
-    <!-- start quiz 2 -->
-    <div class="page quiz bg2 hidden" data-view="2">
+    <div class="page quiz bg2 hidden" data-view="1">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -118,10 +95,10 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 2 -->
+    <!-- end quiz 1 -->
 
-    <!-- start quiz 3 -->
-    <div class="page quiz bg3 hidden" data-view="3">
+    <!-- start quiz 2 -->
+    <div class="page quiz bg3 hidden" data-view="2">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -146,10 +123,10 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 3 -->
+    <!-- end quiz 2 -->
 
-    <!-- start quiz 4 -->
-    <div class="page quiz bg4 hidden" data-view="4">
+    <!-- start quiz 3 -->
+    <div class="page quiz bg4 hidden" data-view="3">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -178,10 +155,10 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 4 -->
+    <!-- end quiz 3 -->
 
-    <!-- start quiz 5 -->
-    <div class="page quiz bg3 hidden" data-view="5">
+    <!-- start quiz 4 -->
+    <div class="page quiz bg3 hidden" data-view="4">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -206,10 +183,10 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 5 -->
+    <!-- end quiz 4 -->
 
-    <!-- start quiz 6 -->
-    <div class="page quiz bg2 hidden" data-view="6">
+    <!-- start quiz 5 -->
+    <div class="page quiz bg2 hidden" data-view="5">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -245,10 +222,10 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 6 -->
+    <!-- end quiz 5 -->
 
     <!-- start quiz results -->
-    <div class="page quiz bg1 hidden" data-view="7">
+    <div class="page quiz bg1 hidden" data-view="6">
       <div class="row left">
         <div class="column-50 left">
           <img
@@ -294,7 +271,7 @@
     <!-- end quiz results -->
 
     <!-- start loading page -->
-    <div class="page loading bg0 hidden" data-view="8">
+    <div class="page loading bg0 hidden" data-view="7">
       <div class="row center">
         <img
           src="images/assets/exodus-logo-white-animation.gif"
@@ -308,7 +285,7 @@
     <!-- end loading page -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations bg1 hidden" data-view="9">
+    <div class="page recommendations bg1 hidden" data-view="8">
       <div class="row" id="suggestions-header">
         <div class="column-50 left">
           <img
@@ -417,7 +394,7 @@
     <!-- end recommendations page -->
 
     <!-- start information page -->
-    <div class="page recommendations bg2 hidden" data-view="10">
+    <div class="page recommendations bg2 hidden" data-view="9">
       <div class="row">
         <div class="column-50 left">
           <img
@@ -510,7 +487,7 @@
     <!-- end information page -->
 
     <!-- start favorites page -->
-    <div class="page recommendations bg3 hidden" data-view="11">
+    <div class="page recommendations bg3 hidden" data-view="10">
       <div class="row">
         <div class="column-50 left">
           <img
@@ -595,6 +572,7 @@
     <!-- start scripts -->
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/dev-button.js"></script>
     <!-- end scripts -->
   </body>
 </html>
