@@ -458,24 +458,40 @@
 
       <div class="row header invisible" id="information-footer">
         <div class="column-50 center">
-          <div class="icon-circle" id="back-to-recommendations">
+          <div
+            class="icon-circle back-to-recommendations hidden"
+            id="back-to-recommendations-icon">
             <i class="fa-solid fa-arrow-up" title="back to recommendations"></i>
+          </div>
+          <div
+            class="icon-circle back-to-favorites hidden"
+            id="back-to-favorites-icon">
+            <i class="fa-solid fa-arrow-down" title="back to favorites"></i>
           </div>
         </div>
         <div class="column-50 center">
-          <div class="icon-circle">
-            <i
-              class="fa-regular fa-heart"
-              id="info-page-favorite"
-              title="favorite"></i>
+          <div class="icon-circle" id="info-page-favorite-icon">
+            <i class="fa-regular fa-heart" title="favorite"></i>
           </div>
         </div>
         <div class="row">
           <div class="column-50 center">
-            <p class="label-text">back to recommendations</p>
+            <p
+              class="label-text back-to-recommendations hidden"
+              id="back-to-recommendations-text">
+              back to recommendations
+            </p>
+            <p
+              class="label-text back-to-favorites hidden"
+              id="back-to-favorites-text">
+              back to favorites
+            </p>
           </div>
+
           <div class="column-50 center">
-            <p class="label-text">favorite this planet</p>
+            <p class="label-text" id="info-page-favorite-text">
+              favorite this planet
+            </p>
           </div>
         </div>
         <div class="row center">
@@ -543,19 +559,20 @@
           <h3 class="dialog">warning!</h3>
         </div>
         <div class="row center">
-          <p class="dialog">
-            are you sure you want to delete 16 Cygni Bb from your favorites? you
-            cannot undo this action.
-          </p>
+          <p class="dialog" id="delete-text"></p>
         </div>
         <div class="row center">
-          <div class="column-50">
+          <div class="column-50 center">
             <h4 class="dialog">
-              <i class="fa-regular fa-circle-check"></i>
+              <i
+                class="fa-regular fa-circle-check delete-confirm"
+                id="delete-confirm"></i>
             </h4>
           </div>
-          <div class="column-50">
-            <h4 class="dialog"><i class="fa-regular fa-circle-xmark"></i></h4>
+          <div class="column-50 center">
+            <h4 class="dialog">
+              <i class="fa-regular fa-circle-xmark" id="delete-cancel"></i>
+            </h4>
           </div>
         </div>
       </dialog>

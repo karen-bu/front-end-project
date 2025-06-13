@@ -466,6 +466,7 @@ h4.dialog > i:hover {
 
 button:hover,
 .icon-circle:hover,
+.favorites-entry:hover,
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
@@ -477,6 +478,7 @@ button:hover,
 
 button:active,
 .icon-circle:active,
+.favorites-entry:active,
 .planet-entry:active {
   border-color: #fff;
   box-shadow: 0 0 30px #fff inset;

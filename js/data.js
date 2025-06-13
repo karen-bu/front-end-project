@@ -8,7 +8,6 @@ function distanceInputRemoveErrors() {
 }
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
-console.log(quizPages);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown() {
   window.scrollBy({
@@ -34,6 +33,11 @@ function scrollToInformation() {
 function scrollToRecommendations() {
   const $recommendationsPage = document.querySelector("[data-view='9']");
   $recommendationsPage?.scrollIntoView({ behavior: 'smooth' });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollToFavorites() {
+  const $favoritesPage = document.querySelector("[data-view='11']");
+  $favoritesPage?.scrollIntoView({ behavior: 'smooth' });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function revealPage(dataView) {
@@ -422,7 +426,7 @@ function buildInformationPage() {
   );
   // name of planet
   const $columnPlanetInfoName = document.createElement('div');
-  $columnPlanetInfoName.setAttribute('class', 'column--75 center header');
+  $columnPlanetInfoName.setAttribute('class', 'column-75 center header');
   const $h1PlanetInfoName = document.createElement('h1');
   $h1PlanetInfoName.textContent = exoplanetData[planetClickedNumber].name;
   // temperature
@@ -626,24 +630,50 @@ function buildFavoritesPage() {
     $favoritesPageList?.appendChild($favoritesPageListHolder);
     for (let i = 0; i < favoritesList.length; i++) {
       const $column50CenterEntry = document.createElement('div');
-      $column50CenterEntry.setAttribute('class', 'column-50 center entry');
+      $column50CenterEntry.setAttribute(
+        'class',
+        'column-50 center entry favorites-entry-holder',
+      );
+      $column50CenterEntry.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
       const $column50FavoritesEntry = document.createElement('div');
       $column50FavoritesEntry.setAttribute(
         'class',
-        'column-50 favorites-entry',
+        'column-50 favorites-entry entry-click',
+      );
+      $column50FavoritesEntry.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
       );
       const $column50FavoritesText = document.createElement('div');
-      $column50FavoritesText.setAttribute('class', 'column-50 left');
+      $column50FavoritesText.setAttribute(
+        'class',
+        'column-50 left entry-click',
+      );
+      $column50FavoritesText.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
       const $h4FavoritesText = document.createElement('h4');
       $h4FavoritesText.textContent = favoritesList[i].name;
+      $h4FavoritesText.setAttribute('class', 'entry-click');
       const $column50FavoritesIcons = document.createElement('div');
-      $column50FavoritesIcons.setAttribute('class', 'column-50 right');
+      $column50FavoritesIcons.setAttribute(
+        'class',
+        'column-50 right entry-click',
+      );
+      $column50FavoritesIcons.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
       const $h4FavoritesCancelIcon = document.createElement('h4');
       const $favoritesCancelIcon = document.createElement('i');
-      $favoritesCancelIcon.setAttribute('class', 'fa-regular fa-circle-xmark');
-      const $h4FavoritesHeartButton = document.createElement('h4');
-      const $favoritesHeartIcon = document.createElement('i');
-      $favoritesHeartIcon.setAttribute('class', 'fa-solid fa-heart');
+      $favoritesCancelIcon.setAttribute(
+        'class',
+        'fa-regular fa-circle-xmark icon-click',
+      );
       $favoritesPageListHolder?.appendChild($column50CenterEntry);
       $column50CenterEntry?.appendChild($column50FavoritesEntry);
       $column50FavoritesEntry?.appendChild($column50FavoritesText);
@@ -651,8 +681,6 @@ function buildFavoritesPage() {
       $column50FavoritesEntry?.appendChild($column50FavoritesIcons);
       $column50FavoritesIcons?.appendChild($h4FavoritesCancelIcon);
       $h4FavoritesCancelIcon?.appendChild($favoritesCancelIcon);
-      $column50FavoritesIcons?.appendChild($h4FavoritesHeartButton);
-      $h4FavoritesHeartButton?.appendChild($favoritesHeartIcon);
     }
   }
 }

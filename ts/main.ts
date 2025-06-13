@@ -342,6 +342,14 @@ $suggestionsPreviousButton?.addEventListener('click', () => {
 
 let favoritesList: Exoplanet[] = [];
 
+const $infoPageFavoriteText = document.querySelector(
+  '#info-page-favorite-text',
+);
+
+const $infoPageFavoriteButton = document.querySelector(
+  '#info-page-favorite-icon',
+);
+
 // retake quiz button
 const $infoPageRetakeQuizButton = document.querySelector('#info-retake-quiz');
 
@@ -365,6 +373,9 @@ $infoPageFavoritesList?.addEventListener('click', () => {
 
 // clicking on a planet
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let redirectFrom: string = '';
+
 const $planetRecommendations = document.querySelector(
   '#planet-recommendations',
 ) as HTMLElement;
@@ -375,6 +386,8 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
   planetClickedNumber = Number(planetClicked?.dataset.planetRecommendation);
 
   if (planetClicked.classList.contains('entry-click')) {
+    redirectFrom = 'recommendations';
+
     // remove the previous page
     const $planetInformationPageHolder = document.querySelector(
       '#planet-information-page-holder',
@@ -382,11 +395,34 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
 
     $planetInformationPageHolder?.remove();
 
-    // build and show new information page
+    // build and show new information page - UNCOMMENT
     buildInformationPage();
     revealPage(10);
     // scrollToInformation();
     // setTimeout(() => hidePage(9), 750);
+
+    // show right 'back to' page
+    const backToFavoritesIcon = document.querySelector(
+      '#back-to-favorites-icon',
+    );
+    const backToFavoritesText = document.querySelector(
+      '#back-to-favorites-text',
+    );
+    const backToRecommendationsIcon = document.querySelector(
+      '#back-to-recommendations-icon',
+    );
+    const backToRecommendationsText = document.querySelector(
+      '#back-to-recommendations-text',
+    );
+
+    backToFavoritesIcon?.classList.add('hidden');
+    backToFavoritesText?.classList.add('hidden');
+    backToRecommendationsIcon?.classList.remove('hidden');
+    backToRecommendationsText?.classList.remove('hidden');
+
+    // show favorite button and text
+    $infoPageFavoriteButton?.classList.remove('hidden');
+    $infoPageFavoriteText?.classList.remove('hidden');
   }
 
   // add planets to favorites
@@ -429,10 +465,6 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
           favoritesList.splice(i, 1);
         }
       }
-
-      favoritesList.splice(planetClickedNumber, 1);
-
-      console.log('favoritesList', favoritesList);
     }
 
     // retain appearance of heart even if page is refreshed - TO WORK ON
@@ -441,7 +473,7 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
 
 // event listener to go back to recommendations
 const $recommendationsInfoPage = document.querySelector(
-  '#back-to-recommendations',
+  '.back-to-recommendations',
 ) as HTMLElement;
 
 // scroll back to recommendations page
@@ -452,11 +484,8 @@ $recommendationsInfoPage?.addEventListener('click', () => {
 });
 
 // add planet to favorites from this page
-const $infoPageFavoriteButton = document.querySelector('#info-page-favorite');
 
 $infoPageFavoriteButton?.addEventListener('click', (event: Event) => {
-  console.log(planetClickedNumber);
-
   const favoriteClicked = event.target as HTMLElement;
 
   // change appearance of heart
@@ -523,4 +552,98 @@ $favoritesPageRecommendationsList?.addEventListener('click', () => {
   revealPage(9);
   scrollToRecommendations();
   setTimeout(() => hidePage(11), 750);
+});
+
+// clicking on a planet
+
+const $favoritesList = document.querySelector('#favorites-list');
+const $deleteModal = document.querySelector('dialog');
+const $deleteModalText = document.querySelector('#delete-text') as HTMLElement;
+
+$favoritesList?.addEventListener('click', (event: Event) => {
+  const favoritesEntry = event.target as HTMLElement;
+
+  if (favoritesEntry.classList.contains('entry-click')) {
+    planetClickedNumber = Number(favoritesEntry?.dataset.planetClickedNumber);
+    // remove previous content in information page
+    const $planetInformationPageHolder = document.querySelector(
+      '#planet-information-page-holder',
+    );
+
+    $planetInformationPageHolder?.remove();
+
+    // build information page and scroll
+    buildInformationPage();
+    revealPage(10);
+    scrollToInformation();
+    setTimeout(() => hidePage(9), 750);
+
+    // show right 'back to' page
+    const backToFavoritesIcon = document.querySelector(
+      '#back-to-favorites-icon',
+    );
+    const backToFavoritesText = document.querySelector(
+      '#back-to-favorites-text',
+    );
+    const backToRecommendationsIcon = document.querySelector(
+      '#back-to-recommendations-icon',
+    );
+    const backToRecommendationsText = document.querySelector(
+      '#back-to-recommendations-text',
+    );
+
+    backToFavoritesIcon?.classList.remove('hidden');
+    backToFavoritesText?.classList.remove('hidden');
+    backToRecommendationsIcon?.classList.add('hidden');
+    backToRecommendationsText?.classList.add('hidden');
+
+    // hide 'favorite this planet'
+    $infoPageFavoriteButton?.classList.add('hidden');
+    $infoPageFavoriteText?.classList.add('hidden');
+  } else if (favoritesEntry.classList.contains('icon-click')) {
+    const planetToDelete = exoplanetData[planetClickedNumber].name;
+
+    // show modal
+    $deleteModalText.textContent = `are you sure you want to delete ${planetToDelete}? this action cannot be undone.`;
+    $deleteModal?.showModal();
+
+    // confirm delete
+    const $confirmDeleteButton = document.querySelector('#delete-confirm');
+    $confirmDeleteButton?.addEventListener('click', () => {
+      const favoritesEntryHolder = favoritesEntry?.closest(
+        '.favorites-entry-holder',
+      ) as HTMLElement;
+
+      planetClickedNumber = Number(
+        favoritesEntryHolder.dataset.planetClickedNumber,
+      );
+
+      for (let i = 0; i < favoritesList.length; i++) {
+        if (favoritesList[i].planetClickedNumber === planetClickedNumber) {
+          favoritesList.splice(i, 1);
+        }
+      }
+
+      favoritesEntryHolder?.remove();
+      $deleteModal?.close();
+    });
+
+    // cancel delete
+    const $cancelDeleteButton = document.querySelector('#delete-cancel');
+    $cancelDeleteButton?.addEventListener('click', () => {
+      $deleteModal?.close();
+    });
+  }
+});
+
+// event listener to go back to favorites
+const $favoritesPage = document.querySelector(
+  '#back-to-favorites-icon',
+) as HTMLElement;
+
+// scroll back to recommendations page
+$favoritesPage?.addEventListener('click', () => {
+  revealPage(11);
+  scrollToFavorites();
+  setTimeout(() => hidePage(10), 750);
 });
