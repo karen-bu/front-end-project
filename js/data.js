@@ -684,3 +684,9 @@ function buildFavoritesPage() {
     }
   }
 }
+// writing to local storage
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function writeFavoritesList() {
+  const favoritesListJSON = JSON.stringify(favoritesList);
+  localStorage.setItem('favoritesList-storage', favoritesListJSON);
+}

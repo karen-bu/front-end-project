@@ -344,7 +344,8 @@ $planetRecommendations?.addEventListener('click', (event) => {
       };
       // push to favorites array
       favoritesList.push(favoritePlanet);
-      console.log('favorites list:', favoritesList);
+      // write to local storage
+      writeFavoritesList();
       // build favorites page
       buildFavoritesPage();
     }
@@ -487,6 +488,7 @@ $favoritesList?.addEventListener('click', (event) => {
           favoritesList.splice(i, 1);
         }
       }
+      writeFavoritesList();
       favoritesEntryHolder?.remove();
       $deleteModal?.close();
     });
