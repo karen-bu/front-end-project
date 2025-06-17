@@ -502,7 +502,7 @@ $favoritesList?.addEventListener('click', (event) => {
 const $favoritesPage = document.querySelector('#back-to-favorites-icon');
 // scroll back to recommendations page
 $favoritesPage?.addEventListener('click', () => {
-  revealPage(8);
+  revealPage(10);
   scrollToFavorites();
-  setTimeout(() => hidePage(10), 750);
+  setTimeout(() => hidePage(9), 750);
 });

@@ -8,6 +8,7 @@ function distanceInputRemoveErrors() {
 }
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
+console.log(quizPages);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown() {
   window.scrollBy({
@@ -296,6 +297,7 @@ let exoplanetData = [];
 async function buildSuggestionsPage() {
   exoplanetData = await fetchExoplanetData(apiURL);
   if (!exoplanetData) throw new Error('exoplanetData does not exist!');
+  console.log(exoplanetData);
   const $planetEntryRow = document.querySelector('#planet-recommendations');
   if (exoplanetData.length === 0) {
     const $h4NoPlanets1 = document.createElement('h4');
