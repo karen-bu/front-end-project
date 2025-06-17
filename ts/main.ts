@@ -646,7 +646,7 @@ const $favoritesPage = document.querySelector(
 
 // scroll back to recommendations page
 $favoritesPage?.addEventListener('click', () => {
-  revealPage(8);
+  revealPage(10);
   scrollToFavorites();
-  setTimeout(() => hidePage(10), 750);
+  setTimeout(() => hidePage(9), 750);
 });
