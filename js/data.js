@@ -207,8 +207,8 @@ function generateApiCall() {
     .concat(apiRadius)
     .concat(apiDistance)
     .concat(apiOffset);
-  console.log(quizResponses);
-  console.log(apiURL);
+  // console.log(quizResponses);
+  // console.log(apiURL);
 }
 // GENERATING NEXT PAGE OF API URL
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -223,7 +223,6 @@ function increaseAPIOffset() {
     .concat(apiRadius)
     .concat(apiDistance)
     .concat(apiOffset);
-  console.log(apiURL);
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function decreaseAPIOffset() {
@@ -238,7 +237,6 @@ function decreaseAPIOffset() {
       .concat(apiRadius)
       .concat(apiDistance)
       .concat(apiOffset);
-    console.log(apiURL);
   } else
     apiURL = apiURL = api1
       .concat(apiTemp)
@@ -351,11 +349,7 @@ async function buildSuggestionsPage() {
       const $recommendationsHeartIcon = document.createElement('i');
       $recommendationsHeartIcon.setAttribute(
         'class',
-        'fa-solid fa-heart icon-click',
-      );
-      $recommendationsHeartIcon.setAttribute(
-        'class',
-        'fa-regular fa-heart icon-click',
+        'fa-regular fa-heart recommended-favorite icon-click',
       );
       $recommendationsHeartIcon.setAttribute(
         'data-planet-recommendation',

@@ -24,10 +24,14 @@ $getStartedButton?.addEventListener('click', () => {
 
 // going to saved favorites using data from local storage
 const $savedFavorites = document.querySelector('.saved-favorites');
+const $clearFavorites = document.querySelector('.clear-favorites');
+
 if (localStorage.getItem('favoritesList-storage') === null) {
   $savedFavorites?.classList.add('hidden');
+  $clearFavorites?.classList.add('hidden');
 } else {
   $savedFavorites?.classList.remove('hidden');
+  $clearFavorites?.classList.remove('hidden');
 }
 
 $savedFavorites?.addEventListener('click', () => {
@@ -42,6 +46,10 @@ $savedFavorites?.addEventListener('click', () => {
   revealPage(10);
   scrollToFavorites();
   setTimeout(() => hidePage(0), 750);
+});
+
+$clearFavorites?.addEventListener('click', () => {
+  localStorage.clear();
 });
 
 // quiz 1 - planet temperature (data-view="1")
@@ -286,23 +294,50 @@ const $suggestionsNextButton = document.querySelector('#suggestions-next-icon');
 const $suggestionsPreviousButton = document.querySelector(
   '#suggestions-previous-icon',
 );
-
-$suggestionsNextButton?.addEventListener('click', () => {
+$suggestionsNextButton?.addEventListener('click', async () => {
   pageChange();
   increaseAPIOffset();
-  console.log(apiURL);
-  fetchExoplanetData(apiURL);
+  await fetchExoplanetData(apiURL);
   $suggestionsLoading?.classList.remove('hidden');
-  buildSuggestionsPage();
+  await buildSuggestionsPage();
+
+  const $heartIcons = document.querySelectorAll('.recommended-favorite');
+
+  // map array of planet names
+  const favoritePlanetNames = favoritesList.map(
+    (favoritePlanet) => favoritePlanet.name,
+  );
+
+  for (let i = 0; i < exoplanetData.length; i++) {
+    if (favoritePlanetNames.includes(exoplanetData[i].name)) {
+      console.log('found ya!');
+      $heartIcons[i].classList.remove('fa-regular');
+      $heartIcons[i].classList.add('fa-solid');
+    }
+  }
 });
 
-$suggestionsPreviousButton?.addEventListener('click', () => {
+$suggestionsPreviousButton?.addEventListener('click', async () => {
   pageChange();
   decreaseAPIOffset();
-  console.log(apiURL);
-  fetchExoplanetData(apiURL);
+  await fetchExoplanetData(apiURL);
   $suggestionsLoading?.classList.remove('hidden');
-  buildSuggestionsPage();
+  await buildSuggestionsPage();
+
+  const $heartIcons = document.querySelectorAll('.recommended-favorite');
+
+  // map array of planet names
+  const favoritePlanetNames = favoritesList.map(
+    (favoritePlanet) => favoritePlanet.name,
+  );
+
+  for (let i = 0; i < exoplanetData.length; i++) {
+    if (favoritePlanetNames.includes(exoplanetData[i].name)) {
+      console.log('found ya!');
+      $heartIcons[i].classList.remove('fa-regular');
+      $heartIcons[i].classList.add('fa-solid');
+    }
+  }
 });
 
 // PLANET INFORMATION PAGE (data-view="9")
@@ -364,6 +399,7 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
 
     // build and show new information page
     buildInformationPage();
+
     revealPage(9);
     scrollToInformation();
     setTimeout(() => hidePage(10), 750);
@@ -478,7 +514,6 @@ $infoPageFavoriteButton?.addEventListener('click', (event: Event) => {
     };
 
     favoritesList.push(favoritePlanet);
-    console.log('favorites list:', favoritesList);
 
     // build favorites page
     buildFavoritesPage();
@@ -493,7 +528,6 @@ $infoPageFavoriteButton?.addEventListener('click', (event: Event) => {
         favoritesList.splice(i, 1);
       }
     }
-    console.log('favorites list:', favoritesList);
   }
 });
 

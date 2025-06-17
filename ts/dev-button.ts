@@ -25,11 +25,11 @@ $devLazy?.addEventListener('click', () => {
   quizResponses.planetDistance = '0';
   generateSummary();
   generateApiCall();
-  console.log(apiURL);
+  // console.log(apiURL);
   fetchExoplanetData(apiURL);
   buildSuggestionsPage();
   setTimeout(() => revealText($suggestionsHeader), 250);
   setTimeout(() => revealText($suggestionsSubheader), 750);
   setTimeout(() => revealText($planetRecommendations), 1500);
-  console.log('quizResponses:', quizResponses);
+  // console.log('quizResponses:', quizResponses);
 });
