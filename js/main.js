@@ -233,7 +233,6 @@ $suggestionsNextButton?.addEventListener('click', async () => {
   );
   for (let i = 0; i < exoplanetData.length; i++) {
     if (favoritePlanetNames.includes(exoplanetData[i].name)) {
-      console.log('found ya!');
       $heartIcons[i].classList.remove('fa-regular');
       $heartIcons[i].classList.add('fa-solid');
     }
@@ -252,7 +251,6 @@ $suggestionsPreviousButton?.addEventListener('click', async () => {
   );
   for (let i = 0; i < exoplanetData.length; i++) {
     if (favoritePlanetNames.includes(exoplanetData[i].name)) {
-      console.log('found ya!');
       $heartIcons[i].classList.remove('fa-regular');
       $heartIcons[i].classList.add('fa-solid');
     }
