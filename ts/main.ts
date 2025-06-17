@@ -40,6 +40,7 @@ $savedFavorites?.addEventListener('click', () => {
   fetchExoplanetData(apiURL);
   readFavoritesList();
   buildSuggestionsPage();
+
   generateSuggestionsPage();
   buildFavoritesPage();
 
@@ -50,6 +51,7 @@ $savedFavorites?.addEventListener('click', () => {
 
 $clearFavorites?.addEventListener('click', () => {
   localStorage.clear();
+  location.reload();
 });
 
 // quiz 1 - planet temperature (data-view="1")
@@ -550,6 +552,20 @@ const $favoritesPageRecommendationsList = document.querySelector(
 );
 
 $favoritesPageRecommendationsList?.addEventListener('click', () => {
+  const $heartIcons = document.querySelectorAll('.recommended-favorite');
+
+  // favorite icon persistence of planet names
+  const favoritePlanetNames = favoritesList.map(
+    (favoritePlanet) => favoritePlanet.name,
+  );
+
+  for (let i = 0; i < exoplanetData.length; i++) {
+    if (favoritePlanetNames.includes(exoplanetData[i].name)) {
+      $heartIcons[i].classList.remove('fa-regular');
+      $heartIcons[i].classList.add('fa-solid');
+    }
+  }
+
   revealPage(8);
   scrollToRecommendations();
   setTimeout(() => hidePage(10), 750);
