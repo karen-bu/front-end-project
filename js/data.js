@@ -8,7 +8,6 @@ function distanceInputRemoveErrors() {
 }
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
-console.log(quizPages);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown() {
   window.scrollBy({
@@ -18,14 +17,27 @@ function scrollDown() {
   });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollUp() {
+  window.scrollBy({
+    top: -window.innerHeight,
+    left: 0,
+    behavior: 'smooth',
+  });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToInformation() {
-  const $informationPage = document.querySelector("[data-view='10']");
+  const $informationPage = document.querySelector("[data-view='9']");
   $informationPage?.scrollIntoView({ behavior: 'smooth' });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToRecommendations() {
-  const $recommendationsPage = document.querySelector("[data-view='9']");
+  const $recommendationsPage = document.querySelector("[data-view='8']");
   $recommendationsPage?.scrollIntoView({ behavior: 'smooth' });
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function scrollToFavorites() {
+  const $favoritesPage = document.querySelector("[data-view='10']");
+  $favoritesPage?.scrollIntoView({ behavior: 'smooth' });
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function revealPage(dataView) {
@@ -43,7 +55,7 @@ function hidePage(dataView) {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hideQuiz() {
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i < 8; i++) {
     hidePage(i);
   }
 }
@@ -57,7 +69,7 @@ function hideAll() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showLoad() {
   hideAll();
-  quizPages[8].classList.remove('hidden');
+  quizPages[7].classList.remove('hidden');
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollToTop() {
@@ -194,8 +206,8 @@ function generateApiCall() {
     .concat(apiRadius)
     .concat(apiDistance)
     .concat(apiOffset);
-  console.log(quizResponses);
-  console.log(apiURL);
+  // console.log(quizResponses);
+  // console.log(apiURL);
 }
 // GENERATING NEXT PAGE OF API URL
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -210,7 +222,6 @@ function increaseAPIOffset() {
     .concat(apiRadius)
     .concat(apiDistance)
     .concat(apiOffset);
-  console.log(apiURL);
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function decreaseAPIOffset() {
@@ -225,7 +236,6 @@ function decreaseAPIOffset() {
       .concat(apiRadius)
       .concat(apiDistance)
       .concat(apiOffset);
-    console.log(apiURL);
   } else
     apiURL = apiURL = api1
       .concat(apiTemp)
@@ -286,23 +296,13 @@ let exoplanetData = [];
 async function buildSuggestionsPage() {
   exoplanetData = await fetchExoplanetData(apiURL);
   if (!exoplanetData) throw new Error('exoplanetData does not exist!');
-  console.log(exoplanetData);
   const $planetEntryRow = document.querySelector('#planet-recommendations');
   if (exoplanetData.length === 0) {
     const $h4NoPlanets1 = document.createElement('h4');
     $h4NoPlanets1.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets1.textContent = 'nothing matching your criteria was found :(';
-    const $h4NoPlanets2 = document.createElement('h4');
-    $h4NoPlanets2.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets2.textContent =
-      "don't worry, there is still a place in the universe meant for you!";
-    const $h4NoPlanets3 = document.createElement('h4');
-    $h4NoPlanets3.setAttribute('class', 'no-planets-text');
-    $h4NoPlanets3.textContent =
-      'please retake the quiz to adjust your parameters and search again.';
+    $h4NoPlanets1.textContent =
+      "nothing matching your criteria was found :( don't worry, there is still a place in the universe meant for you! please retake the quiz to adjust your parameters and search again.";
     $planetEntryRow?.appendChild($h4NoPlanets1);
-    $planetEntryRow?.appendChild($h4NoPlanets2);
-    $planetEntryRow?.appendChild($h4NoPlanets3);
   } else {
     const $rowCenterEntry = document.createElement('div');
     $rowCenterEntry.setAttribute('class', 'row center');
@@ -317,26 +317,42 @@ async function buildSuggestionsPage() {
         String(exoplanetData.indexOf(exoplanetData[i])),
       );
       const $column50DivName = document.createElement('div');
-      $column50DivName.setAttribute('class', 'column-50 left');
+      $column50DivName.setAttribute('class', 'column-50 left entry-click');
       $column50DivName.setAttribute(
         'data-planet-recommendation',
         String(exoplanetData.indexOf(exoplanetData[i])),
       );
       const $h4PlanetEntry = document.createElement('h4');
+      $h4PlanetEntry.setAttribute('class', 'entry-click');
       $h4PlanetEntry.setAttribute(
         'data-planet-recommendation',
         String(exoplanetData.indexOf(exoplanetData[i])),
       );
       $h4PlanetEntry.textContent = exoplanetData[i].name;
       const $column50DivIcons = document.createElement('div');
-      $column50DivIcons.setAttribute('class', 'column-50 right');
+      $column50DivIcons.setAttribute('class', 'column-50 right entry-click');
       $column50DivIcons.setAttribute(
         'data-planet-recommendation',
         String(exoplanetData.indexOf(exoplanetData[i])),
       );
       const $h4RecommendationsHeartIcon = document.createElement('h4');
+      $h4RecommendationsHeartIcon.setAttribute(
+        'class',
+        'heart-icon entry-click',
+      );
+      $h4RecommendationsHeartIcon.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
       const $recommendationsHeartIcon = document.createElement('i');
-      $recommendationsHeartIcon.setAttribute('class', 'fa-regular fa-heart');
+      $recommendationsHeartIcon.setAttribute(
+        'class',
+        'fa-regular fa-heart recommended-favorite icon-click',
+      );
+      $recommendationsHeartIcon.setAttribute(
+        'data-planet-recommendation',
+        String(exoplanetData.indexOf(exoplanetData[i])),
+      );
       // appending entry to DOM
       $planetEntryRow?.appendChild($rowCenterEntry);
       $rowCenterEntry?.appendChild($column50CenterEntry);
@@ -407,7 +423,7 @@ function buildInformationPage() {
   );
   // name of planet
   const $columnPlanetInfoName = document.createElement('div');
-  $columnPlanetInfoName.setAttribute('class', 'column--75 center header');
+  $columnPlanetInfoName.setAttribute('class', 'column-75 center header');
   const $h1PlanetInfoName = document.createElement('h1');
   $h1PlanetInfoName.textContent = exoplanetData[planetClickedNumber].name;
   // temperature
@@ -587,4 +603,107 @@ function buildInformationPage() {
     '#information-footer',
   );
   revealText($planetInformationFooter);
+}
+// FAVORITES LIST
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function buildFavoritesPage() {
+  const $favoritesPageListDelete = document.querySelector(
+    '#favorites-list-holder',
+  );
+  $favoritesPageListDelete?.remove();
+  const $favoritesPageList = document.querySelector('#favorites-list');
+  if (favoritesList.length === 0) {
+    const $noFavoritesRow = document.createElement('div');
+    $noFavoritesRow.setAttribute('class', 'row center');
+    const $noFavoritesText = document.createElement('h4');
+    $noFavoritesText.setAttribute('class', 'no-favorites');
+    $noFavoritesText.textContent =
+      "no favorites yet! why don't you add a planet from your recommendations list?";
+    $favoritesPageList?.appendChild($noFavoritesRow);
+    $noFavoritesRow?.appendChild($noFavoritesText);
+  } else {
+    const $favoritesPageListHolder = document.createElement('div');
+    $favoritesPageListHolder.setAttribute('class', 'row');
+    $favoritesPageListHolder.setAttribute('id', 'favorites-list-holder');
+    $favoritesPageList?.appendChild($favoritesPageListHolder);
+    for (let i = 0; i < favoritesList.length; i++) {
+      const $column50CenterEntry = document.createElement('div');
+      $column50CenterEntry.setAttribute(
+        'class',
+        'column-50 center entry favorites-entry-holder',
+      );
+      $column50CenterEntry.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
+      const $column50FavoritesEntry = document.createElement('div');
+      $column50FavoritesEntry.setAttribute(
+        'class',
+        'column-50 favorites-entry entry-click',
+      );
+      $column50FavoritesEntry.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
+      const $column50FavoritesText = document.createElement('div');
+      $column50FavoritesText.setAttribute(
+        'class',
+        'column-50 left entry-click',
+      );
+      $column50FavoritesText.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
+      const $h4FavoritesText = document.createElement('h4');
+      $h4FavoritesText.textContent = favoritesList[i].name;
+      $h4FavoritesText.setAttribute('class', 'entry-click');
+      const $column50FavoritesIcons = document.createElement('div');
+      $column50FavoritesIcons.setAttribute(
+        'class',
+        'column-50 right entry-click',
+      );
+      $column50FavoritesIcons.setAttribute(
+        'data-planet-clicked-number',
+        String(favoritesList[i].planetClickedNumber),
+      );
+      const $h4FavoritesCancelIcon = document.createElement('h4');
+      const $favoritesCancelIcon = document.createElement('i');
+      $favoritesCancelIcon.setAttribute(
+        'class',
+        'fa-regular fa-circle-xmark icon-click',
+      );
+      $favoritesPageListHolder?.appendChild($column50CenterEntry);
+      $column50CenterEntry?.appendChild($column50FavoritesEntry);
+      $column50FavoritesEntry?.appendChild($column50FavoritesText);
+      $column50FavoritesText?.appendChild($h4FavoritesText);
+      $column50FavoritesEntry?.appendChild($column50FavoritesIcons);
+      $column50FavoritesIcons?.appendChild($h4FavoritesCancelIcon);
+      $h4FavoritesCancelIcon?.appendChild($favoritesCancelIcon);
+    }
+  }
+}
+// LOCAL STORAGE FUNCTIONS
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function writeFavoritesList() {
+  const favoritesListJSON = JSON.stringify(favoritesList);
+  localStorage.setItem('favoritesList-storage', favoritesListJSON);
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function readFavoritesList() {
+  const favoritesListStorage = localStorage.getItem('favoritesList-storage');
+  if (favoritesListStorage !== null) {
+    favoritesList = JSON.parse(favoritesListStorage);
+  }
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function writeQuizResponses() {
+  const quizResponsesJSON = JSON.stringify(quizResponses);
+  localStorage.setItem('quizResponses-storage', quizResponsesJSON);
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function readQuizResponses() {
+  const quizResponsesStorage = localStorage.getItem('quizResponses-storage');
+  if (quizResponsesStorage !== null) {
+    quizResponses = JSON.parse(quizResponsesStorage);
+  }
 }

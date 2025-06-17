@@ -10,7 +10,7 @@
       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
-    <link rel="icon" href="/images/logo/exodus-logo.svg" />
+    <link rel="icon" href="images/logo/exodus-logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +21,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <!-- start intro page -->
@@ -29,7 +29,7 @@
       <div class="row center header">
         <div class="column-100">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo intro" />
         </div>
@@ -57,47 +57,29 @@
         <div class="column-75">
           <button id="get-started">GET STARTED</button>
         </div>
-        <button id="dev-lazy">DEV IS LAZY</button>
+        <div class="column-75">
+          <button class="saved-favorites hidden" id="saved-favorites">
+            SAVED FAVORITES
+          </button>
+        </div>
+        <div class="column-75">
+          <button class="clear-favorites hidden" id="clear-favorites">
+            CLEAR FAVORITES
+          </button>
+        </div>
+        <div class="column-75 hidden">
+          <button id="dev-lazy">DEV IS LAZY</button>
+        </div>
       </div>
     </div>
     <!-- end page intro -->
 
     <!-- start quiz 1 -->
-    <div class="page quiz bg1 hidden" data-view="1">
+    <div class="page quiz bg2 hidden" data-view="1">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
-            alt="exod.us logo"
-            class="logo" />
-          <div class="column-25 left wordmark"><h5>exod.us</h5></div>
-        </div>
-      </div>
-      <div class="row center">
-        <div class="column-75 header">
-          <h1>do you already have a planet in mind?</h1>
-        </div>
-        <div class="column-75">
-          <form id="planet-search">
-            <input
-              type="text"
-              placeholder="search by name + press enter"
-              id="planet-search-input" />
-          </form>
-        </div>
-        <div class="column-75">
-          <button id="no-planet-search">NO - HELP ME FIND ONE!</button>
-        </div>
-      </div>
-    </div>
-    <!-- end quiz 1 -->
-
-    <!-- start quiz 2 -->
-    <div class="page quiz bg2 hidden" data-view="2">
-      <div class="row left">
-        <div class="column-50 left">
-          <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -118,14 +100,14 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 2 -->
+    <!-- end quiz 1 -->
 
-    <!-- start quiz 3 -->
-    <div class="page quiz bg3 hidden" data-view="3">
+    <!-- start quiz 2 -->
+    <div class="page quiz bg3 hidden" data-view="2">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -146,14 +128,14 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 3 -->
+    <!-- end quiz 2 -->
 
-    <!-- start quiz 4 -->
-    <div class="page quiz bg4 hidden" data-view="4">
+    <!-- start quiz 3 -->
+    <div class="page quiz bg4 hidden" data-view="3">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -178,14 +160,14 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 4 -->
+    <!-- end quiz 3 -->
 
-    <!-- start quiz 5 -->
-    <div class="page quiz bg3 hidden" data-view="5">
+    <!-- start quiz 4 -->
+    <div class="page quiz bg3 hidden" data-view="4">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -206,14 +188,14 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 5 -->
+    <!-- end quiz 4 -->
 
-    <!-- start quiz 6 -->
-    <div class="page quiz bg2 hidden" data-view="6">
+    <!-- start quiz 5 -->
+    <div class="page quiz bg2 hidden" data-view="5">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -245,14 +227,14 @@
         </div>
       </div>
     </div>
-    <!-- end quiz 6 -->
+    <!-- end quiz 5 -->
 
     <!-- start quiz results -->
-    <div class="page quiz bg1 hidden" data-view="7">
+    <div class="page quiz bg1 hidden" data-view="6">
       <div class="row left">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 left wordmark"><h5>exod.us</h5></div>
@@ -294,7 +276,7 @@
     <!-- end quiz results -->
 
     <!-- start loading page -->
-    <div class="page loading bg0 hidden" data-view="8">
+    <div class="page loading bg0 hidden" data-view="7">
       <div class="row center">
         <img
           src="images/assets/exodus-logo-white-animation.gif"
@@ -308,11 +290,11 @@
     <!-- end loading page -->
 
     <!-- start recommendations page -->
-    <div class="page recommendations bg1 hidden" data-view="9">
+    <div class="page recommendations bg1 hidden" data-view="8">
       <div class="row" id="suggestions-header">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 wordmark"><h5>exod.us</h5></div>
@@ -357,16 +339,20 @@
       <div class="row center">
         <div class="column-75 invisible" id="suggestions-subheader-text">
           <p>
-            click on each planet to get more information, or click on the heart
-            to add to your favorites list.
+            scroll down to access the full list, and click &quot;next&quot; to
+            generate another page of results. click on each planet to get more
+            information, or click on the heart to add the planet to your
+            favorites list.
           </p>
         </div>
       </div>
-      <div class="row center invisible" id="planet-recommendations"></div>
+      <div
+        class="row invisible element-scroll"
+        id="planet-recommendations"></div>
       <div class="row center header hidden" id="suggestions-loading">
         <div class="column-100">
           <img
-            src="/images/assets/exodus-logo-white-animation.gif"
+            src="images/assets/exodus-logo-white-animation.gif"
             alt="exodus-loading-gif"
             class="logo intro" />
         </div>
@@ -399,11 +385,12 @@
         </div>
         <div class="row center invisible" id="suggestions-disclaimer">
           <div class="column-75 center">
-            <p class="label-text header">
+            <p class="label-text">
               disclaimer: exod.us is not morally responsible or legally liable
               for these recommendations. not all planets contain liquid water,
-              habitable environments, friendly residents, or sentient life. move
-              to a new planet at your own risk.
+              habitable environments, or sentient life. should sentient life
+              exist, it is not guaranteed to be friendly. move to a new planet
+              at your own risk.
             </p>
           </div>
         </div>
@@ -412,11 +399,11 @@
     <!-- end recommendations page -->
 
     <!-- start information page -->
-    <div class="page recommendations bg2 hidden" data-view="10">
+    <div class="page recommendations bg2 hidden" data-view="9">
       <div class="row">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 wordmark"><h5>exod.us</h5></div>
@@ -428,7 +415,10 @@
             </div>
           </div>
           <div class="column-25 center">
-            <div class="icon-circle" title="favorites">
+            <div
+              class="icon-circle"
+              title="favorites"
+              id="information-favorites">
               <i class="fa-solid fa-heart"></i>
             </div>
           </div>
@@ -450,21 +440,40 @@
 
       <div class="row header invisible" id="information-footer">
         <div class="column-50 center">
-          <div class="icon-circle" id="back-to-recommendations">
+          <div
+            class="icon-circle back-to-recommendations hidden"
+            id="back-to-recommendations-icon">
             <i class="fa-solid fa-arrow-up" title="back to recommendations"></i>
+          </div>
+          <div
+            class="icon-circle back-to-favorites hidden"
+            id="back-to-favorites-icon">
+            <i class="fa-solid fa-arrow-down" title="back to favorites"></i>
           </div>
         </div>
         <div class="column-50 center">
-          <div class="icon-circle">
+          <div class="icon-circle" id="info-page-favorite-icon">
             <i class="fa-regular fa-heart" title="favorite"></i>
           </div>
         </div>
         <div class="row">
           <div class="column-50 center">
-            <p class="label-text">back to recommendations</p>
+            <p
+              class="label-text back-to-recommendations hidden"
+              id="back-to-recommendations-text">
+              back to recommendations
+            </p>
+            <p
+              class="label-text back-to-favorites hidden"
+              id="back-to-favorites-text">
+              back to favorites
+            </p>
           </div>
+
           <div class="column-50 center">
-            <p class="label-text">favorite this planet</p>
+            <p class="label-text" id="info-page-favorite-text">
+              favorite this planet
+            </p>
           </div>
         </div>
         <div class="row center">
@@ -483,23 +492,29 @@
     <!-- end information page -->
 
     <!-- start favorites page -->
-    <div class="page recommendations bg3 hidden" data-view="11">
+    <div class="page recommendations bg3 hidden" data-view="10">
       <div class="row">
         <div class="column-50 left">
           <img
-            src="/images/logo/exodus-logo-white.svg"
+            src="images/logo/exodus-logo-white.svg"
             alt="exod.us logo"
             class="logo" />
           <div class="column-25 wordmark"><h5>exod.us</h5></div>
         </div>
         <div class="column-50 right">
           <div class="column-25 center">
-            <div class="icon-circle" title="retake quiz">
+            <div
+              class="icon-circle"
+              id="favorite-retake-quiz"
+              title="retake quiz">
               <i class="fa-solid fa-question"></i>
             </div>
           </div>
           <div class="column-25 center">
-            <div class="icon-circle" title="suggestions list">
+            <div
+              class="icon-circle"
+              id="favorite-recommendations-list"
+              title="suggestions list">
               <i class="fa-solid fa-list"></i>
             </div>
           </div>
@@ -519,60 +534,27 @@
       <div class="row center">
         <h2>here are your favorite planets!</h2>
       </div>
-      <div class="row">
-        <div class="column-50 center entry">
-          <div class="column-50 planet-entry" data-planet-favorite="1">
-            <div class="column-50 left">
-              <h4>16 Cygni Bb</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-favorite="2">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>2MASS J21402931 b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-        <div class="column-50 center entry" data-planet-favorite="3">
-          <div class="planet-entry">
-            <div class="column-50 left">
-              <h4>23 Librae b</h4>
-            </div>
-            <div class="column-50 right">
-              <h4><i class="fa-regular fa-circle-xmark"></i></h4>
-              <h4><i class="fa-regular fa-heart"></i></h4>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="row" id="favorites-list"></div>
 
       <dialog id="delete-favorite">
         <div class="row center">
           <h3 class="dialog">warning!</h3>
         </div>
         <div class="row center">
-          <p class="dialog">
-            are you sure you want to delete 16 Cygni Bb from your favorites? you
-            cannot undo this action.
-          </p>
+          <p class="dialog" id="delete-text"></p>
         </div>
         <div class="row center">
-          <div class="column-50">
+          <div class="column-50 center">
             <h4 class="dialog">
-              <i class="fa-regular fa-circle-check"></i>
+              <i
+                class="fa-regular fa-circle-check delete-confirm"
+                id="delete-confirm"></i>
             </h4>
           </div>
-          <div class="column-50">
-            <h4 class="dialog"><i class="fa-regular fa-circle-xmark"></i></h4>
+          <div class="column-50 center">
+            <h4 class="dialog">
+              <i class="fa-regular fa-circle-xmark" id="delete-cancel"></i>
+            </h4>
           </div>
         </div>
       </dialog>
@@ -593,8 +575,9 @@
     <!-- end favorites page -->
 
     <!-- start scripts -->
-    <script src="./js/data.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dev-button.js"></script>
     <!-- end scripts -->
   </body>
 </html>

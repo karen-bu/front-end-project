@@ -166,6 +166,10 @@ h4 {
   }
 }
 
+h4.no-favorites {
+  text-align: center;
+}
+
 h5 {
   font-size: 12pt;
   text-align: left;
@@ -444,11 +448,12 @@ h4.dialog > i:hover {
   }
 }
 
+.favorites-entry,
 .planet-entry {
   width: 600px;
   height: 125px;
   border-radius: 80px;
-  margin: 10px 5px;
+  margin: 10px;
   padding: 0 40px;
   background: transparent;
   border: solid white 3px;
@@ -465,6 +470,7 @@ h4.dialog > i:hover {
 
 button:hover,
 .icon-circle:hover,
+.favorites-entry:hover,
 .planet-entry:hover {
   border-color: #9ca0b9;
   background-color: #9ca0b9;
@@ -476,8 +482,20 @@ button:hover,
 
 button:active,
 .icon-circle:active,
+.favorites-entry:active,
 .planet-entry:active {
   border-color: #fff;
   box-shadow: 0 0 30px #fff inset;
   transition: 0.05s ease-in-out;
+}
+
+.element-scroll {
+  max-height: 55vh;
+  overflow: scroll;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+
+  @media screen and (width < 1024px) {
+    border-radius: 15px;
+  }
 }
