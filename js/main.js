@@ -33,7 +33,6 @@ $savedFavorites?.addEventListener('click', () => {
 });
 $clearFavorites?.addEventListener('click', () => {
   localStorage.clear();
-  location.reload();
 });
 // quiz 1 - planet temperature (data-view="1")
 const $temperatureCold = document.querySelector('#temp-cold');

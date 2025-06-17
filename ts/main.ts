@@ -46,25 +46,10 @@ $savedFavorites?.addEventListener('click', () => {
   revealPage(10);
   scrollToFavorites();
   setTimeout(() => hidePage(0), 750);
-
-  const $heartIcons = document.querySelectorAll('.recommended-favorite');
-
-  // map array of planet names
-  const favoritePlanetNames = favoritesList.map(
-    (favoritePlanet) => favoritePlanet.name,
-  );
-
-  for (let i = 0; i < exoplanetData.length; i++) {
-    if (favoritePlanetNames.includes(exoplanetData[i].name)) {
-      $heartIcons[i].classList.remove('fa-regular');
-      $heartIcons[i].classList.add('fa-solid');
-    }
-  }
 });
 
 $clearFavorites?.addEventListener('click', () => {
   localStorage.clear();
-  location.reload();
 });
 
 // quiz 1 - planet temperature (data-view="1")
