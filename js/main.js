@@ -211,6 +211,7 @@ const $suggestionsPageRetakeQuizButton = document.querySelector(
 );
 $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
+  apiURL = '';
   $distanceForm.reset();
   distanceInputRemoveErrors();
   scrollToTop();
