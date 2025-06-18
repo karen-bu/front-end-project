@@ -8,7 +8,6 @@ function distanceInputRemoveErrors(): void {
 
 // SCROLL FUNCTIONS
 const quizPages = document.querySelectorAll('[data-view]');
-console.log(quizPages);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scrollDown(): void {

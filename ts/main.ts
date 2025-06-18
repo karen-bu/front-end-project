@@ -240,6 +240,7 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
 
   // generate API url and make the calls
   generateApiCall();
+  console.log(apiURL);
   fetchExoplanetData(apiURL);
   await buildSuggestionsPage();
 
