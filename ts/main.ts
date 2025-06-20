@@ -621,42 +621,40 @@ $favoritesList?.addEventListener('click', (event: Event) => {
     // hide 'favorite this planet'
     $infoPageFavoriteButton?.classList.add('hidden');
     $infoPageFavoriteText?.classList.add('hidden');
-  } else if (favoritesEntry.classList.contains('icon-click')) {
-    const planetToDelete = exoplanetData[planetClickedNumber].name;
-
-    // show modal
-    $deleteModalText.textContent = `are you sure you want to delete ${planetToDelete}? this action cannot be undone.`;
-    $deleteModal?.showModal();
-
-    // confirm delete
-    const $confirmDeleteButton = document.querySelector('#delete-confirm');
-    $confirmDeleteButton?.addEventListener('click', () => {
-      const favoritesEntryHolder = favoritesEntry?.closest(
-        '.favorites-entry-holder',
-      ) as HTMLElement;
-
-      planetClickedNumber = Number(
-        favoritesEntryHolder.dataset.planetClickedNumber,
-      );
-
-      for (let i = 0; i < favoritesList.length; i++) {
-        if (favoritesList[i].planetClickedNumber === planetClickedNumber) {
-          favoritesList.splice(i, 1);
-        }
-      }
-
-      writeFavoritesList();
-      favoritesEntryHolder?.remove();
-
-      $deleteModal?.close();
-    });
-
-    // cancel delete
-    const $cancelDeleteButton = document.querySelector('#delete-cancel');
-    $cancelDeleteButton?.addEventListener('click', () => {
-      $deleteModal?.close();
-    });
   }
+
+  // show modal
+  $deleteModalText.textContent = `are you sure you want to delete this planet? this action cannot be undone.`;
+  $deleteModal?.showModal();
+
+  // confirm delete
+  const $confirmDeleteButton = document.querySelector('#delete-confirm');
+  $confirmDeleteButton?.addEventListener('click', () => {
+    const favoritesEntryHolder = favoritesEntry?.closest(
+      '.favorites-entry-holder',
+    ) as HTMLElement;
+
+    planetClickedNumber = Number(
+      favoritesEntryHolder.dataset.planetClickedNumber,
+    );
+
+    for (let i = 0; i < favoritesList.length; i++) {
+      if (favoritesList[i].planetClickedNumber === planetClickedNumber) {
+        favoritesList.splice(i, 1);
+      }
+    }
+
+    writeFavoritesList();
+    favoritesEntryHolder?.remove();
+
+    $deleteModal?.close();
+  });
+
+  // cancel delete
+  const $cancelDeleteButton = document.querySelector('#delete-cancel');
+  $cancelDeleteButton?.addEventListener('click', () => {
+    $deleteModal?.close();
+  });
 });
 
 // event listener to go back to favorites
