@@ -258,8 +258,6 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
 
 $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
-  const $noPlanetsText = document.querySelector('no-planets-text');
-  $noPlanetsText?.remove();
   $distanceForm.reset();
   distanceInputRemoveErrors();
   scrollToTop();
@@ -290,6 +288,8 @@ $suggestionsPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
   apiURL = '';
   $distanceForm.reset();
+  const $noPlanetsText = document.querySelector('no-planets-text');
+  $noPlanetsText?.remove();
   distanceInputRemoveErrors();
   scrollToTop();
   setTimeout(() => hideAll(), 750);
