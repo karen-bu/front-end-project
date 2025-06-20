@@ -258,6 +258,8 @@ $summaryPageGetSuggestionsButton?.addEventListener('click', async () => {
 
 $summaryPageRetakeQuizButton?.addEventListener('click', () => {
   quizResponses = {};
+  const $noPlanetsText = document.querySelector('no-planets-text');
+  $noPlanetsText?.remove();
   $distanceForm.reset();
   distanceInputRemoveErrors();
   scrollToTop();
