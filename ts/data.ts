@@ -317,24 +317,6 @@ const apiKey1 = 'zt9vRW46vl4e8li5HhlgnA=';
 const apiKey2 = '=HWWTaldjD4VJd3pb';
 const apiKey = apiKey1.concat(apiKey2);
 
-// const fetchTest =
-//   'https://api.api-ninjas.com/v1/planets?&min_temperature=0&min_mass=0&min_period=0&min_radius=0&min_distance_light_year=0&offset=30';
-
-// async function fetchExoplanetData(url: string): Promise<void> {
-//   try {
-//     const apiData = await fetch(url, {
-//       headers: { 'X-Api-Key': apiKey },
-//     });
-//     if (!apiData.ok) throw new Error(`HTTP error! Status: ${apiData.status}`);
-//     const exoplanetData = await apiData.json();
-//     console.log(exoplanetData);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// }
-
-// console.log(fetchExoplanetData(fetchTest));
-
 async function fetchExoplanetData(
   url: string,
 ): Promise<Exoplanet[] | undefined> {
