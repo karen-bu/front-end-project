@@ -6,7 +6,7 @@ interface QuizResponses {
   planetMass?: string;
   planetPeriod?: string;
   planetRadius?: string;
-  planetDistance?: string | undefined;
+  planetDistance?: string;
 }
 
 let quizResponses: QuizResponses = {};
