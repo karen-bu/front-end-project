@@ -309,7 +309,7 @@ $suggestionsNextButton?.addEventListener('click', async () => {
 
   const $heartIcons = document.querySelectorAll('.recommended-favorite');
 
-  // map array of planet names
+  // retain appearance of heart even if page is refreshed
   const favoritePlanetNames = favoritesList.map(
     (favoritePlanet) => favoritePlanet.name,
   );
@@ -476,8 +476,6 @@ $planetRecommendations?.addEventListener('click', (event: Event) => {
         }
       }
     }
-
-    // retain appearance of heart even if page is refreshed - TO WORK ON
   }
 });
 
